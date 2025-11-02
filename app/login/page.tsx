@@ -7,7 +7,9 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [displayName, setDisplayName] = useState('')
   const [isAnonymous, setIsAnonymous] = useState(false)
+  const [role, setRole] = useState<'speler' | 'club'>('speler')
   const [isRegister, setIsRegister] = useState(false)
+  const [visibility, setVisibility] = useState(true)
   const [message, setMessage] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -16,14 +18,16 @@ export default function LoginPage() {
 
     try {
       if (isRegister) {
-        // ✅ Nieuwe gebruiker aanmaken met metadata
-        const { data, error } = await supabase.auth.signUp({
+        // 🔹 Alleen signup — de trigger maakt zelf het profiel aan
+        const { error } = await supabase.auth.signUp({
           email,
           password,
           options: {
             data: {
               display_name: isAnonymous ? null : displayName || null,
               is_anonymous: isAnonymous,
+              role,
+              visibility,
             },
           },
         })
@@ -34,12 +38,11 @@ export default function LoginPage() {
           '✅ Account aangemaakt! Controleer je e-mail om te bevestigen (indien vereist).'
         )
       } else {
-        // 🔹 Inloggen met e-mail en wachtwoord
+        // 🔹 Inloggen
         const { error } = await supabase.auth.signInWithPassword({
           email,
           password,
         })
-
         if (error) throw error
 
         setMessage('✅ Ingelogd! Even geduld...')
@@ -52,7 +55,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="p-8 max-w-md mx-auto min-h-[calc(100vh-4rem)] flex flex-col justify-center">
+    <main className="p-8 max-w-md mx-auto min-h-[calc(100vh-5rem)] flex flex-col justify-center">
       <h1 className="text-3xl font-bold mb-6 text-center">
         {isRegister ? 'Account aanmaken' : 'Inloggen'}
       </h1>
@@ -82,6 +85,16 @@ export default function LoginPage() {
         {/* Alleen tonen bij registratie */}
         {isRegister && (
           <>
+            <label className="text-sm font-medium">Ik ben een...</label>
+            <select
+              className="border p-2 rounded"
+              value={role}
+              onChange={(e) => setRole(e.target.value as 'speler' | 'club')}
+            >
+              <option value="speler">👟 Speler</option>
+              <option value="club">🏟️ Club</option>
+            </select>
+
             <input
               type="text"
               placeholder="Weergavenaam (optioneel)"
@@ -90,6 +103,7 @@ export default function LoginPage() {
               onChange={(e) => setDisplayName(e.target.value)}
               disabled={isAnonymous}
             />
+
             <label className="flex items-center gap-2 text-sm">
               <input
                 type="checkbox"
@@ -98,12 +112,21 @@ export default function LoginPage() {
               />
               <span>Anoniem blijven</span>
             </label>
+
+            <label className="flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={visibility}
+                onChange={(e) => setVisibility(e.target.checked)}
+              />
+              <span>Maak mijn profiel zichtbaar voor clubs</span>
+            </label>
           </>
         )}
 
         <button
           type="submit"
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+          className="bg-[#F59E0B] text-white px-4 py-2 rounded hover:bg-[#D97706] transition"
         >
           {isRegister ? 'Registreren' : 'Inloggen'}
         </button>
@@ -117,7 +140,7 @@ export default function LoginPage() {
             Heb je al een account?{' '}
             <button
               onClick={() => setIsRegister(false)}
-              className="text-green-700 underline"
+              className="text-[#F59E0B] underline"
             >
               Inloggen
             </button>
@@ -127,7 +150,7 @@ export default function LoginPage() {
             Nog geen account?{' '}
             <button
               onClick={() => setIsRegister(true)}
-              className="text-green-700 underline"
+              className="text-[#D97706] underline"
             >
               Registreren
             </button>
