@@ -102,9 +102,8 @@ export default function HomePage() {
         )}
       </motion.div>
 
-      <footer className="absolute bottom-0 left-0 w-full text-center text-gray-400 text-xs py-2">
-        © {new Date().getFullYear()} Voetbalmarkt — gemaakt met ⚽ & ❤️
-      </footer>
+      
+
     </main>
   )
 }

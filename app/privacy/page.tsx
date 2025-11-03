@@ -151,6 +151,18 @@ export default function PrivacyPage() {
         </p>
       </section>
 
+      <section>
+        <h2 className="text-xl font-semibold text-[#F59E0B] mb-2">
+          10. Cookies
+        </h2>
+        <p>
+          VoetbalMarkt gebruikt enkel functionele cookies die nodig zijn om
+          gebruikers ingelogd te houden en de site correct te laten werken.
+          Er worden geen marketing- of trackingcookies gebruikt.
+        </p>
+      </section>
+
+
       <div className="pt-6">
         <Link
           href="/"
