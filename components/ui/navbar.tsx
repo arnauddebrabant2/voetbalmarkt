@@ -13,16 +13,20 @@ export default function Navbar() {
   const router = useRouter()
 
   useEffect(() => {
-  // Publieke pagina's waar geen redirect mag gebeuren
   const publicPaths = ['/start', '/privacy', '/login', '/register']
   const isPublic = publicPaths.some((path) => pathname.startsWith(path))
 
-  // Niets doen zolang Supabase nog laadt
+  // wacht tot Supabase klaar is
   if (loading) return
 
-  // Alleen redirecten als we GEEN user hebben en NIET op een publieke pagina zitten
+  // alleen redirecten als we GEEN user hebben, NIET aan het inloggen zijn
+  // en we niet op een publieke pagina zitten
   if (!user && !isPublic) {
-    router.replace('/start')
+    // kleine vertraging om state-updates (zoals login) niet te onderbreken
+    const timeout = setTimeout(() => {
+      router.replace('/start')
+    }, 200)
+    return () => clearTimeout(timeout)
   }
 }, [user, loading, pathname, router])
 
