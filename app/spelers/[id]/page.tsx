@@ -4,10 +4,13 @@ import { useParams, useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabaseClient'
 import { Button } from '@/components/ui/button'
 import { FootballField } from '@/components/ui/FootballField'
+import { useAuth } from '@/components/ui/AuthProvider'
+
 
 export default function PubliekSpelerProfiel() {
   const params = useParams()
   const router = useRouter()
+  const { user } = useAuth()
   const id = params?.id as string
   const [profile, setProfile] = useState<any>(null)
   const [loading, setLoading] = useState(true)
@@ -30,6 +33,28 @@ export default function PubliekSpelerProfiel() {
     }
     fetchProfile()
   }, [id])
+
+  // 👁️ Profielview registreren (club of andere speler bekijkt dit profiel)
+useEffect(() => {
+  const logProfileView = async () => {
+    if (!user || !id) return
+    if (user.id === id) return // eigen profiel niet tellen
+
+    const { error } = await supabase.from('profile_views_player').insert([
+      {
+        profile_id: id,     // speler die bekeken wordt
+        viewer_id: user.id, // wie bekijkt
+      },
+    ])
+
+    if (error && error.code !== '23505') {
+      // 23505 = unieke constraint (al bekeken vandaag)
+      console.error('❌ Fout bij registreren profielview:', error)
+    }
+  }
+
+  logProfileView()
+}, [user, id])
 
   if (loading)
     return (

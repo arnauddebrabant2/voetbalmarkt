@@ -5,9 +5,14 @@ import { useAuth } from '@/components/ui/AuthProvider'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useParams } from 'next/navigation'
+
 
 export default function ProfielPage() {
   const { user, refreshProfile } = useAuth()
+  const params = useParams()
+  const profielID = params?.id || user?.id // eigen profiel of een specifiek profiel-id uit de URL
+  const [viewCount, setViewCount] = useState<number>(0)
   const [profile, setProfile] = useState<any>(null)
   const [isEditing, setIsEditing] = useState(false)
   const [message, setMessage] = useState('')
@@ -26,6 +31,33 @@ export default function ProfielPage() {
     }
     fetchProfile()
   }, [user, isEditing])
+
+  // 🔹 Aantal profielbezoekers ophalen
+// 🔹 Aantal profielbezoekers ophalen
+useEffect(() => {
+  const fetchViewCount = async () => {
+    if (!profielID) return
+
+    const { data, count, error } = await supabase
+      .from('profile_views_player')
+      .select('id, profile_id, viewer_id', { count: 'exact' })
+      .eq('profile_id', profielID)
+
+    console.log('📊 View data:', data)
+    console.log('📈 View count:', count)
+    console.log('⚠️ Error:', error)
+
+    if (error) {
+      console.error('❌ Fout bij ophalen viewcount:', error)
+    } else {
+      setViewCount(count || 0)
+    }
+  }
+
+  fetchViewCount()
+}, [profielID])
+
+
 
   // Meldingsbanner automatisch laten verdwijnen
   useEffect(() => {
@@ -47,7 +79,7 @@ const selectedPositions = [
 
 
   return (
-    <main className="relative p-8 w-full min-h-[calc(100vh-4rem)] bg-gradient-to-b from-green-50 to-white">
+<main className="relative p-8 w-full min-h-[calc(100vh-4rem)] bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0B1220] text-white">
       {/* Meldingsbalk */}
       <AnimatePresence>
         {message && (
@@ -96,6 +128,7 @@ const selectedPositions = [
               {isSpeler && <Info label="Leeftijd">{profile.age || '-'}</Info>}
               <Info label="Provincie">{profile.province || '-'}</Info>
               <Info label="Niveau">{profile.level || '-'}</Info>
+              <Info label="👀 Profielbezoekers">{viewCount}</Info>
               {isSpeler && <Info label="Gewenst niveau">{profile.level_pref || '-'}</Info>}
               {isSpeler && (
                     <Info label="Posities">{profile.position_primary || '-'}{" & "}{profile.position_secondary || '-'}</Info>
@@ -115,7 +148,7 @@ const selectedPositions = [
               <h2 className="text-lg font-semibold mb-2 text-[#F59E0B]">
                 {isClub ? 'Over onze club' : 'Over mij'}
               </h2>
-              <p className="text-gray-700 whitespace-pre-line">
+              <p className="text-gray-100 whitespace-pre-line">
                 {profile.bio ||
                   (isClub
                     ? 'Nog geen clubbeschrijving toegevoegd.'
@@ -139,7 +172,7 @@ const selectedPositions = [
                       ))}
                     </div>
                   ) : (
-                    <p className="text-gray-500">Nog geen sterktes ingevuld.</p>
+                    <p className="text-gray-400">Nog geen sterktes ingevuld.</p>
                   )}
                 </section>
 
@@ -148,13 +181,13 @@ const selectedPositions = [
                     Loopbaan / Carrière
                   </h2>
                   {profile.career ? (
-                    <ul className="list-disc list-inside space-y-1 text-gray-700">
+                    <ul className="list-disc list-inside space-y-1 text-gray-100">
                       {profile.career.split('\n').map((line: string, i: number) => (
                         <li key={i}>{line}</li>
                       ))}
                     </ul>
                   ) : (
-                    <p className="text-gray-500">Nog geen loopbaaninformatie toegevoegd.</p>
+                    <p className="text-gray-100">Nog geen loopbaaninformatie toegevoegd.</p>
                   )}
                 </section>
               </>
@@ -174,7 +207,7 @@ const selectedPositions = [
       )}
 
       {!profile && (
-        <p className="text-center text-gray-500 mt-12">Nog geen profielinformatie beschikbaar.</p>
+        <p className="text-center text-gray-100 mt-12">Nog geen profielinformatie beschikbaar.</p>
       )}
 
       {/* Bewerken overlay */}
@@ -187,24 +220,26 @@ const selectedPositions = [
             exit={{ opacity: 0 }}
           >
             <motion.div
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 50, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white rounded-2xl shadow-2xl p-8 max-w-5xl w-[90%] max-h-[90vh] overflow-y-auto"
-            >
-              <EditForm
-                user={user}
-                initial={profile}
-                isClub={isClub}
-                onClose={() => setIsEditing(false)}
-                onSaved={() => {
-                  refreshProfile()
-                  setIsEditing(false)
-                  setMessage('✅ Profiel bijgewerkt!')
-                }}
-              />
-            </motion.div>
+  initial={{ y: 50, opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  exit={{ y: 50, opacity: 0 }}
+  transition={{ duration: 0.3 }}
+  className="bg-[#0F172A]/95 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl 
+             p-10 max-w-5xl w-[90%] max-h-[90vh] overflow-y-auto text-white"
+>
+  <EditForm
+    user={user}
+    initial={profile}
+    isClub={isClub}
+    onClose={() => setIsEditing(false)}
+    onSaved={() => {
+      refreshProfile()
+      setIsEditing(false)
+      setMessage('✅ Profiel bijgewerkt!')
+    }}
+  />
+</motion.div>
+
           </motion.div>
         )}
       </AnimatePresence>
@@ -216,8 +251,8 @@ const selectedPositions = [
 function Info({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <span className="block text-sm text-gray-500">{label}</span>
-      <span className="block text-base font-medium text-gray-800">{children}</span>
+      <span className="block text-sm text-gray-400">{label}</span>
+      <span className="block text-base font-medium text-gray-200">{children}</span>
     </div>
   )
 }
@@ -363,7 +398,8 @@ function EditForm({
         {isClub ? 'Clubprofiel bewerken' : 'Spelersprofiel bewerken'}
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="md:col-span-2 grid md:grid-cols-[1fr_auto] gap-6 items-start">
         <InputField
           label={isClub ? 'Clubnaam' : 'Weergavenaam'}
           value={form.display_name}
@@ -371,23 +407,31 @@ function EditForm({
           disabled={form.is_anonymous}
         />
 
-        <div className="flex items-center gap-2 mt-6">
-          <input
-            type="checkbox"
-            checked={form.is_anonymous}
-            onChange={(e) => update('is_anonymous', e.target.checked)}
-          />
-          <span className="text-sm">Anoniem blijven</span>
-        </div>
-        <div className="flex items-center gap-2 mt-2">
-          <input
-            type="checkbox"
-            checked={form.visibility}
-            onChange={(e) => update('visibility', e.target.checked)}
-          />
-          <span className="text-sm">Maak mijn profiel zichtbaar voor clubs</span>
-        </div>
+        <div className="flex flex-col justify-start mt-[1.9rem] gap-1">
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              className="w-4 h-4 accent-[#F59E0B]"
+              checked={form.is_anonymous}
+              onChange={(e) => update('is_anonymous', e.target.checked)}
+            />
+            <span>Anoniem blijven</span>
+          </label>
 
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              className="w-4 h-4 accent-[#F59E0B]"
+              checked={form.visibility}
+              onChange={(e) => update('visibility', e.target.checked)}
+            />
+            <span>Maak mijn profiel zichtbaar voor clubs</span>
+          </label>
+        </div>
+      </div>
+
+
+  <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
 
         <Select
           label="Provincie"
@@ -481,6 +525,8 @@ function EditForm({
           </>
         )}
       </div>
+      </div>
+      
 
       {!isClub && (
         <>
@@ -493,28 +539,46 @@ function EditForm({
           <div>
             <label className="block text-sm font-medium mb-1">Loopbaan / carrière</label>
             <textarea
-              className="border rounded p-3 w-full h-32 resize-none"
+              className="bg-[#1E293B] border border-white/30 rounded-lg p-4 w-full text-white placeholder-gray-400
+                        focus:ring-2 focus:ring-[#F59E0B] outline-none resize-none h-40"
               placeholder="Bijv: KVC Westerlo (2018–2021)\nKSK Lierse (2021–heden)"
               value={form.career}
               onChange={(e) => update('career', e.target.value)}
             />
           </div>
         </>
+        
       )}
 
       <div>
         <label className="block text-sm font-medium mb-1">{isClub ? 'Over onze club' : 'Over mij'}</label>
-        <textarea className="border rounded p-3 w-full h-40 resize-none" value={form.bio} onChange={(e) => update('bio', e.target.value)} />
+        <textarea
+          className="bg-[#1E293B] border border-white/30 rounded-lg p-4 w-full text-white placeholder-gray-400
+                    focus:ring-2 focus:ring-[#F59E0B] outline-none resize-none"
+          value={form.bio}
+          onChange={(e) => update('bio', e.target.value)}
+          placeholder={isClub ? 'Vertel iets over je club...' : 'Vertel iets over jezelf...'}
+        />
+
       </div>
 
-      <div className="flex justify-end gap-3 pt-4">
-        <Button type="button" onClick={onClose} className="bg-gray-300 text-gray-800 hover:bg-gray-400">
+      <div className="flex justify-end gap-4 pt-6">
+        <button
+          type="button"
+          onClick={onClose}
+          className="px-5 py-2 border border-white/40 rounded-lg hover:bg-white/10 transition"
+        >
           Annuleren
-        </Button>
-        <Button type="submit" disabled={saving} className="bg-[#F59E0B] hover:bg-[#D97706] text-white">
+        </button>
+        <button
+          type="submit"
+          disabled={saving}
+          className="px-6 py-2 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition"
+        >
           {saving ? 'Opslaan...' : 'Opslaan'}
-        </Button>
+        </button>
       </div>
+
     </form>
   )
 }
@@ -535,7 +599,17 @@ function InputField({
   return (
     <div>
       <label className="block text-sm font-medium mb-1">{label}</label>
-      <Input type={type} value={value} disabled={disabled} onChange={(e) => onChange(e.target.value)} />
+      <input
+        type={type}
+        value={value}
+        disabled={disabled}
+        onChange={(e) => onChange(e.target.value)}
+        className={`bg-[#1E293B] border border-white/30 rounded-lg p-4 w-full text-white placeholder-gray-400
+                  focus:ring-2 focus:ring-[#F59E0B] outline-none ${
+                    disabled ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
+      />
+
     </div>
   )
 }
@@ -554,7 +628,13 @@ function Select({
   return (
     <div>
       <label className="block text-sm font-medium mb-1">{label}</label>
-      <select className="border rounded p-2 w-full" value={value} onChange={(e) => onChange(e.target.value)}>
+      <select
+        className="bg-[#1E293B] border border-white/30 rounded-lg p-4 w-full text-white 
+                  focus:ring-2 focus:ring-[#F59E0B] outline-none"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      >
+
         <option value="">Selecteer...</option>
         {options.map((opt) => (
           <option key={opt}>{opt}</option>

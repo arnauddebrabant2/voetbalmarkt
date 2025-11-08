@@ -19,7 +19,7 @@ export default function Footer() {
         ${
           isAuthPage
             ? 'bg-transparent border-white/20 text-gray-200 backdrop-blur-sm'
-            : 'bg-gray-100 border-gray-200 text-gray-400'
+            : 'bg-[#1E293B] border-[#1E293B] text-gray-400'
         }`}
     >
       © {new Date().getFullYear()} VoetbalMarkt — gemaakt met ⚽ & ❤️
