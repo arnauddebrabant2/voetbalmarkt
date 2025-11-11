@@ -78,9 +78,9 @@ export default function Navbar() {
           Home
         </Link>
 
-        <Link href="/zoekertjes" className={linkStyle('/zoekertjes')}>
+        {/* <Link href="/zoekertjes" className={linkStyle('/zoekertjes')}>
           Zoekertjes
-        </Link>
+        </Link> */}
 
         {role === 'speler' && (
           <Link href="/clubs" className={linkStyle('/clubs')}>

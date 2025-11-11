@@ -21,7 +21,9 @@ export default function ClubProfielPage() {
         .select('*')
         .eq('user_id', clubId)
         .eq('role', 'club')
+        .eq('visibility', true)
         .single()
+
 
       if (error) {
         console.error('❌ Fout bij ophalen clubprofiel:', error)

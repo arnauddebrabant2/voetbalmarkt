@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabaseClient'
 type Profile = {
   display_name: string | null
   is_anonymous: boolean
-  role: 'speler' | 'club' | null
+  role: 'speler' | 'club' | 'trainer' | null
 }
 
 type AuthContextType = {
