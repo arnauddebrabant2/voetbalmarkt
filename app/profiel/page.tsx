@@ -220,25 +220,25 @@ const selectedPositions = [
             exit={{ opacity: 0 }}
           >
             <motion.div
-  initial={{ y: 50, opacity: 0 }}
-  animate={{ y: 0, opacity: 1 }}
-  exit={{ y: 50, opacity: 0 }}
-  transition={{ duration: 0.3 }}
-  className="bg-[#0F172A]/95 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl 
-             p-10 max-w-5xl w-[90%] max-h-[90vh] overflow-y-auto text-white"
->
-  <EditForm
-    user={user}
-    initial={profile}
-    isClub={isClub}
-    onClose={() => setIsEditing(false)}
-    onSaved={() => {
-      refreshProfile()
-      setIsEditing(false)
-      setMessage('✅ Profiel bijgewerkt!')
-    }}
-  />
-</motion.div>
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 50, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="bg-[#0F172A]/95 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl 
+                        p-10 max-w-5xl w-[90%] max-h-[90vh] overflow-y-auto text-white"
+            >
+              <EditForm
+                user={user}
+                initial={profile}
+                isClub={isClub}
+                onClose={() => setIsEditing(false)}
+                onSaved={() => {
+                  refreshProfile()
+                  setIsEditing(false)
+                  setMessage('✅ Profiel bijgewerkt!')
+                }}
+              />
+            </motion.div>
 
           </motion.div>
         )}
@@ -320,10 +320,6 @@ function FootballField({
     </div>
   )
 }
-
-
-
-
 
 /** Bewerkformulier (met sterktes & carrière) */
 function EditForm({
@@ -459,46 +455,46 @@ function EditForm({
         {!isClub && (
           <>
             {/* Primaire positie */}
-<Select
-  label="Favoriete positie"
-  value={form.position_primary}
-  onChange={(v) => update('position_primary', v)}
-  options={[
-    'Doelman',
-    'Rechtsachter',
-    'Centrale verdediger links',
-    'Centrale verdediger rechts',
-    'Linksachter',
-    // 'Verdedigende middenvelder',
-    'Centrale middenvelder links',
-    'Centrale middenvelder rechts',
-    'Aanvallende middenvelder',
-    'Linksbuiten',
-    'Rechtsbuiten',
-    'Spits',
-  ]}
-/>
+          <Select
+            label="Favoriete positie"
+            value={form.position_primary}
+            onChange={(v) => update('position_primary', v)}
+            options={[
+              'Doelman',
+              'Rechtsachter',
+              'Centrale verdediger links',
+              'Centrale verdediger rechts',
+              'Linksachter',
+              // 'Verdedigende middenvelder',
+              'Centrale middenvelder links',
+              'Centrale middenvelder rechts',
+              'Aanvallende middenvelder',
+              'Linksbuiten',
+              'Rechtsbuiten',
+              'Spits',
+            ]}
+          />
 
-{/* Secundaire positie */}
-<Select
-  label="Tweede positie"
-  value={form.position_secondary}
-  onChange={(v) => update('position_secondary', v)}
-  options={[
-    'Doelman',
-    'Rechtsachter',
-    'Centrale verdediger links',
-    'Centrale verdediger rechts',
-    'Linksachter',
-    // 'Verdedigende middenvelder',
-    'Centrale middenvelder links',
-    'Centrale middenvelder rechts',
-    'Aanvallende middenvelder',
-    'Linksbuiten',
-    'Rechtsbuiten',
-    'Spits',
-  ]}
-/>
+          {/* Secundaire positie */}
+          <Select
+            label="Tweede positie"
+            value={form.position_secondary}
+            onChange={(v) => update('position_secondary', v)}
+            options={[
+              'Doelman',
+              'Rechtsachter',
+              'Centrale verdediger links',
+              'Centrale verdediger rechts',
+              'Linksachter',
+              // 'Verdedigende middenvelder',
+              'Centrale middenvelder links',
+              'Centrale middenvelder rechts',
+              'Aanvallende middenvelder',
+              'Linksbuiten',
+              'Rechtsbuiten',
+              'Spits',
+            ]}
+          />
 
 
             <Select

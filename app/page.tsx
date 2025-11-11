@@ -112,6 +112,8 @@ export default function HomePage() {
   const [showModal, setShowModal] = useState(false)
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState('')
+  const [clubsInBuurt, setClubsInBuurt] = useState<any[]>([])
+  const [playerProvince, setPlayerProvince] = useState<string | null>(null)
 
   const [form, setForm] = useState({
     title: '',
@@ -138,6 +140,43 @@ export default function HomePage() {
     }
     fetchListings()
   }, [])
+
+  useEffect(() => {
+    const fetchClubs = async () => {
+      if (!user) return
+
+      // 🔹 Eerst: haal speler zijn provincie op
+      const { data: speler, error: spelerError } = await supabase
+        .from('profiles_player')
+        .select('province')
+        .eq('user_id', user.id)
+        .single()
+
+      if (spelerError) {
+        console.error('❌ Fout bij ophalen speler:', spelerError)
+        return
+      }
+
+      setPlayerProvince(speler.province)
+
+      // 🔹 Daarna: haal clubs uit dezelfde provincie op
+      const { data: clubs, error: clubError } = await supabase
+        .from('profiles_player')
+        .select('user_id, display_name, bio, province, level')
+        .eq('role', 'club')
+        .eq('province', speler.province)
+        .limit(5)
+
+      if (clubError) {
+        console.error('❌ Fout bij ophalen clubs:', clubError)
+      } else {
+        setClubsInBuurt(clubs || [])
+      }
+    }
+
+    fetchClubs()
+  }, [user])
+
 
   const handleChange = (e: any) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
@@ -249,95 +288,128 @@ export default function HomePage() {
 
               return (
                 <motion.li
-  key={l.id}
-  initial={{ opacity: 0, y: 15 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: i * 0.05 }}
-  className="relative bg-[#1E293B]/90 border border-white/10 rounded-2xl p-8 shadow-lg hover:bg-[#243045] transition-all"
->
-  {/* ✅ Structuur: links info + rechts veld */}
-  <div className="flex flex-col md:flex-row justify-between gap-6">
-    {/* 🔹 Linkerzijde */}
-    <div className="flex-1 relative">
-      {/* Badge bovenaan */}
-      <span
-        className={`absolute -top-3 left-0 text-xs font-semibold px-3 py-1 rounded-full ${
-          l.type === 'club_zoekt_speler'
-            ? 'bg-[#F59E0B]/20 text-[#F59E0B]'
-            : 'bg-green-600/20 text-green-400'
-        }`}
-      >
-        {l.type === 'club_zoekt_speler'
-          ? '🏟️ Club zoekt speler'
-          : '👟 Speler zoekt club'}
-      </span>
+                  key={l.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="relative bg-[#1E293B]/90 border border-white/10 rounded-2xl p-8 shadow-lg hover:bg-[#243045] transition-all"
+                >
+                  {/* ✅ Structuur: links info + rechts veld */}
+                  <div className="flex flex-col md:flex-row justify-between gap-6">
+                    {/* 🔹 Linkerzijde */}
+                    <div className="flex-1 relative">
+                      {/* Badge bovenaan */}
+                      <span
+                        className={`absolute -top-3 left-0 text-xs font-semibold px-3 py-1 rounded-full ${
+                          l.type === 'club_zoekt_speler'
+                            ? 'bg-[#F59E0B]/20 text-[#F59E0B]'
+                            : 'bg-green-600/20 text-green-400'
+                        }`}
+                      >
+                        {l.type === 'club_zoekt_speler'
+                          ? '🏟️ Club zoekt speler'
+                          : '👟 Speler zoekt club'}
+                      </span>
 
-      {/* 👤 Profielnaam + bolletje */}
-      {/* 👤 Profielnaam + bolletje */}
-      <div className="flex items-center gap-3 mb-4 mt-6">
-        <Link
-          href={`/spelers/${l.owner_user_id}`}
-          aria-label="Bekijk spelersprofiel"
-          className={`w-10 h-10 flex items-center justify-center rounded-full font-semibold shadow-inner border border-white/10
-            ${l.profiles_player?.is_anonymous
-              ? 'bg-gray-500/50 text-white'
-              : 'bg-[#F59E0B]/90 text-[#0F172A] hover:brightness-105 transition'
-            }`}
-        >
-          {l.profiles_player?.is_anonymous
-            ? '?'
-            : l.profiles_player?.display_name?.[0]?.toUpperCase() || '?'}
-        </Link>
+                      {/* 👤 Profielnaam + bolletje */}
+                      {/* 👤 Profielnaam + bolletje */}
+                      <div className="flex items-center gap-3 mb-4 mt-6">
+                        <Link
+                          href={`/spelers/${l.owner_user_id}`}
+                          aria-label="Bekijk spelersprofiel"
+                          className={`w-10 h-10 flex items-center justify-center rounded-full font-semibold shadow-inner border border-white/10
+                            ${l.profiles_player?.is_anonymous
+                              ? 'bg-gray-500/50 text-white'
+                              : 'bg-[#F59E0B]/90 text-[#0F172A] hover:brightness-105 transition'
+                            }`}
+                        >
+                          {l.profiles_player?.is_anonymous
+                            ? '?'
+                            : l.profiles_player?.display_name?.[0]?.toUpperCase() || '?'}
+                        </Link>
 
-        <div className="flex flex-col leading-tight">
-          <Link
-            href={`/spelers/${l.owner_user_id}`}
-            className="text-lg font-semibold text-gray-100 hover:text-[#F59E0B] transition-colors"
-          >
-            {l.profiles_player?.is_anonymous
-              ? 'Anonieme speler'
-              : l.profiles_player?.display_name || 'Onbekend'}
-          </Link>
-          <p className="text-xs text-gray-400 mt-0.5">{timeAgo}</p>
-        </div>
-      </div>
+                        <div className="flex flex-col leading-tight">
+                          <Link
+                            href={`/spelers/${l.owner_user_id}`}
+                            className="text-lg font-semibold text-gray-100 hover:text-[#F59E0B] transition-colors"
+                          >
+                            {l.profiles_player?.is_anonymous
+                              ? 'Anonieme speler'
+                              : l.profiles_player?.display_name || 'Onbekend'}
+                          </Link>
+                          <p className="text-xs text-gray-400 mt-0.5">{timeAgo}</p>
+                        </div>
+                      </div>
+                      {/* 📝 Titel en beschrijving */}
+                      <h3 className="text-[#F59E0B] text-2xl font-semibold mb-2">{l.title}</h3>
+                      <p className="text-gray-300 mb-4">{l.description}</p>
 
+                      {/* 📋 Extra info */}
+                      <div className="space-y-1 text-sm text-gray-400">
+                        <p>
+                          📍 <span className="text-gray-200">{l.province}</span>
+                        </p>
+                        <p>
+                          ⚽ <span className="text-gray-200">{l.level}</span>
+                        </p>
+                        <p>
+                          🧍 <span className="text-gray-200">{pos.join(' & ')}</span>
+                        </p>
+                      </div>
+                    </div>
 
-
-      {/* 📝 Titel en beschrijving */}
-      <h3 className="text-[#F59E0B] text-2xl font-semibold mb-2">{l.title}</h3>
-      <p className="text-gray-300 mb-4">{l.description}</p>
-
-      {/* 📋 Extra info */}
-      <div className="space-y-1 text-sm text-gray-400">
-        <p>
-          📍 <span className="text-gray-200">{l.province}</span>
-        </p>
-        <p>
-          ⚽ <span className="text-gray-200">{l.level}</span>
-        </p>
-        <p>
-          🧍 <span className="text-gray-200">{pos.join(' & ')}</span>
-        </p>
-      </div>
-    </div>
-
-    {/* 🔸 Rechterzijde: voetbalveld */}
-    <div className="flex flex-col items-end justify-start">
-      {pos.length > 0 && <FootballField positionsSelected={pos} />}
-    </div>
-  </div>
-</motion.li>
-
-
+                    {/* 🔸 Rechterzijde: voetbalveld */}
+                    <div className="flex flex-col items-end justify-start">
+                      {pos.length > 0 && <FootballField positionsSelected={pos} />}
+                    </div>
+                  </div>
+                </motion.li>
               )
             })}
           </ul>
-
-
-
-
         </motion.div>
+        {/* 🔹 Rechts: clubs in de buurt */}
+        <div className="hidden md:block md:col-start-3 md:justify-self-start sticky top-24 self-start">
+          <div className="backdrop-blur-xl bg-[#1E293B]/70 border border-white/20 rounded-3xl shadow-2xl p-6 w-[280px] text-white">
+            <h2 className="text-xl font-bold text-[#F59E0B] mb-4">
+              Clubs in jouw buurt
+            </h2>
+
+            {!playerProvince && (
+              <p className="text-gray-400 text-sm">
+                Vul je provincie in bij je profiel om clubs in je buurt te zien.
+              </p>
+            )}
+
+            {playerProvince && clubsInBuurt.length === 0 && (
+              <p className="text-gray-400 text-sm">
+                Nog geen clubs gevonden in {playerProvince}.
+              </p>
+            )}
+
+            {clubsInBuurt.length > 0 && (
+              <ul className="space-y-4">
+                {clubsInBuurt.map((club) => (
+                  <li key={club.user_id}>
+                    <Link
+                      href={`/clubs/${club.user_id}`}
+                      className="block bg-[#243045]/70 hover:bg-[#2E3A50] border border-white/10 rounded-xl p-4 transition"
+                    >
+                      <p className="text-lg font-semibold text-white">
+                        {club.display_name || 'Onbekende club'}
+                      </p>
+                      <p className="text-sm text-gray-400">{club.level || '-'}</p>
+                      <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                        {club.bio || 'Geen beschrijving beschikbaar.'}
+                      </p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+
       </main>
 
       {/* Modaal voor nieuwe bijdrage */}
