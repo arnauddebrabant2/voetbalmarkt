@@ -43,14 +43,26 @@ useEffect(() => {
       .from('player_career')
       .select('*')
       .eq('player_id', profielID)
-      .order('start_date', { ascending: true })
 
     if (error) console.error('Fout bij ophalen carrière:', error)
-    else setCareer(data || [])
+    else {
+      // 🔹 Sorteer jeugd eerst, daarna eerste ploeg, chronologisch per categorie
+      const sorted = data.sort((a, b) => {
+        if (a.is_youth && !b.is_youth) return -1
+        if (!a.is_youth && b.is_youth) return 1
+
+        const aYear = a.is_youth ? parseInt(a.youth_from || 0) : new Date(a.start_date).getFullYear()
+        const bYear = b.is_youth ? parseInt(b.youth_from || 0) : new Date(b.start_date).getFullYear()
+
+        return aYear - bYear
+      })
+      setCareer(sorted)
+    }
   }
 
   fetchCareer()
 }, [profielID, isEditing])
+
 
 
   useEffect(() => {
@@ -286,7 +298,7 @@ useEffect(() => {
 
             {/* Veld rechts */}
             <div className="flex justify-center md:justify-end sticky top-20">
-                <FootballField positionsSelected={selectedPositions} size="md" />
+                <FootballField positionsSelected={selectedPositions} size="lg" />
             </div>
             </section>
         </div>
@@ -371,7 +383,6 @@ function EditForm({
     level: initial?.level || '',
     bio: initial?.bio || '',
     strengths: initial?.strengths || '',
-    career: initial?.career || '',
     visibility: initial?.visibility ?? true,
     position_primary: initial?.position_primary || '',
     position_secondary: initial?.position_secondary || '',
@@ -674,7 +685,7 @@ function EditForm({
       <div className="flex-1 min-w-[220px]">
         <TeamSelect
           value={item.team_name || ''}
-          onChange={(val, logo) => {
+          onChange={(val: string, logo: string) => {
             const updated = [...careerList]
             updated[idx].team_name = val
             updated[idx].team_logo = logo
@@ -742,36 +753,47 @@ function EditForm({
         ) : (
           <>
             <input
-              type="number"
-              min="1970"
-              max={new Date().getFullYear()}
+              type="text"
+              inputMode="numeric"
+              maxLength={4}
               placeholder="Startjaar"
               value={item.start_date ? new Date(item.start_date).getFullYear() : ''}
               onChange={(e) => {
+                const year = e.target.value.replace(/\D/g, '')  // Alleen cijfers
                 const updated = [...careerList]
-                updated[idx].start_date = e.target.value
-                  ? `${e.target.value}-01-01`
-                  : null
+                
+                if (year === '') {
+                  updated[idx].start_date = null
+                } else {
+                  updated[idx].start_date = `${year.padStart(4, '0')}-01-01`
+                }
+                
                 setCareerList(updated)
               }}
               className="w-[110px] bg-[#0F172A] border border-white/30 rounded-lg p-2 text-white text-center"
             />
             <span className="text-gray-400 text-sm">→</span>
             <input
-              type="number"
-              min="1970"
-              max={new Date().getFullYear()}
+              type="text"
+              inputMode="numeric"
+              maxLength={4}
               placeholder="Eindjaar"
               value={item.end_date ? new Date(item.end_date).getFullYear() : ''}
               onChange={(e) => {
+                const year = e.target.value.replace(/\D/g, '')  // Alleen cijfers
                 const updated = [...careerList]
-                updated[idx].end_date = e.target.value
-                  ? `${e.target.value}-01-01`
-                  : null
+                
+                if (year === '') {
+                  updated[idx].end_date = null
+                } else {
+                  updated[idx].end_date = `${year.padStart(4, '0')}-01-01`
+                }
+                
                 setCareerList(updated)
               }}
               className="w-[110px] bg-[#0F172A] border border-white/30 rounded-lg p-2 text-white text-center"
             />
+
           </>
         )}
       </div>
