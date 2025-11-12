@@ -1,11 +1,15 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import { useAuth } from '@/components/ui/AuthProvider'
 import { Button } from '@/components/ui/button'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useParams } from 'next/navigation'
 import { FootballField } from '@/components/ui/FootballField'
+import belgianTeams from '@/public/data/belgian_teams_simple.json'
+import Image from 'next/image'
+import CareerEditor from '@/components/ui/CareerEditor'
+
 
 export default function SpelerProfielPage() {
   const { user, refreshProfile } = useAuth()
@@ -29,6 +33,25 @@ export default function SpelerProfielPage() {
     }
     fetchProfile()
   }, [user, isEditing])
+
+  const [career, setCareer] = useState<any[]>([])
+
+useEffect(() => {
+  const fetchCareer = async () => {
+    if (!profielID) return
+    const { data, error } = await supabase
+      .from('player_career')
+      .select('*')
+      .eq('player_id', profielID)
+      .order('start_date', { ascending: true })
+
+    if (error) console.error('Fout bij ophalen carrière:', error)
+    else setCareer(data || [])
+  }
+
+  fetchCareer()
+}, [profielID, isEditing])
+
 
   useEffect(() => {
     const fetchViewCount = async () => {
@@ -55,6 +78,11 @@ export default function SpelerProfielPage() {
     ...(profile?.position_primary ? [profile.position_primary] : []),
     ...(profile?.position_secondary ? [profile.position_secondary] : []),
   ]
+
+  const currentTeamData = profile?.current_team
+  ? belgianTeams.find((t) => t.name === profile.current_team)
+  : null
+
 
   const getProfileAvatar = () => {
     if (profile?.is_anonymous) return '❓'
@@ -89,7 +117,6 @@ export default function SpelerProfielPage() {
       {profile ? (
         <div className="max-w-7xl mx-auto flex flex-col gap-10">
 
-        {/* ---------- 1️⃣ BOVENSTE PROFIELKADER (GEBOORTEDATUM & OPGESCHOOND) ---------- */}
         {/* ---------- 1️⃣ BOVENSTE PROFIELKADER (GEBOORTEDATUM + LEEFTIJDSBOL) ---------- */}
         <section className="relative overflow-hidden bg-gradient-to-r from-[#1E293B] via-[#0F172A] to-[#1E293B] border border-white/10 rounded-3xl shadow-2xl p-10 flex flex-col md:flex-row items-start gap-10">
         {/* Achtergrond glow */}
@@ -167,12 +194,28 @@ export default function SpelerProfielPage() {
         </div>
         </section>
 
-
-
-
             {/* ---------- 2️⃣ INFO + VELD NAAST ELKAAR ---------- */}
             <section className="grid md:grid-cols-[2fr_1fr] gap-10 items-start w-full">
             <div className="flex flex-col gap-8">
+                {currentTeamData && (
+            <section className="bg-[#1E293B]/60 border border-white/20 rounded-2xl p-6 flex items-center gap-4 shadow-lg">
+              <Image
+                src={currentTeamData.logo}
+                alt={currentTeamData.name}
+                width={48}
+                height={48}
+                className="rounded-full border border-white/30"
+              />
+              <div>
+                <h3 className="text-lg font-semibold text-[#F59E0B]">
+                  Huidige / Laatste club
+                </h3>
+                <p className="text-white text-base font-medium">
+                  {currentTeamData.name}
+                </p>
+              </div>
+            </section>
+          )}
                 <Section
                 title="Over mij"
                 content={profile.bio}
@@ -193,20 +236,52 @@ export default function SpelerProfielPage() {
                     : 'Nog geen sterktes ingevuld.'
                 }
                 />
-                <Section
-                title="Loopbaan / Carrière"
-                content={
-                    profile.career ? (
-                    <ul className="list-disc list-inside space-y-1 text-gray-100">
-                        {profile.career.split('\n').map((line: string, i: number) => (
-                        <li key={i}>{line}</li>
-                        ))}
+                <section className="bg-[#1E293B]/60 border border-white/20 rounded-3xl p-8 shadow-lg">
+                  <h2 className="text-xl font-semibold text-[#F59E0B] mb-4">Loopbaan / Carrière</h2>
+
+                  {career.length > 0 ? (
+                    <ul className="divide-y divide-white/10 space-y-1">
+                      {career.map((c) => {
+                        const team = belgianTeams.find(
+                          (t) => t.name.toLowerCase() === c.team_name?.toLowerCase()
+                        )
+
+                        const periode = c.is_youth
+                          ? `${c.youth_from || '?'} → ${c.youth_to || '?'} (jeugd)`
+                          : `${c.start_date ? new Date(c.start_date).getFullYear() : '?'} - ${
+                              c.end_date ? new Date(c.end_date).getFullYear() : 'heden'
+                            }`
+
+                        return (
+                          <li
+                            key={c.id}
+                            className="flex items-center justify-between py-3 gap-4 hover:bg-white/5 rounded-xl transition-colors px-2"
+                          >
+                            <div className="flex items-center gap-3">
+                              {team ? (
+                                <Image
+                                  src={team.logo}
+                                  alt={team.name}
+                                  width={36}
+                                  height={36}
+                                  className="object-contain"
+                                />
+                              ) : (
+                                <div className="w-9 h-9 bg-gray-600/30 rounded-md" />
+                              )}
+                              <span className="text-white font-medium">{c.team_name}</span>
+                            </div>
+                            <span className="text-gray-400 text-sm font-light">{periode}</span>
+                          </li>
+                        )
+                      })}
                     </ul>
-                    ) : (
-                    'Nog geen loopbaaninformatie toegevoegd.'
-                    )
-                }
-                />
+                  ) : (
+                    <p className="text-gray-400">Nog geen loopbaaninformatie toegevoegd.</p>
+                  )}
+                </section>
+
+
             </div>
 
             {/* Veld rechts */}
@@ -277,78 +352,6 @@ function Section({ title, content, fallback }: any) {
   )
 }
 
-/* ---------- VOETBALVELD ---------- */
-// function FootballField({ positionsSelected = [] }: { positionsSelected?: string[] }) {
-//   const positions: Record<string, { x: number; y: number }> = {
-//     Doelman: { x: 50, y: 95 },
-//     Linksachter: { x: 16, y: 78 },
-//     'Centrale verdediger links': { x: 38, y: 82 },
-//     'Centrale verdediger rechts': { x: 62, y: 82 },
-//     Rechtsachter: { x: 84, y: 78 },
-//     'Centrale middenvelder links': { x: 30, y: 60 },
-//     'Centrale middenvelder rechts': { x: 70, y: 60 },
-//     'Aanvallende middenvelder': { x: 50, y: 38 },
-//     Linksbuiten: { x: 20, y: 27 },
-//     Spits: { x: 50, y: 20 },
-//     Rechtsbuiten: { x: 80, y: 27 },
-//   }
-  
-
-//   return (
-//     <div className="relative flex items-center justify-center">
-//       {/* 🏟️ Buitenrand (stadionmuur) */}
-//       <div className="relative w-[320px] h-[480px] rounded-3xl bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 border-4 border-slate-700 shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden">
-//         {/* 💺 Tribune ring */}
-//         <div className="absolute inset-0 bg-gradient-to-b from-gray-800 via-gray-900 to-black rounded-3xl p-3">
-//           {/* ⚽ Grasveld */}
-//           <div className="relative w-full h-full rounded-2xl bg-gradient-to-b from-green-800 to-green-700 border-4 border-green-900 shadow-inner overflow-hidden">
-//             {/* Witte lijnen */}
-//             <svg viewBox="0 0 100 150" className="absolute inset-0 w-full h-full opacity-90">
-//               <rect x="0" y="0" width="100" height="150" fill="none" stroke="white" strokeWidth="1.2" />
-//               <line x1="0" y1="75" x2="100" y2="75" stroke="white" strokeWidth="0.8" />
-//               <circle cx="50" cy="75" r="10" stroke="white" fill="none" strokeWidth="0.8" />
-//               <circle cx="50" cy="75" r="1.5" fill="white" />
-//               <rect x="25" y="0" width="50" height="16" stroke="white" fill="none" strokeWidth="0.8" />
-//               <rect x="25" y="134" width="50" height="16" stroke="white" fill="none" strokeWidth="0.8" />
-//               <rect x="35" y="0" width="30" height="6" stroke="white" fill="none" strokeWidth="0.8" />
-//               <rect x="35" y="144" width="30" height="6" stroke="white" fill="none" strokeWidth="0.8" />
-//               <rect x="42" y="-2" width="16" height="2" fill="white" />
-//               <rect x="42" y="150" width="16" height="2" fill="white" />
-//               <circle cx="50" cy="11" r="1.2" fill="white" />
-//               <circle cx="50" cy="139" r="1.2" fill="white" />
-//             </svg>
-
-//             {/* Posities */}
-//             {Object.entries(positions).map(([pos, { x, y }]) => {
-//               const isSelected = positionsSelected.includes(pos)
-//               return (
-//                 <div
-//                   key={pos}
-//                   title={pos}
-//                   className={`absolute rounded-full transition-all duration-300 ease-in-out ${
-//                     isSelected
-//                       ? 'bg-yellow-400 border-2 border-white w-6 h-6 ring-4 ring-yellow-300/40 shadow-lg animate-pulse'
-//                       : 'bg-white/80 w-3 h-3 shadow-sm'
-//                   }`}
-//                   style={{
-//                     left: `${x}%`,
-//                     top: `${y}%`,
-//                     transform: 'translate(-50%, -50%)',
-//                   }}
-//                 />
-//               )
-//             })}
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* 💡 Lichtgloed bovenaan (stadionlichten) */}
-//       <div className="absolute -top-10 w-[120%] h-20 bg-gradient-to-b from-white/10 to-transparent blur-3xl rounded-full pointer-events-none" />
-//     </div>
-//   )
-// }
-
-
 /* ---------- Bewerken formulier ---------- */
 function EditForm({
   user,
@@ -376,8 +379,25 @@ function EditForm({
     foot: initial?.foot || '',
     birth_date: initial?.birth_date || '', // 🔹 Nieuw: geboortedatum
     available_from: initial?.available_from || '',
+    current_team: initial?.current_team || '',
   })
+  const [careerList, setCareerList] = useState<any[]>([])
   const [saving, setSaving] = useState(false)
+
+  useEffect(() => {
+  const fetchCareer = async () => {
+    const { data, error } = await supabase
+      .from('player_career')
+      .select('*')
+      .eq('player_id', user.id)
+      .order('start_date', { ascending: true })
+
+    if (error) console.error('❌ Fout bij ophalen carrière:', error)
+    else setCareerList(data || [])
+  }
+
+  fetchCareer()
+}, [user])
 
   const update = (key: string, val: any) => setForm((p) => ({ ...p, [key]: val }))
 
@@ -391,13 +411,42 @@ function EditForm({
     )
 
     const { error } = await supabase
-      .from('profiles_player')
-      .update({
-        role: 'speler',
-        ...cleanedForm,
-        updated_at: new Date().toISOString(),
-      })
-      .eq('user_id', user.id)
+    .from('profiles_player')
+    .update({
+      role: 'speler',
+      ...cleanedForm,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('user_id', user.id)
+
+    // 🔹 Carrière opslaan
+    const cleanedCareer = careerList
+      .filter((c) => c.team_name)
+      .map((c) => ({
+        player_id: user.id,
+        team_name: c.team_name,
+        team_logo: c.team_logo || null,
+        start_date: c.start_date || null,
+        end_date: c.end_date || null,
+        is_youth: c.is_youth || false,
+        youth_from: c.youth_from || null,
+        youth_to: c.youth_to || null,
+      }))
+
+    // 🔸 Oude carrière wissen
+    await supabase.from('player_career').delete().eq('player_id', user.id)
+
+    // 🔸 Nieuwe carrière invoegen
+    if (cleanedCareer.length > 0) {
+      const { error: insertError } = await supabase
+        .from('player_career')
+        .insert(cleanedCareer)
+
+      if (insertError) {
+        console.error('❌ Fout bij opslaan carrière:', insertError)
+        alert('❌ Fout bij opslaan carrière')
+      }
+    }
 
     setSaving(false)
 
@@ -407,6 +456,7 @@ function EditForm({
     } else {
       onSaved()
     }
+
   }
 
   return (
@@ -532,6 +582,7 @@ function EditForm({
           onChange={(v) => update('foot', v)}
           options={['Rechts', 'Links', 'Beide']}
         />
+        <TeamSelect value={form.current_team} onChange={(v) => update('current_team', v)} />
 
         {/* 🔹 Nieuw veld: geboortedatum */}
         <InputField
@@ -550,22 +601,219 @@ function EditForm({
       </div>
 
       {/* Tekstvelden */}
-      <InputField
-        label="Sterktes (komma gescheiden, bv. snelheid, techniek, inzicht)"
-        value={form.strengths}
-        onChange={(v) => update('strengths', v)}
-      />
-
       <div>
-        <label className="block text-sm font-medium mb-1">Loopbaan / carrière</label>
-        <textarea
-          className="bg-[#1E293B] border border-white/30 rounded-lg p-4 w-full text-white placeholder-gray-400
-                     focus:ring-2 focus:ring-[#F59E0B] outline-none resize-none h-40"
-          placeholder="Bijv: KVC Westerlo (2018–2021)\nKSK Lierse (2021–heden)"
-          value={form.career || ''}
-          onChange={(e) => update('career', e.target.value)}
+  <label className="block text-sm font-medium mb-1 text-[#F59E0B]">
+    Sterktes
+  </label>
+  <p className="text-xs text-gray-400 mb-2">
+    Selecteer de kwaliteiten die jou het best omschrijven.
+  </p>
+  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+    {[
+      'Snelheid',
+      'Techniek',
+      'Inzicht',
+      'Fysiek sterk',
+      'Uithouding',
+      'Kopbalsterk',
+      'Passnauwkeurigheid',
+      'Dribbelvaardig',
+      'Verdedigend inzicht',
+      'Positiespel',
+      'Afwerking',
+      'Teamspeler',
+      'Leiderschap',
+      'Communicatie',
+      'Creativiteit',
+    ].map((sterkte) => {
+      const selected = form.strengths
+        ?.split(',')
+        .map((s: string) => s.trim())
+        .includes(sterkte)
+      return (
+        <button
+          key={sterkte}
+          type="button"
+          onClick={() => {
+            const current = form.strengths
+              ? form.strengths.split(',').map((s: string) => s.trim())
+              : []
+            const newList = selected
+              ? current.filter((s: string) => s !== sterkte)
+              : [...current, sterkte]
+            update('strengths', newList.join(', '))
+          }}
+          className={`rounded-lg border px-3 py-2 text-sm text-center transition ${
+            selected
+              ? 'bg-[#F59E0B] text-white border-[#F59E0B]'
+              : 'bg-[#1E293B] text-gray-200 border-white/30 hover:bg-white/10'
+          }`}
+        >
+          {sterkte}
+        </button>
+      )
+    })}
+  </div>
+</div>
+
+
+        <div>
+  <label className="block text-sm font-medium mb-1 text-[#F59E0B]">
+    Loopbaan / Carrière
+  </label>
+  <p className="text-xs text-gray-400 mb-2">
+    Voeg clubs toe en geef aan of het om jeugd of senior voetbal gaat.
+  </p>
+
+  {careerList.map((item, idx) => (
+    <div
+      key={idx}
+      className="flex flex-wrap md:flex-nowrap items-center gap-3 mb-2 bg-[#1E293B] border border-white/20 rounded-lg p-3"
+    >
+      {/* Team-select met logo — label verbergen */}
+      <div className="flex-1 min-w-[220px]">
+        <TeamSelect
+          value={item.team_name || ''}
+          onChange={(val, logo) => {
+            const updated = [...careerList]
+            updated[idx].team_name = val
+            updated[idx].team_logo = logo
+            setCareerList(updated)
+          }}
+          hideLabel
         />
       </div>
+
+      {/* Jeugd / senior toggle */}
+      <div className="flex items-center gap-2 h-[46px]">
+        <input
+          id={`is_youth_${idx}`}
+          type="checkbox"
+          checked={item.is_youth || false}
+          onChange={(e) => {
+            const updated = [...careerList]
+            updated[idx].is_youth = e.target.checked
+            setCareerList(updated)
+          }}
+          className="accent-[#F59E0B] w-4 h-4"
+        />
+        <label
+          htmlFor={`is_youth_${idx}`}
+          className="text-sm text-gray-300 select-none"
+        >
+          Jeugd
+        </label>
+      </div>
+
+      {/* Datum- of U-selectie */}
+      <div className="flex items-center gap-2 flex-wrap md:flex-nowrap">
+        {item.is_youth ? (
+          <>
+            <select
+              value={item.youth_from || ''}
+              onChange={(e) => {
+                const updated = [...careerList]
+                updated[idx].youth_from = e.target.value
+                setCareerList(updated)
+              }}
+              className="w-[110px] bg-[#0F172A] border border-white/30 rounded-lg p-2 text-white"
+            >
+              <option value="">Van</option>
+              {['U6','U7','U8','U9','U10','U11','U12','U13','U14','U15','U16','U17','U18','U19'].map((u) => (
+                <option key={u}>{u}</option>
+              ))}
+            </select>
+            <span className="text-gray-400 text-sm">→</span>
+            <select
+              value={item.youth_to || ''}
+              onChange={(e) => {
+                const updated = [...careerList]
+                updated[idx].youth_to = e.target.value
+                setCareerList(updated)
+              }}
+              className="w-[110px] bg-[#0F172A] border border-white/30 rounded-lg p-2 text-white"
+            >
+              <option value="">Tot</option>
+              {['U6','U7','U8','U9','U10','U11','U12','U13','U14','U15','U16','U17','U18','U19'].map((u) => (
+                <option key={u}>{u}</option>
+              ))}
+            </select>
+          </>
+        ) : (
+          <>
+            <input
+              type="number"
+              min="1970"
+              max={new Date().getFullYear()}
+              placeholder="Startjaar"
+              value={item.start_date ? new Date(item.start_date).getFullYear() : ''}
+              onChange={(e) => {
+                const updated = [...careerList]
+                updated[idx].start_date = e.target.value
+                  ? `${e.target.value}-01-01`
+                  : null
+                setCareerList(updated)
+              }}
+              className="w-[110px] bg-[#0F172A] border border-white/30 rounded-lg p-2 text-white text-center"
+            />
+            <span className="text-gray-400 text-sm">→</span>
+            <input
+              type="number"
+              min="1970"
+              max={new Date().getFullYear()}
+              placeholder="Eindjaar"
+              value={item.end_date ? new Date(item.end_date).getFullYear() : ''}
+              onChange={(e) => {
+                const updated = [...careerList]
+                updated[idx].end_date = e.target.value
+                  ? `${e.target.value}-01-01`
+                  : null
+                setCareerList(updated)
+              }}
+              className="w-[110px] bg-[#0F172A] border border-white/30 rounded-lg p-2 text-white text-center"
+            />
+          </>
+        )}
+      </div>
+
+      {/* Verwijderknop rechts */}
+      <button
+        type="button"
+        onClick={() =>
+          setCareerList(careerList.filter((_, i) => i !== idx))
+        }
+        className="text-red-400 hover:text-red-600 text-sm ml-auto"
+      >
+        ✕
+      </button>
+    </div>
+  ))}
+
+  {/* Knop om nieuwe rij toe te voegen */}
+  <button
+    type="button"
+    onClick={() =>
+      setCareerList([
+        ...careerList,
+        {
+          team_name: '',
+          team_logo: '',
+          is_youth: false,
+          youth_from: '',
+          youth_to: '',
+          start_date: '',
+          end_date: '',
+        },
+      ])
+    }
+    className="mt-2 text-[#F59E0B] text-sm hover:underline"
+  >
+    + Voeg club toe
+  </button>
+</div>
+
+
+
 
       <div>
         <label className="block text-sm font-medium mb-1">Over mij</label>
@@ -652,6 +900,109 @@ function Select({
           <option key={opt}>{opt}</option>
         ))}
       </select>
+    </div>
+  )
+}
+
+function TeamSelect({
+  value,
+  onChange,
+  hideLabel = false,
+}: {
+  value: string
+  onChange: (v: string) => void
+}) {
+  const [query, setQuery] = useState('')
+  const [focused, setFocused] = useState(false)
+
+  // 🔠 Sorteer alfabetisch
+  const teams = useMemo(
+    () => [...belgianTeams].sort((a, b) => a.name.localeCompare(b.name)),
+    []
+  )
+
+  // 🔍 Filteren
+  const filteredTeams = useMemo(() => {
+    if (!query) return teams
+    return teams.filter((team) =>
+      team.name.toLowerCase().includes(query.toLowerCase())
+    )
+  }, [query, teams])
+
+  // 💡 Toon tijdelijk query bij focus
+  const displayValue = focused ? query : value
+
+  return (
+    <div className="relative w-full">
+      {!hideLabel && (
+  <label className="block text-sm font-medium mb-1">
+    Huidige / Laatste club
+  </label>
+)}
+
+
+      <input
+        type="text"
+        placeholder="Zoek of selecteer een club..."
+        value={displayValue || ''}
+        onChange={(e) => setQuery(e.target.value)}
+        onFocus={() => {
+          setFocused(true)
+          setQuery('') // leeg bij focus om te zoeken
+        }}
+        onBlur={() => setTimeout(() => setFocused(false), 150)}
+        className="w-full bg-[#1E293B] border border-white/30 rounded-lg p-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-[#F59E0B] outline-none"
+      />
+
+      {/* Dropdownlijst */}
+      {focused && (
+        <div className="absolute z-20 mt-1 w-full max-h-60 overflow-y-auto bg-[#0F172A] border border-white/20 rounded-lg shadow-lg">
+          {/* ➕ Optie: geen club */}
+          <button
+            type="button"
+            onClick={() => {
+              onChange('')
+              setQuery('')
+              setFocused(false)
+            }}
+            className="flex items-center gap-3 w-full px-3 py-2 text-left hover:bg-[#F59E0B]/20 transition-colors border-b border-white/10"
+          >
+            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-600/50 text-white text-xs">
+              –
+            </div>
+            <span className="text-sm text-gray-300 italic">Geen club (vrije speler)</span>
+          </button>
+
+          {/* Clubs */}
+          {filteredTeams.map((team) => (
+            <button
+              key={team.name}
+              type="button"
+              onClick={() => {
+                onChange(team.name)
+                setQuery('')
+                setFocused(false)
+              }}
+              className="flex items-center gap-3 w-full px-3 py-2 text-left hover:bg-[#F59E0B]/20 transition-colors"
+            >
+              <Image
+                src={team.logo}
+                alt={team.name}
+                width={24}
+                height={24}
+                className="rounded-full"
+              />
+              <span className="text-sm text-white">{team.name}</span>
+            </button>
+          ))}
+
+          {filteredTeams.length === 0 && (
+            <p className="px-3 py-2 text-sm text-gray-400">
+              Geen clubs gevonden
+            </p>
+          )}
+        </div>
+      )}
     </div>
   )
 }

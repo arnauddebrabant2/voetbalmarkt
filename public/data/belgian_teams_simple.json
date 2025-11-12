@@ -1,0 +1,3250 @@
+[
+  {
+    "name": "Belgium",
+    "logo": "https://media.api-sports.io/football/teams/1.png"
+  },
+  {
+    "name": "Lommel United",
+    "logo": "https://media.api-sports.io/football/teams/259.png"
+  },
+  {
+    "name": "OH Leuven",
+    "logo": "https://media.api-sports.io/football/teams/260.png"
+  },
+  {
+    "name": "KVC Westerlo",
+    "logo": "https://media.api-sports.io/football/teams/261.png"
+  },
+  {
+    "name": "Tubize",
+    "logo": "https://media.api-sports.io/football/teams/262.png"
+  },
+  {
+    "name": "Beerschot Wilrijk",
+    "logo": "https://media.api-sports.io/football/teams/263.png"
+  },
+  {
+    "name": "Roeselare",
+    "logo": "https://media.api-sports.io/football/teams/264.png"
+  },
+  {
+    "name": "KV Mechelen",
+    "logo": "https://media.api-sports.io/football/teams/266.png"
+  },
+  {
+    "name": "Anderlecht",
+    "logo": "https://media.api-sports.io/football/teams/554.png"
+  },
+  {
+    "name": "Club Brugge KV",
+    "logo": "https://media.api-sports.io/football/teams/569.png"
+  },
+  {
+    "name": "Zulte Waregem",
+    "logo": "https://media.api-sports.io/football/teams/600.png"
+  },
+  {
+    "name": "Oostende",
+    "logo": "https://media.api-sports.io/football/teams/624.png"
+  },
+  {
+    "name": "Gent",
+    "logo": "https://media.api-sports.io/football/teams/631.png"
+  },
+  {
+    "name": "Standard Liege",
+    "logo": "https://media.api-sports.io/football/teams/733.png"
+  },
+  {
+    "name": "Kortrijk",
+    "logo": "https://media.api-sports.io/football/teams/734.png"
+  },
+  {
+    "name": "St. Truiden",
+    "logo": "https://media.api-sports.io/football/teams/735.png"
+  },
+  {
+    "name": "Charleroi",
+    "logo": "https://media.api-sports.io/football/teams/736.png"
+  },
+  {
+    "name": "Lokeren",
+    "logo": "https://media.api-sports.io/football/teams/737.png"
+  },
+  {
+    "name": "Waasland-beveren",
+    "logo": "https://media.api-sports.io/football/teams/738.png"
+  },
+  {
+    "name": "AS Eupen",
+    "logo": "https://media.api-sports.io/football/teams/739.png"
+  },
+  {
+    "name": "Antwerp",
+    "logo": "https://media.api-sports.io/football/teams/740.png"
+  },
+  {
+    "name": "Cercle Brugge",
+    "logo": "https://media.api-sports.io/football/teams/741.png"
+  },
+  {
+    "name": "Genk",
+    "logo": "https://media.api-sports.io/football/teams/742.png"
+  },
+  {
+    "name": "Royal Excel Mouscron",
+    "logo": "https://media.api-sports.io/football/teams/743.png"
+  },
+  {
+    "name": "Lierse",
+    "logo": "https://media.api-sports.io/football/teams/1392.png"
+  },
+  {
+    "name": "Union St. Gilloise",
+    "logo": "https://media.api-sports.io/football/teams/1393.png"
+  },
+  {
+    "name": "Belgium W",
+    "logo": "https://media.api-sports.io/football/teams/1777.png"
+  },
+  {
+    "name": "Genk W",
+    "logo": "https://media.api-sports.io/football/teams/1786.png"
+  },
+  {
+    "name": "K.S.K. Heist W",
+    "logo": "https://media.api-sports.io/football/teams/1787.png"
+  },
+  {
+    "name": "Tienen W",
+    "logo": "https://media.api-sports.io/football/teams/1788.png"
+  },
+  {
+    "name": "Gent W",
+    "logo": "https://media.api-sports.io/football/teams/1789.png"
+  },
+  {
+    "name": "OH Leuven W",
+    "logo": "https://media.api-sports.io/football/teams/1790.png"
+  },
+  {
+    "name": "Standard Liege W",
+    "logo": "https://media.api-sports.io/football/teams/1791.png"
+  },
+  {
+    "name": "Anderlecht W",
+    "logo": "https://media.api-sports.io/football/teams/1792.png"
+  },
+  {
+    "name": "Mons",
+    "logo": "https://media.api-sports.io/football/teams/4653.png"
+  },
+  {
+    "name": "Beerschot",
+    "logo": "https://media.api-sports.io/football/teams/4654.png"
+  },
+  {
+    "name": "Excelsior Virton",
+    "logo": "https://media.api-sports.io/football/teams/4715.png"
+  },
+  {
+    "name": "Lille",
+    "logo": "https://media.api-sports.io/football/teams/5734.png"
+  },
+  {
+    "name": "Chaumont",
+    "logo": "https://media.api-sports.io/football/teams/5735.png"
+  },
+  {
+    "name": "AEDEC Hyon",
+    "logo": "https://media.api-sports.io/football/teams/5736.png"
+  },
+  {
+    "name": "Acren-Lessines",
+    "logo": "https://media.api-sports.io/football/teams/5737.png"
+  },
+  {
+    "name": "Adegem",
+    "logo": "https://media.api-sports.io/football/teams/5738.png"
+  },
+  {
+    "name": "Aische",
+    "logo": "https://media.api-sports.io/football/teams/5739.png"
+  },
+  {
+    "name": "Albert Quévy-Mons",
+    "logo": "https://media.api-sports.io/football/teams/5740.png"
+  },
+  {
+    "name": "Alken",
+    "logo": "https://media.api-sports.io/football/teams/5741.png"
+  },
+  {
+    "name": "Andennais",
+    "logo": "https://media.api-sports.io/football/teams/5742.png"
+  },
+  {
+    "name": "Anderlecht-Milan",
+    "logo": "https://media.api-sports.io/football/teams/5743.png"
+  },
+  {
+    "name": "Anderlues",
+    "logo": "https://media.api-sports.io/football/teams/5744.png"
+  },
+  {
+    "name": "Ardennen",
+    "logo": "https://media.api-sports.io/football/teams/5745.png"
+  },
+  {
+    "name": "Avanti",
+    "logo": "https://media.api-sports.io/football/teams/5746.png"
+  },
+  {
+    "name": "Aywaille",
+    "logo": "https://media.api-sports.io/football/teams/5747.png"
+  },
+  {
+    "name": "Baal",
+    "logo": "https://media.api-sports.io/football/teams/5748.png"
+  },
+  {
+    "name": "Bambrugge",
+    "logo": "https://media.api-sports.io/football/teams/5749.png"
+  },
+  {
+    "name": "Belœil",
+    "logo": "https://media.api-sports.io/football/teams/5750.png"
+  },
+  {
+    "name": "Berchem Sport",
+    "logo": "https://media.api-sports.io/football/teams/5751.png"
+  },
+  {
+    "name": "Berg en Dal",
+    "logo": "https://media.api-sports.io/football/teams/5752.png"
+  },
+  {
+    "name": "Berg-Op",
+    "logo": "https://media.api-sports.io/football/teams/5753.png"
+  },
+  {
+    "name": "Beringen",
+    "logo": "https://media.api-sports.io/football/teams/5754.png"
+  },
+  {
+    "name": "Bertem-Leefdaal",
+    "logo": "https://media.api-sports.io/football/teams/5755.png"
+  },
+  {
+    "name": "Betekom",
+    "logo": "https://media.api-sports.io/football/teams/5756.png"
+  },
+  {
+    "name": "Biesme",
+    "logo": "https://media.api-sports.io/football/teams/5757.png"
+  },
+  {
+    "name": "Bilzerse Waltwilder",
+    "logo": "https://media.api-sports.io/football/teams/5758.png"
+  },
+  {
+    "name": "Blankenberge",
+    "logo": "https://media.api-sports.io/football/teams/5759.png"
+  },
+  {
+    "name": "Bocholt",
+    "logo": "https://media.api-sports.io/football/teams/5760.png"
+  },
+  {
+    "name": "Bokrijk Sport",
+    "logo": "https://media.api-sports.io/football/teams/5761.png"
+  },
+  {
+    "name": "Bornem",
+    "logo": "https://media.api-sports.io/football/teams/5762.png"
+  },
+  {
+    "name": "Bosquetia Frameries",
+    "logo": "https://media.api-sports.io/football/teams/5763.png"
+  },
+  {
+    "name": "Braine",
+    "logo": "https://media.api-sports.io/football/teams/5764.png"
+  },
+  {
+    "name": "Breugel",
+    "logo": "https://media.api-sports.io/football/teams/5765.png"
+  },
+  {
+    "name": "Bütgenbach",
+    "logo": "https://media.api-sports.io/football/teams/5766.png"
+  },
+  {
+    "name": "Cappellen",
+    "logo": "https://media.api-sports.io/football/teams/5767.png"
+  },
+  {
+    "name": "City Pirates Antwerpen",
+    "logo": "https://media.api-sports.io/football/teams/5768.png"
+  },
+  {
+    "name": "Couvin-Mariembourg",
+    "logo": "https://media.api-sports.io/football/teams/5769.png"
+  },
+  {
+    "name": "Crossing Schaerbeek",
+    "logo": "https://media.api-sports.io/football/teams/5770.png"
+  },
+  {
+    "name": "Dadizele",
+    "logo": "https://media.api-sports.io/football/teams/5771.png"
+  },
+  {
+    "name": "De Goé",
+    "logo": "https://media.api-sports.io/football/teams/5772.png"
+  },
+  {
+    "name": "De Kempen",
+    "logo": "https://media.api-sports.io/football/teams/5773.png"
+  },
+  {
+    "name": "De Neffe",
+    "logo": "https://media.api-sports.io/football/teams/5774.png"
+  },
+  {
+    "name": "Dendermonde",
+    "logo": "https://media.api-sports.io/football/teams/5775.png"
+  },
+  {
+    "name": "Diegem Sport",
+    "logo": "https://media.api-sports.io/football/teams/5776.png"
+  },
+  {
+    "name": "Diest",
+    "logo": "https://media.api-sports.io/football/teams/5777.png"
+  },
+  {
+    "name": "Dikkelvenne",
+    "logo": "https://media.api-sports.io/football/teams/5778.png"
+  },
+  {
+    "name": "Dottignies",
+    "logo": "https://media.api-sports.io/football/teams/5779.png"
+  },
+  {
+    "name": "Drongen",
+    "logo": "https://media.api-sports.io/football/teams/5780.png"
+  },
+  {
+    "name": "ES de la Molignée",
+    "logo": "https://media.api-sports.io/football/teams/5781.png"
+  },
+  {
+    "name": "Edeboys",
+    "logo": "https://media.api-sports.io/football/teams/5782.png"
+  },
+  {
+    "name": "Eendracht Aalst",
+    "logo": "https://media.api-sports.io/football/teams/5783.png"
+  },
+  {
+    "name": "Eendracht Aalter",
+    "logo": "https://media.api-sports.io/football/teams/5784.png"
+  },
+  {
+    "name": "Eendracht Stevoort",
+    "logo": "https://media.api-sports.io/football/teams/5785.png"
+  },
+  {
+    "name": "Eendracht Termien",
+    "logo": "https://media.api-sports.io/football/teams/5786.png"
+  },
+  {
+    "name": "Eendracht Wervik",
+    "logo": "https://media.api-sports.io/football/teams/5787.png"
+  },
+  {
+    "name": "Eendracht Zele",
+    "logo": "https://media.api-sports.io/football/teams/5788.png"
+  },
+  {
+    "name": "Eghezée",
+    "logo": "https://media.api-sports.io/football/teams/5789.png"
+  },
+  {
+    "name": "Elene-Grotenberge",
+    "logo": "https://media.api-sports.io/football/teams/5790.png"
+  },
+  {
+    "name": "Elsautoise",
+    "logo": "https://media.api-sports.io/football/teams/5791.png"
+  },
+  {
+    "name": "Entité Floreffe",
+    "logo": "https://media.api-sports.io/football/teams/5792.png"
+  },
+  {
+    "name": "Entité Manageoise",
+    "logo": "https://media.api-sports.io/football/teams/5793.png"
+  },
+  {
+    "name": "Eppegem",
+    "logo": "https://media.api-sports.io/football/teams/5794.png"
+  },
+  {
+    "name": "Esperanza Pelt",
+    "logo": "https://media.api-sports.io/football/teams/5795.png"
+  },
+  {
+    "name": "Ethe Belmont",
+    "logo": "https://media.api-sports.io/football/teams/5796.png"
+  },
+  {
+    "name": "Etoile de Faimes",
+    "logo": "https://media.api-sports.io/football/teams/5797.png"
+  },
+  {
+    "name": "Etterbeek",
+    "logo": "https://media.api-sports.io/football/teams/5798.png"
+  },
+  {
+    "name": "Excelsior Bouwel",
+    "logo": "https://media.api-sports.io/football/teams/5799.png"
+  },
+  {
+    "name": "Excelsior Mariakerke",
+    "logo": "https://media.api-sports.io/football/teams/5800.png"
+  },
+  {
+    "name": "FC Bercheux",
+    "logo": "https://media.api-sports.io/football/teams/5801.png"
+  },
+  {
+    "name": "FC Eupen",
+    "logo": "https://media.api-sports.io/football/teams/5802.png"
+  },
+  {
+    "name": "FC Lebbeke",
+    "logo": "https://media.api-sports.io/football/teams/5803.png"
+  },
+  {
+    "name": "Florenville",
+    "logo": "https://media.api-sports.io/football/teams/5804.png"
+  },
+  {
+    "name": "Francs Borains",
+    "logo": "https://media.api-sports.io/football/teams/5805.png"
+  },
+  {
+    "name": "Ganshoren",
+    "logo": "https://media.api-sports.io/football/teams/5806.png"
+  },
+  {
+    "name": "Geel",
+    "logo": "https://media.api-sports.io/football/teams/5807.png"
+  },
+  {
+    "name": "Geetbets",
+    "logo": "https://media.api-sports.io/football/teams/5808.png"
+  },
+  {
+    "name": "Gosselies Sports",
+    "logo": "https://media.api-sports.io/football/teams/5809.png"
+  },
+  {
+    "name": "Grand-Leez",
+    "logo": "https://media.api-sports.io/football/teams/5810.png"
+  },
+  {
+    "name": "Greunsjotters Vossem",
+    "logo": "https://media.api-sports.io/football/teams/5811.png"
+  },
+  {
+    "name": "Gullegem",
+    "logo": "https://media.api-sports.io/football/teams/5812.png"
+  },
+  {
+    "name": "HO Kalken",
+    "logo": "https://media.api-sports.io/football/teams/5813.png"
+  },
+  {
+    "name": "Habay-la-Neuve",
+    "logo": "https://media.api-sports.io/football/teams/5814.png"
+  },
+  {
+    "name": "Hades",
+    "logo": "https://media.api-sports.io/football/teams/5815.png"
+  },
+  {
+    "name": "Hamoir",
+    "logo": "https://media.api-sports.io/football/teams/5816.png"
+  },
+  {
+    "name": "Harelbeke",
+    "logo": "https://media.api-sports.io/football/teams/5817.png"
+  },
+  {
+    "name": "Helson Helchteren",
+    "logo": "https://media.api-sports.io/football/teams/5818.png"
+  },
+  {
+    "name": "Herderen-Millen",
+    "logo": "https://media.api-sports.io/football/teams/5819.png"
+  },
+  {
+    "name": "Herk",
+    "logo": "https://media.api-sports.io/football/teams/5820.png"
+  },
+  {
+    "name": "Herstal",
+    "logo": "https://media.api-sports.io/football/teams/5821.png"
+  },
+  {
+    "name": "Heur Tongeren",
+    "logo": "https://media.api-sports.io/football/teams/5822.png"
+  },
+  {
+    "name": "Heusden-Zolder",
+    "logo": "https://media.api-sports.io/football/teams/5823.png"
+  },
+  {
+    "name": "Hoboken",
+    "logo": "https://media.api-sports.io/football/teams/5824.png"
+  },
+  {
+    "name": "Hoogstraten",
+    "logo": "https://media.api-sports.io/football/teams/5825.png"
+  },
+  {
+    "name": "Horion",
+    "logo": "https://media.api-sports.io/football/teams/5826.png"
+  },
+  {
+    "name": "Hornu",
+    "logo": "https://media.api-sports.io/football/teams/5827.png"
+  },
+  {
+    "name": "Houtem",
+    "logo": "https://media.api-sports.io/football/teams/5828.png"
+  },
+  {
+    "name": "Houtvenne",
+    "logo": "https://media.api-sports.io/football/teams/5829.png"
+  },
+  {
+    "name": "Huizingen",
+    "logo": "https://media.api-sports.io/football/teams/5830.png"
+  },
+  {
+    "name": "Huvo Jeuk",
+    "logo": "https://media.api-sports.io/football/teams/5831.png"
+  },
+  {
+    "name": "Huy",
+    "logo": "https://media.api-sports.io/football/teams/5832.png"
+  },
+  {
+    "name": "Ixelles",
+    "logo": "https://media.api-sports.io/football/teams/5833.png"
+  },
+  {
+    "name": "Jehaytois",
+    "logo": "https://media.api-sports.io/football/teams/5834.png"
+  },
+  {
+    "name": "Jespo Comines-Warneton",
+    "logo": "https://media.api-sports.io/football/teams/5835.png"
+  },
+  {
+    "name": "Jette",
+    "logo": "https://media.api-sports.io/football/teams/5836.png"
+  },
+  {
+    "name": "Jeunesse Tavietoise",
+    "logo": "https://media.api-sports.io/football/teams/5837.png"
+  },
+  {
+    "name": "Jodoigne",
+    "logo": "https://media.api-sports.io/football/teams/5838.png"
+  },
+  {
+    "name": "Jong Lede",
+    "logo": "https://media.api-sports.io/football/teams/5839.png"
+  },
+  {
+    "name": "Jong Zulte",
+    "logo": "https://media.api-sports.io/football/teams/5840.png"
+  },
+  {
+    "name": "K. Kontich",
+    "logo": "https://media.api-sports.io/football/teams/5841.png"
+  },
+  {
+    "name": "KFC Duffel",
+    "logo": "https://media.api-sports.io/football/teams/5842.png"
+  },
+  {
+    "name": "KRC Gent",
+    "logo": "https://media.api-sports.io/football/teams/5843.png"
+  },
+  {
+    "name": "Kabouters Opglabbeek",
+    "logo": "https://media.api-sports.io/football/teams/5844.png"
+  },
+  {
+    "name": "Kesselt",
+    "logo": "https://media.api-sports.io/football/teams/5845.png"
+  },
+  {
+    "name": "Kleit Maldegem",
+    "logo": "https://media.api-sports.io/football/teams/5846.png"
+  },
+  {
+    "name": "Knokke",
+    "logo": "https://media.api-sports.io/football/teams/5847.png"
+  },
+  {
+    "name": "Kobbegem",
+    "logo": "https://media.api-sports.io/football/teams/5848.png"
+  },
+  {
+    "name": "Kortemark",
+    "logo": "https://media.api-sports.io/football/teams/5849.png"
+  },
+  {
+    "name": "Kosova Schaerbeek",
+    "logo": "https://media.api-sports.io/football/teams/5850.png"
+  },
+  {
+    "name": "La Hulpe",
+    "logo": "https://media.api-sports.io/football/teams/5851.png"
+  },
+  {
+    "name": "La Roche",
+    "logo": "https://media.api-sports.io/football/teams/5852.png"
+  },
+  {
+    "name": "Lauwe",
+    "logo": "https://media.api-sports.io/football/teams/5853.png"
+  },
+  {
+    "name": "Le Roeulx",
+    "logo": "https://media.api-sports.io/football/teams/5854.png"
+  },
+  {
+    "name": "Lembeke",
+    "logo": "https://media.api-sports.io/football/teams/5855.png"
+  },
+  {
+    "name": "Lendelede Sport",
+    "logo": "https://media.api-sports.io/football/teams/5856.png"
+  },
+  {
+    "name": "Leopoldsburg",
+    "logo": "https://media.api-sports.io/football/teams/5857.png"
+  },
+  {
+    "name": "Libramont",
+    "logo": "https://media.api-sports.io/football/teams/5858.png"
+  },
+  {
+    "name": "Linden",
+    "logo": "https://media.api-sports.io/football/teams/5859.png"
+  },
+  {
+    "name": "Lochristi",
+    "logo": "https://media.api-sports.io/football/teams/5860.png"
+  },
+  {
+    "name": "Loenhout",
+    "logo": "https://media.api-sports.io/football/teams/5861.png"
+  },
+  {
+    "name": "Londerzeel",
+    "logo": "https://media.api-sports.io/football/teams/5862.png"
+  },
+  {
+    "name": "Loyers",
+    "logo": "https://media.api-sports.io/football/teams/5863.png"
+  },
+  {
+    "name": "Lyra-Lierse Berlaar",
+    "logo": "https://media.api-sports.io/football/teams/5864.png"
+  },
+  {
+    "name": "Léopold",
+    "logo": "https://media.api-sports.io/football/teams/5865.png"
+  },
+  {
+    "name": "Maarkedal",
+    "logo": "https://media.api-sports.io/football/teams/5866.png"
+  },
+  {
+    "name": "Malmundaria",
+    "logo": "https://media.api-sports.io/football/teams/5867.png"
+  },
+  {
+    "name": "Mandel United",
+    "logo": "https://media.api-sports.io/football/teams/5868.png"
+  },
+  {
+    "name": "Mariekerke",
+    "logo": "https://media.api-sports.io/football/teams/5869.png"
+  },
+  {
+    "name": "Meix-Devant-Virton",
+    "logo": "https://media.api-sports.io/football/teams/5870.png"
+  },
+  {
+    "name": "Merelbeke",
+    "logo": "https://media.api-sports.io/football/teams/5871.png"
+  },
+  {
+    "name": "Meux",
+    "logo": "https://media.api-sports.io/football/teams/5872.png"
+  },
+  {
+    "name": "Minderhout",
+    "logo": "https://media.api-sports.io/football/teams/5873.png"
+  },
+  {
+    "name": "Molenbaix",
+    "logo": "https://media.api-sports.io/football/teams/5874.png"
+  },
+  {
+    "name": "Montignies",
+    "logo": "https://media.api-sports.io/football/teams/5875.png"
+  },
+  {
+    "name": "Mormont",
+    "logo": "https://media.api-sports.io/football/teams/5876.png"
+  },
+  {
+    "name": "Mormont II",
+    "logo": "https://media.api-sports.io/football/teams/5877.png"
+  },
+  {
+    "name": "Muno",
+    "logo": "https://media.api-sports.io/football/teams/5878.png"
+  },
+  {
+    "name": "Naastois",
+    "logo": "https://media.api-sports.io/football/teams/5879.png"
+  },
+  {
+    "name": "Nassogne",
+    "logo": "https://media.api-sports.io/football/teams/5880.png"
+  },
+  {
+    "name": "Neufvilles",
+    "logo": "https://media.api-sports.io/football/teams/5881.png"
+  },
+  {
+    "name": "Nieuwkerke",
+    "logo": "https://media.api-sports.io/football/teams/5882.png"
+  },
+  {
+    "name": "Nijlen",
+    "logo": "https://media.api-sports.io/football/teams/5883.png"
+  },
+  {
+    "name": "Ninove",
+    "logo": "https://media.api-sports.io/football/teams/5884.png"
+  },
+  {
+    "name": "Nismes",
+    "logo": "https://media.api-sports.io/football/teams/5885.png"
+  },
+  {
+    "name": "Olsa Brakel",
+    "logo": "https://media.api-sports.io/football/teams/5886.png"
+  },
+  {
+    "name": "Olympia Wijgmaal",
+    "logo": "https://media.api-sports.io/football/teams/5887.png"
+  },
+  {
+    "name": "Onhaye",
+    "logo": "https://media.api-sports.io/football/teams/5888.png"
+  },
+  {
+    "name": "Oostduinkerke",
+    "logo": "https://media.api-sports.io/football/teams/5889.png"
+  },
+  {
+    "name": "Oostkamp",
+    "logo": "https://media.api-sports.io/football/teams/5890.png"
+  },
+  {
+    "name": "Oostnieuwkerke",
+    "logo": "https://media.api-sports.io/football/teams/5891.png"
+  },
+  {
+    "name": "Oppagne-Wéris",
+    "logo": "https://media.api-sports.io/football/teams/5892.png"
+  },
+  {
+    "name": "Ostiches",
+    "logo": "https://media.api-sports.io/football/teams/5893.png"
+  },
+  {
+    "name": "Oudenaarde",
+    "logo": "https://media.api-sports.io/football/teams/5894.png"
+  },
+  {
+    "name": "Oupeye",
+    "logo": "https://media.api-sports.io/football/teams/5895.png"
+  },
+  {
+    "name": "PAC Buzet",
+    "logo": "https://media.api-sports.io/football/teams/5896.png"
+  },
+  {
+    "name": "Park Houthalen",
+    "logo": "https://media.api-sports.io/football/teams/5897.png"
+  },
+  {
+    "name": "Pepingen-Halle",
+    "logo": "https://media.api-sports.io/football/teams/5898.png"
+  },
+  {
+    "name": "Poperinge",
+    "logo": "https://media.api-sports.io/football/teams/5899.png"
+  },
+  {
+    "name": "Putte SK",
+    "logo": "https://media.api-sports.io/football/teams/5900.png"
+  },
+  {
+    "name": "Pâturages",
+    "logo": "https://media.api-sports.io/football/teams/5901.png"
+  },
+  {
+    "name": "RAAL La Louvière",
+    "logo": "https://media.api-sports.io/football/teams/5902.png"
+  },
+  {
+    "name": "RC Lauwe",
+    "logo": "https://media.api-sports.io/football/teams/5903.png"
+  },
+  {
+    "name": "RES Durbuy",
+    "logo": "https://media.api-sports.io/football/teams/5904.png"
+  },
+  {
+    "name": "RFC Wetteren",
+    "logo": "https://media.api-sports.io/football/teams/5905.png"
+  },
+  {
+    "name": "Racing Mechelen",
+    "logo": "https://media.api-sports.io/football/teams/5906.png"
+  },
+  {
+    "name": "Racing Waregem",
+    "logo": "https://media.api-sports.io/football/teams/5907.png"
+  },
+  {
+    "name": "Raeren-Eynatten",
+    "logo": "https://media.api-sports.io/football/teams/5908.png"
+  },
+  {
+    "name": "Rapid Symphorinois",
+    "logo": "https://media.api-sports.io/football/teams/5909.png"
+  },
+  {
+    "name": "Rebecq",
+    "logo": "https://media.api-sports.io/football/teams/5910.png"
+  },
+  {
+    "name": "Rhisnes",
+    "logo": "https://media.api-sports.io/football/teams/5911.png"
+  },
+  {
+    "name": "Rhodienne-De Hoek",
+    "logo": "https://media.api-sports.io/football/teams/5912.png"
+  },
+  {
+    "name": "Richelle United",
+    "logo": "https://media.api-sports.io/football/teams/5913.png"
+  },
+  {
+    "name": "Rochefort",
+    "logo": "https://media.api-sports.io/football/teams/5914.png"
+  },
+  {
+    "name": "Rocherath",
+    "logo": "https://media.api-sports.io/football/teams/5915.png"
+  },
+  {
+    "name": "Ronse",
+    "logo": "https://media.api-sports.io/football/teams/5916.png"
+  },
+  {
+    "name": "SG-Tertre-Hautrage",
+    "logo": "https://media.api-sports.io/football/teams/5917.png"
+  },
+  {
+    "name": "SG-Tertre-Hautrage II",
+    "logo": "https://media.api-sports.io/football/teams/5918.png"
+  },
+  {
+    "name": "Saint-Josse",
+    "logo": "https://media.api-sports.io/football/teams/5919.png"
+  },
+  {
+    "name": "Saint-Louis-Saint-Léger",
+    "logo": "https://media.api-sports.io/football/teams/5920.png"
+  },
+  {
+    "name": "Sassport Boezinge",
+    "logo": "https://media.api-sports.io/football/teams/5921.png"
+  },
+  {
+    "name": "Schelle Sport",
+    "logo": "https://media.api-sports.io/football/teams/5922.png"
+  },
+  {
+    "name": "Schriek",
+    "logo": "https://media.api-sports.io/football/teams/5923.png"
+  },
+  {
+    "name": "Sint-Job",
+    "logo": "https://media.api-sports.io/football/teams/5924.png"
+  },
+  {
+    "name": "Sint-Lenaarts",
+    "logo": "https://media.api-sports.io/football/teams/5925.png"
+  },
+  {
+    "name": "Solières Sport",
+    "logo": "https://media.api-sports.io/football/teams/5926.png"
+  },
+  {
+    "name": "Sparta Petegem",
+    "logo": "https://media.api-sports.io/football/teams/5927.png"
+  },
+  {
+    "name": "Sport Koersel",
+    "logo": "https://media.api-sports.io/football/teams/5928.png"
+  },
+  {
+    "name": "Sport Liège",
+    "logo": "https://media.api-sports.io/football/teams/5929.png"
+  },
+  {
+    "name": "Sporting Club Jemappes",
+    "logo": "https://media.api-sports.io/football/teams/5930.png"
+  },
+  {
+    "name": "Sporting Hasselt",
+    "logo": "https://media.api-sports.io/football/teams/5931.png"
+  },
+  {
+    "name": "Sporting Kampenhout",
+    "logo": "https://media.api-sports.io/football/teams/5932.png"
+  },
+  {
+    "name": "Sportive Brainoise",
+    "logo": "https://media.api-sports.io/football/teams/5933.png"
+  },
+  {
+    "name": "Spouwen-Mopertingen",
+    "logo": "https://media.api-sports.io/football/teams/5934.png"
+  },
+  {
+    "name": "Sprimont",
+    "logo": "https://media.api-sports.io/football/teams/5935.png"
+  },
+  {
+    "name": "Spy",
+    "logo": "https://media.api-sports.io/football/teams/5936.png"
+  },
+  {
+    "name": "St-Joris Sleidinge",
+    "logo": "https://media.api-sports.io/football/teams/5937.png"
+  },
+  {
+    "name": "Stade Brainois",
+    "logo": "https://media.api-sports.io/football/teams/5938.png"
+  },
+  {
+    "name": "Stade Everois",
+    "logo": "https://media.api-sports.io/football/teams/5939.png"
+  },
+  {
+    "name": "Standard Elen",
+    "logo": "https://media.api-sports.io/football/teams/5940.png"
+  },
+  {
+    "name": "Ster-Francorchamps",
+    "logo": "https://media.api-sports.io/football/teams/5941.png"
+  },
+  {
+    "name": "Stockay-Warfusée",
+    "logo": "https://media.api-sports.io/football/teams/5942.png"
+  },
+  {
+    "name": "Stockel",
+    "logo": "https://media.api-sports.io/football/teams/5943.png"
+  },
+  {
+    "name": "Svelta Melsele",
+    "logo": "https://media.api-sports.io/football/teams/5944.png"
+  },
+  {
+    "name": "TK Meldert",
+    "logo": "https://media.api-sports.io/football/teams/5945.png"
+  },
+  {
+    "name": "Templiers Nandrin",
+    "logo": "https://media.api-sports.io/football/teams/5946.png"
+  },
+  {
+    "name": "Tempo Overijse",
+    "logo": "https://media.api-sports.io/football/teams/5947.png"
+  },
+  {
+    "name": "Temse",
+    "logo": "https://media.api-sports.io/football/teams/5948.png"
+  },
+  {
+    "name": "Ternesse",
+    "logo": "https://media.api-sports.io/football/teams/5949.png"
+  },
+  {
+    "name": "Tervuren-Duisburg",
+    "logo": "https://media.api-sports.io/football/teams/5950.png"
+  },
+  {
+    "name": "Tienen",
+    "logo": "https://media.api-sports.io/football/teams/5951.png"
+  },
+  {
+    "name": "Tilleur",
+    "logo": "https://media.api-sports.io/football/teams/5952.png"
+  },
+  {
+    "name": "Toekomst Menen",
+    "logo": "https://media.api-sports.io/football/teams/5953.png"
+  },
+  {
+    "name": "Tollembeek",
+    "logo": "https://media.api-sports.io/football/teams/5954.png"
+  },
+  {
+    "name": "Torhout",
+    "logo": "https://media.api-sports.io/football/teams/5955.png"
+  },
+  {
+    "name": "Torpedo Hasselt",
+    "logo": "https://media.api-sports.io/football/teams/5956.png"
+  },
+  {
+    "name": "Tournai",
+    "logo": "https://media.api-sports.io/football/teams/5957.png"
+  },
+  {
+    "name": "Trivières",
+    "logo": "https://media.api-sports.io/football/teams/5958.png"
+  },
+  {
+    "name": "Turnhout",
+    "logo": "https://media.api-sports.io/football/teams/5959.png"
+  },
+  {
+    "name": "UCE Liège",
+    "logo": "https://media.api-sports.io/football/teams/5960.png"
+  },
+  {
+    "name": "US Givry",
+    "logo": "https://media.api-sports.io/football/teams/5961.png"
+  },
+  {
+    "name": "US d'Ophain",
+    "logo": "https://media.api-sports.io/football/teams/5962.png"
+  },
+  {
+    "name": "Union Lasne-Ohain",
+    "logo": "https://media.api-sports.io/football/teams/5963.png"
+  },
+  {
+    "name": "Union Namur",
+    "logo": "https://media.api-sports.io/football/teams/5964.png"
+  },
+  {
+    "name": "VC Groot Dilbeek",
+    "logo": "https://media.api-sports.io/football/teams/5965.png"
+  },
+  {
+    "name": "VW Hamme",
+    "logo": "https://media.api-sports.io/football/teams/5966.png"
+  },
+  {
+    "name": "Vacresse",
+    "logo": "https://media.api-sports.io/football/teams/5967.png"
+  },
+  {
+    "name": "Vaux-Noville",
+    "logo": "https://media.api-sports.io/football/teams/5968.png"
+  },
+  {
+    "name": "Veltem",
+    "logo": "https://media.api-sports.io/football/teams/5969.png"
+  },
+  {
+    "name": "Verlaine",
+    "logo": "https://media.api-sports.io/football/teams/5970.png"
+  },
+  {
+    "name": "Villers-La-Ville",
+    "logo": "https://media.api-sports.io/football/teams/5971.png"
+  },
+  {
+    "name": "Vlamertinge",
+    "logo": "https://media.api-sports.io/football/teams/5972.png"
+  },
+  {
+    "name": "Vliermaal",
+    "logo": "https://media.api-sports.io/football/teams/5973.png"
+  },
+  {
+    "name": "Voh. Wintam Eikevliet",
+    "logo": "https://media.api-sports.io/football/teams/5974.png"
+  },
+  {
+    "name": "Voorde Appelterre",
+    "logo": "https://media.api-sports.io/football/teams/5975.png"
+  },
+  {
+    "name": "Voorwaarts Zwevezele",
+    "logo": "https://media.api-sports.io/football/teams/5976.png"
+  },
+  {
+    "name": "Vosselaar",
+    "logo": "https://media.api-sports.io/football/teams/5977.png"
+  },
+  {
+    "name": "Vrasene",
+    "logo": "https://media.api-sports.io/football/teams/5978.png"
+  },
+  {
+    "name": "Vyle-Tharoul",
+    "logo": "https://media.api-sports.io/football/teams/5979.png"
+  },
+  {
+    "name": "Walhain",
+    "logo": "https://media.api-sports.io/football/teams/5980.png"
+  },
+  {
+    "name": "Wallonia Libin",
+    "logo": "https://media.api-sports.io/football/teams/5981.png"
+  },
+  {
+    "name": "Wallonne Ciney",
+    "logo": "https://media.api-sports.io/football/teams/5982.png"
+  },
+  {
+    "name": "Wanze / Bas-Oha",
+    "logo": "https://media.api-sports.io/football/teams/5983.png"
+  },
+  {
+    "name": "Waremme",
+    "logo": "https://media.api-sports.io/football/teams/5984.png"
+  },
+  {
+    "name": "Warnant",
+    "logo": "https://media.api-sports.io/football/teams/5985.png"
+  },
+  {
+    "name": "Wavre Sports",
+    "logo": "https://media.api-sports.io/football/teams/5986.png"
+  },
+  {
+    "name": "Ways Genappe",
+    "logo": "https://media.api-sports.io/football/teams/5987.png"
+  },
+  {
+    "name": "Weerstand Koersel",
+    "logo": "https://media.api-sports.io/football/teams/5988.png"
+  },
+  {
+    "name": "Wellen",
+    "logo": "https://media.api-sports.io/football/teams/5989.png"
+  },
+  {
+    "name": "Westhoek",
+    "logo": "https://media.api-sports.io/football/teams/5990.png"
+  },
+  {
+    "name": "Wielsbeke",
+    "logo": "https://media.api-sports.io/football/teams/5991.png"
+  },
+  {
+    "name": "Wingene",
+    "logo": "https://media.api-sports.io/football/teams/5992.png"
+  },
+  {
+    "name": "Witgoor Sport",
+    "logo": "https://media.api-sports.io/football/teams/5993.png"
+  },
+  {
+    "name": "Woluwe-Zaventem",
+    "logo": "https://media.api-sports.io/football/teams/5994.png"
+  },
+  {
+    "name": "Wolvertem Merchtem",
+    "logo": "https://media.api-sports.io/football/teams/5995.png"
+  },
+  {
+    "name": "Wortel",
+    "logo": "https://media.api-sports.io/football/teams/5996.png"
+  },
+  {
+    "name": "Wépion",
+    "logo": "https://media.api-sports.io/football/teams/5997.png"
+  },
+  {
+    "name": "Zaffelare",
+    "logo": "https://media.api-sports.io/football/teams/5998.png"
+  },
+  {
+    "name": "Zandhovense",
+    "logo": "https://media.api-sports.io/football/teams/5999.png"
+  },
+  {
+    "name": "Zandvliet Sport",
+    "logo": "https://media.api-sports.io/football/teams/6000.png"
+  },
+  {
+    "name": "Zelzate",
+    "logo": "https://media.api-sports.io/football/teams/6001.png"
+  },
+  {
+    "name": "Zuun",
+    "logo": "https://media.api-sports.io/football/teams/6002.png"
+  },
+  {
+    "name": "Zwarte Leeuw",
+    "logo": "https://media.api-sports.io/football/teams/6003.png"
+  },
+  {
+    "name": "Sint-Niklaas",
+    "logo": "https://media.api-sports.io/football/teams/6213.png"
+  },
+  {
+    "name": "Deinze",
+    "logo": "https://media.api-sports.io/football/teams/6214.png"
+  },
+  {
+    "name": "Dender",
+    "logo": "https://media.api-sports.io/football/teams/6215.png"
+  },
+  {
+    "name": "Dessel Sport",
+    "logo": "https://media.api-sports.io/football/teams/6216.png"
+  },
+  {
+    "name": "Heist",
+    "logo": "https://media.api-sports.io/football/teams/6217.png"
+  },
+  {
+    "name": "La Louvière Centre",
+    "logo": "https://media.api-sports.io/football/teams/6218.png"
+  },
+  {
+    "name": "K. Lierse S.K.",
+    "logo": "https://media.api-sports.io/football/teams/6219.png"
+  },
+  {
+    "name": "Liège",
+    "logo": "https://media.api-sports.io/football/teams/6220.png"
+  },
+  {
+    "name": "Olympic Charleroi",
+    "logo": "https://media.api-sports.io/football/teams/6221.png"
+  },
+  {
+    "name": "Patro Eisden",
+    "logo": "https://media.api-sports.io/football/teams/6222.png"
+  },
+  {
+    "name": "RFC Seraing",
+    "logo": "https://media.api-sports.io/football/teams/6223.png"
+  },
+  {
+    "name": "RWDM",
+    "logo": "https://media.api-sports.io/football/teams/6224.png"
+  },
+  {
+    "name": "Rupel Boom",
+    "logo": "https://media.api-sports.io/football/teams/6225.png"
+  },
+  {
+    "name": "Sint-Eloois-Winkel",
+    "logo": "https://media.api-sports.io/football/teams/6226.png"
+  },
+  {
+    "name": "Thes Sport",
+    "logo": "https://media.api-sports.io/football/teams/6227.png"
+  },
+  {
+    "name": "URSL Visé",
+    "logo": "https://media.api-sports.io/football/teams/6228.png"
+  },
+  {
+    "name": "Club Brugge W",
+    "logo": "https://media.api-sports.io/football/teams/6344.png"
+  },
+  {
+    "name": "Club Brugge U19",
+    "logo": "https://media.api-sports.io/football/teams/7893.png"
+  },
+  {
+    "name": "Genk U19",
+    "logo": "https://media.api-sports.io/football/teams/7901.png"
+  },
+  {
+    "name": "Anderlecht U19",
+    "logo": "https://media.api-sports.io/football/teams/7948.png"
+  },
+  {
+    "name": "Belgium U21",
+    "logo": "https://media.api-sports.io/football/teams/8183.png"
+  },
+  {
+    "name": "Lyra",
+    "logo": "https://media.api-sports.io/football/teams/8421.png"
+  },
+  {
+    "name": "'s Gravenwezel-Schilde",
+    "logo": "https://media.api-sports.io/football/teams/8422.png"
+  },
+  {
+    "name": "Antonia",
+    "logo": "https://media.api-sports.io/football/teams/8423.png"
+  },
+  {
+    "name": "Berlaar-Heikant",
+    "logo": "https://media.api-sports.io/football/teams/8424.png"
+  },
+  {
+    "name": "Eendracht Zoersel",
+    "logo": "https://media.api-sports.io/football/teams/8425.png"
+  },
+  {
+    "name": "Oppuurs",
+    "logo": "https://media.api-sports.io/football/teams/8426.png"
+  },
+  {
+    "name": "Sint-Dymphna",
+    "logo": "https://media.api-sports.io/football/teams/8427.png"
+  },
+  {
+    "name": "VC Herentals",
+    "logo": "https://media.api-sports.io/football/teams/8428.png"
+  },
+  {
+    "name": "Wezel",
+    "logo": "https://media.api-sports.io/football/teams/8429.png"
+  },
+  {
+    "name": "Aarschot",
+    "logo": "https://media.api-sports.io/football/teams/8430.png"
+  },
+  {
+    "name": "BX Brussels",
+    "logo": "https://media.api-sports.io/football/teams/8431.png"
+  },
+  {
+    "name": "Boitsfort",
+    "logo": "https://media.api-sports.io/football/teams/8432.png"
+  },
+  {
+    "name": "Borght-Humbeek",
+    "logo": "https://media.api-sports.io/football/teams/8433.png"
+  },
+  {
+    "name": "Football Club Schaerbeek",
+    "logo": "https://media.api-sports.io/football/teams/8434.png"
+  },
+  {
+    "name": "Genappe",
+    "logo": "https://media.api-sports.io/football/teams/8435.png"
+  },
+  {
+    "name": "Grimbergen",
+    "logo": "https://media.api-sports.io/football/teams/8436.png"
+  },
+  {
+    "name": "Hoegaarden-Outgaarden",
+    "logo": "https://media.api-sports.io/football/teams/8437.png"
+  },
+  {
+    "name": "Huldenberg",
+    "logo": "https://media.api-sports.io/football/teams/8438.png"
+  },
+  {
+    "name": "Kester-Gooik",
+    "logo": "https://media.api-sports.io/football/teams/8439.png"
+  },
+  {
+    "name": "Liedekerke",
+    "logo": "https://media.api-sports.io/football/teams/8440.png"
+  },
+  {
+    "name": "Meise",
+    "logo": "https://media.api-sports.io/football/teams/8441.png"
+  },
+  {
+    "name": "Melsbroek",
+    "logo": "https://media.api-sports.io/football/teams/8442.png"
+  },
+  {
+    "name": "Nivellois",
+    "logo": "https://media.api-sports.io/football/teams/8443.png"
+  },
+  {
+    "name": "Sporting Bruxelles",
+    "logo": "https://media.api-sports.io/football/teams/8444.png"
+  },
+  {
+    "name": "Stade Bierbeek",
+    "logo": "https://media.api-sports.io/football/teams/8445.png"
+  },
+  {
+    "name": "Waterloo",
+    "logo": "https://media.api-sports.io/football/teams/8446.png"
+  },
+  {
+    "name": "Antoing",
+    "logo": "https://media.api-sports.io/football/teams/8447.png"
+  },
+  {
+    "name": "Binche",
+    "logo": "https://media.api-sports.io/football/teams/8448.png"
+  },
+  {
+    "name": "Gilly",
+    "logo": "https://media.api-sports.io/football/teams/8449.png"
+  },
+  {
+    "name": "Houdeng",
+    "logo": "https://media.api-sports.io/football/teams/8450.png"
+  },
+  {
+    "name": "Olympic Warcoing",
+    "logo": "https://media.api-sports.io/football/teams/8451.png"
+  },
+  {
+    "name": "RAS Monceau",
+    "logo": "https://media.api-sports.io/football/teams/8452.png"
+  },
+  {
+    "name": "Snef-Tyber",
+    "logo": "https://media.api-sports.io/football/teams/8453.png"
+  },
+  {
+    "name": "Soignies Sports",
+    "logo": "https://media.api-sports.io/football/teams/8454.png"
+  },
+  {
+    "name": "Solre-sur-Sambre",
+    "logo": "https://media.api-sports.io/football/teams/8455.png"
+  },
+  {
+    "name": "Aubel",
+    "logo": "https://media.api-sports.io/football/teams/8456.png"
+  },
+  {
+    "name": "Espoir Minerois",
+    "logo": "https://media.api-sports.io/football/teams/8457.png"
+  },
+  {
+    "name": "FC Du Geer",
+    "logo": "https://media.api-sports.io/football/teams/8458.png"
+  },
+  {
+    "name": "Grün-Weiss Amel",
+    "logo": "https://media.api-sports.io/football/teams/8459.png"
+  },
+  {
+    "name": "JS Fizoise",
+    "logo": "https://media.api-sports.io/football/teams/8460.png"
+  },
+  {
+    "name": "La Calamine",
+    "logo": "https://media.api-sports.io/football/teams/8461.png"
+  },
+  {
+    "name": "Mélen-Micheroux",
+    "logo": "https://media.api-sports.io/football/teams/8462.png"
+  },
+  {
+    "name": "Ougrée",
+    "logo": "https://media.api-sports.io/football/teams/8463.png"
+  },
+  {
+    "name": "Rechain",
+    "logo": "https://media.api-sports.io/football/teams/8464.png"
+  },
+  {
+    "name": "Sprimont II",
+    "logo": "https://media.api-sports.io/football/teams/8465.png"
+  },
+  {
+    "name": "Stade Disonais",
+    "logo": "https://media.api-sports.io/football/teams/8466.png"
+  },
+  {
+    "name": "Weywertz",
+    "logo": "https://media.api-sports.io/football/teams/8467.png"
+  },
+  {
+    "name": "Achel",
+    "logo": "https://media.api-sports.io/football/teams/8468.png"
+  },
+  {
+    "name": "Bregel Sport",
+    "logo": "https://media.api-sports.io/football/teams/8469.png"
+  },
+  {
+    "name": "Eendracht Maasmechelen",
+    "logo": "https://media.api-sports.io/football/teams/8470.png"
+  },
+  {
+    "name": "Groen Star Beek",
+    "logo": "https://media.api-sports.io/football/teams/8471.png"
+  },
+  {
+    "name": "Herkol",
+    "logo": "https://media.api-sports.io/football/teams/8472.png"
+  },
+  {
+    "name": "MD Halen",
+    "logo": "https://media.api-sports.io/football/teams/8473.png"
+  },
+  {
+    "name": "Meeuwen",
+    "logo": "https://media.api-sports.io/football/teams/8474.png"
+  },
+  {
+    "name": "Schoonbeek-Beverst",
+    "logo": "https://media.api-sports.io/football/teams/8475.png"
+  },
+  {
+    "name": "Zepperen-Brustem",
+    "logo": "https://media.api-sports.io/football/teams/8476.png"
+  },
+  {
+    "name": "Zonhoven United",
+    "logo": "https://media.api-sports.io/football/teams/8477.png"
+  },
+  {
+    "name": "Gouvy",
+    "logo": "https://media.api-sports.io/football/teams/8478.png"
+  },
+  {
+    "name": "Jeunesse Freylangeoise",
+    "logo": "https://media.api-sports.io/football/teams/8479.png"
+  },
+  {
+    "name": "Lorraine Arlon",
+    "logo": "https://media.api-sports.io/football/teams/8480.png"
+  },
+  {
+    "name": "Marloie Sport",
+    "logo": "https://media.api-sports.io/football/teams/8481.png"
+  },
+  {
+    "name": "Saint-Hubert",
+    "logo": "https://media.api-sports.io/football/teams/8482.png"
+  },
+  {
+    "name": "Sartoise",
+    "logo": "https://media.api-sports.io/football/teams/8483.png"
+  },
+  {
+    "name": "Beauraing",
+    "logo": "https://media.api-sports.io/football/teams/8484.png"
+  },
+  {
+    "name": "Chevetogne",
+    "logo": "https://media.api-sports.io/football/teams/8485.png"
+  },
+  {
+    "name": "Condruzien",
+    "logo": "https://media.api-sports.io/football/teams/8486.png"
+  },
+  {
+    "name": "Fernelmont-Hemptinne",
+    "logo": "https://media.api-sports.io/football/teams/8487.png"
+  },
+  {
+    "name": "Jeunesse Tamines",
+    "logo": "https://media.api-sports.io/football/teams/8488.png"
+  },
+  {
+    "name": "Pesche",
+    "logo": "https://media.api-sports.io/football/teams/8489.png"
+  },
+  {
+    "name": "Profondeville",
+    "logo": "https://media.api-sports.io/football/teams/8490.png"
+  },
+  {
+    "name": "Berlare",
+    "logo": "https://media.api-sports.io/football/teams/8491.png"
+  },
+  {
+    "name": "Denderhoutem",
+    "logo": "https://media.api-sports.io/football/teams/8492.png"
+  },
+  {
+    "name": "Haasdonk",
+    "logo": "https://media.api-sports.io/football/teams/8493.png"
+  },
+  {
+    "name": "Kruibeke",
+    "logo": "https://media.api-sports.io/football/teams/8494.png"
+  },
+  {
+    "name": "Latem",
+    "logo": "https://media.api-sports.io/football/teams/8495.png"
+  },
+  {
+    "name": "Anzegem",
+    "logo": "https://media.api-sports.io/football/teams/8496.png"
+  },
+  {
+    "name": "Excelsior Zedelgem",
+    "logo": "https://media.api-sports.io/football/teams/8497.png"
+  },
+  {
+    "name": "Varsenare",
+    "logo": "https://media.api-sports.io/football/teams/8498.png"
+  },
+  {
+    "name": "Wevelgem City",
+    "logo": "https://media.api-sports.io/football/teams/8499.png"
+  },
+  {
+    "name": "Péruwelz",
+    "logo": "https://media.api-sports.io/football/teams/10110.png"
+  },
+  {
+    "name": "Seraing United",
+    "logo": "https://media.api-sports.io/football/teams/10244.png"
+  },
+  {
+    "name": "Belgium U19",
+    "logo": "https://media.api-sports.io/football/teams/10327.png"
+  },
+  {
+    "name": "Anderlecht U21",
+    "logo": "https://media.api-sports.io/football/teams/10844.png"
+  },
+  {
+    "name": "Club Brugge U21",
+    "logo": "https://media.api-sports.io/football/teams/10845.png"
+  },
+  {
+    "name": "Genk U21",
+    "logo": "https://media.api-sports.io/football/teams/10846.png"
+  },
+  {
+    "name": "Gent U21",
+    "logo": "https://media.api-sports.io/football/teams/10847.png"
+  },
+  {
+    "name": "Mechelen U21",
+    "logo": "https://media.api-sports.io/football/teams/10848.png"
+  },
+  {
+    "name": "OH Leuven U21",
+    "logo": "https://media.api-sports.io/football/teams/10849.png"
+  },
+  {
+    "name": "Sint-Truiden U21",
+    "logo": "https://media.api-sports.io/football/teams/10850.png"
+  },
+  {
+    "name": "Standard Liège U21",
+    "logo": "https://media.api-sports.io/football/teams/10851.png"
+  },
+  {
+    "name": "AS Eupen U21",
+    "logo": "https://media.api-sports.io/football/teams/14015.png"
+  },
+  {
+    "name": "Waasland-Beveren U21",
+    "logo": "https://media.api-sports.io/football/teams/14016.png"
+  },
+  {
+    "name": "White Star Woluwe W",
+    "logo": "https://media.api-sports.io/football/teams/14034.png"
+  },
+  {
+    "name": "Zulte-Waregem W",
+    "logo": "https://media.api-sports.io/football/teams/14035.png"
+  },
+  {
+    "name": "Charleroi W",
+    "logo": "https://media.api-sports.io/football/teams/14036.png"
+  },
+  {
+    "name": "Eendracht Aalst W",
+    "logo": "https://media.api-sports.io/football/teams/14037.png"
+  },
+  {
+    "name": "Lokeren-Temse",
+    "logo": "https://media.api-sports.io/football/teams/14128.png"
+  },
+  {
+    "name": "Club Brugge II",
+    "logo": "https://media.api-sports.io/football/teams/14130.png"
+  },
+  {
+    "name": "AFC Evere",
+    "logo": "https://media.api-sports.io/football/teams/14149.png"
+  },
+  {
+    "name": "Arquet",
+    "logo": "https://media.api-sports.io/football/teams/14150.png"
+  },
+  {
+    "name": "Bastogne",
+    "logo": "https://media.api-sports.io/football/teams/14151.png"
+  },
+  {
+    "name": "Berchem Sport II",
+    "logo": "https://media.api-sports.io/football/teams/14152.png"
+  },
+  {
+    "name": "Bossière",
+    "logo": "https://media.api-sports.io/football/teams/14153.png"
+  },
+  {
+    "name": "Broechem",
+    "logo": "https://media.api-sports.io/football/teams/14154.png"
+  },
+  {
+    "name": "Calcio Genk",
+    "logo": "https://media.api-sports.io/football/teams/14155.png"
+  },
+  {
+    "name": "Crossing Vissenaken",
+    "logo": "https://media.api-sports.io/football/teams/14156.png"
+  },
+  {
+    "name": "Diksmuide",
+    "logo": "https://media.api-sports.io/football/teams/14157.png"
+  },
+  {
+    "name": "Eeklo Meetjesland",
+    "logo": "https://media.api-sports.io/football/teams/14158.png"
+  },
+  {
+    "name": "Entente Blegnytoise II",
+    "logo": "https://media.api-sports.io/football/teams/14159.png"
+  },
+  {
+    "name": "Excelsior Biévène",
+    "logo": "https://media.api-sports.io/football/teams/14160.png"
+  },
+  {
+    "name": "Excelsior Mariaburg",
+    "logo": "https://media.api-sports.io/football/teams/14161.png"
+  },
+  {
+    "name": "FC Tilleur",
+    "logo": "https://media.api-sports.io/football/teams/14162.png"
+  },
+  {
+    "name": "Forchies",
+    "logo": "https://media.api-sports.io/football/teams/14163.png"
+  },
+  {
+    "name": "Galmaarden",
+    "logo": "https://media.api-sports.io/football/teams/14164.png"
+  },
+  {
+    "name": "Gembloux",
+    "logo": "https://media.api-sports.io/football/teams/14165.png"
+  },
+  {
+    "name": "Gerpinnes",
+    "logo": "https://media.api-sports.io/football/teams/14166.png"
+  },
+  {
+    "name": "Glabbeek-Zuurbemde",
+    "logo": "https://media.api-sports.io/football/teams/14167.png"
+  },
+  {
+    "name": "Herent",
+    "logo": "https://media.api-sports.io/football/teams/14168.png"
+  },
+  {
+    "name": "Herselt",
+    "logo": "https://media.api-sports.io/football/teams/14169.png"
+  },
+  {
+    "name": "Hoeilaart",
+    "logo": "https://media.api-sports.io/football/teams/14170.png"
+  },
+  {
+    "name": "Hombourg",
+    "logo": "https://media.api-sports.io/football/teams/14171.png"
+  },
+  {
+    "name": "Houdinois",
+    "logo": "https://media.api-sports.io/football/teams/14172.png"
+  },
+  {
+    "name": "Houthulst",
+    "logo": "https://media.api-sports.io/football/teams/14173.png"
+  },
+  {
+    "name": "Huccorgne",
+    "logo": "https://media.api-sports.io/football/teams/14174.png"
+  },
+  {
+    "name": "Juve Hasselt",
+    "logo": "https://media.api-sports.io/football/teams/14175.png"
+  },
+  {
+    "name": "Kadijk Overpelt",
+    "logo": "https://media.api-sports.io/football/teams/14176.png"
+  },
+  {
+    "name": "Luingnois",
+    "logo": "https://media.api-sports.io/football/teams/14177.png"
+  },
+  {
+    "name": "Malonne",
+    "logo": "https://media.api-sports.io/football/teams/14178.png"
+  },
+  {
+    "name": "Meix-Devant-Virton II",
+    "logo": "https://media.api-sports.io/football/teams/14179.png"
+  },
+  {
+    "name": "Melreux",
+    "logo": "https://media.api-sports.io/football/teams/14180.png"
+  },
+  {
+    "name": "Meslin Grand-Marais",
+    "logo": "https://media.api-sports.io/football/teams/14181.png"
+  },
+  {
+    "name": "Messancy",
+    "logo": "https://media.api-sports.io/football/teams/14182.png"
+  },
+  {
+    "name": "Mesvin",
+    "logo": "https://media.api-sports.io/football/teams/14183.png"
+  },
+  {
+    "name": "Mons Nord",
+    "logo": "https://media.api-sports.io/football/teams/14184.png"
+  },
+  {
+    "name": "Munkzwalm",
+    "logo": "https://media.api-sports.io/football/teams/14185.png"
+  },
+  {
+    "name": "Noordstar Noorderwijk",
+    "logo": "https://media.api-sports.io/football/teams/14186.png"
+  },
+  {
+    "name": "Olympic Burst",
+    "logo": "https://media.api-sports.io/football/teams/14187.png"
+  },
+  {
+    "name": "Opitter",
+    "logo": "https://media.api-sports.io/football/teams/14188.png"
+  },
+  {
+    "name": "Oud-Turnhout",
+    "logo": "https://media.api-sports.io/football/teams/14189.png"
+  },
+  {
+    "name": "Punt-Larum",
+    "logo": "https://media.api-sports.io/football/teams/14190.png"
+  },
+  {
+    "name": "Racing Vaux",
+    "logo": "https://media.api-sports.io/football/teams/14191.png"
+  },
+  {
+    "name": "Ransart",
+    "logo": "https://media.api-sports.io/football/teams/14192.png"
+  },
+  {
+    "name": "Ranst",
+    "logo": "https://media.api-sports.io/football/teams/14193.png"
+  },
+  {
+    "name": "Rapid Leest",
+    "logo": "https://media.api-sports.io/football/teams/14194.png"
+  },
+  {
+    "name": "Rumbeke",
+    "logo": "https://media.api-sports.io/football/teams/14195.png"
+  },
+  {
+    "name": "Rupelmonde",
+    "logo": "https://media.api-sports.io/football/teams/14196.png"
+  },
+  {
+    "name": "SK Meldert",
+    "logo": "https://media.api-sports.io/football/teams/14197.png"
+  },
+  {
+    "name": "Sart-Bernard",
+    "logo": "https://media.api-sports.io/football/teams/14198.png"
+  },
+  {
+    "name": "Sart-Tilman",
+    "logo": "https://media.api-sports.io/football/teams/14199.png"
+  },
+  {
+    "name": "Schelde Serskamp",
+    "logo": "https://media.api-sports.io/football/teams/14200.png"
+  },
+  {
+    "name": "Sint-Denijs Sport",
+    "logo": "https://media.api-sports.io/football/teams/14201.png"
+  },
+  {
+    "name": "Sint-Jozef Londerzeel",
+    "logo": "https://media.api-sports.io/football/teams/14202.png"
+  },
+  {
+    "name": "Spa",
+    "logo": "https://media.api-sports.io/football/teams/14203.png"
+  },
+  {
+    "name": "St-Jozef Rijkevorsel",
+    "logo": "https://media.api-sports.io/football/teams/14204.png"
+  },
+  {
+    "name": "Standaard Meerbeek",
+    "logo": "https://media.api-sports.io/football/teams/14205.png"
+  },
+  {
+    "name": "Ster-Francorchamps II",
+    "logo": "https://media.api-sports.io/football/teams/14206.png"
+  },
+  {
+    "name": "TSC Proven",
+    "logo": "https://media.api-sports.io/football/teams/14207.png"
+  },
+  {
+    "name": "Templeuve",
+    "logo": "https://media.api-sports.io/football/teams/14208.png"
+  },
+  {
+    "name": "Tenneville Sports",
+    "logo": "https://media.api-sports.io/football/teams/14209.png"
+  },
+  {
+    "name": "Trois Frontières",
+    "logo": "https://media.api-sports.io/football/teams/14210.png"
+  },
+  {
+    "name": "Verbroedering Lommel",
+    "logo": "https://media.api-sports.io/football/teams/14211.png"
+  },
+  {
+    "name": "Voorwaarts Zwevezele II",
+    "logo": "https://media.api-sports.io/football/teams/14212.png"
+  },
+  {
+    "name": "Vorselaar",
+    "logo": "https://media.api-sports.io/football/teams/14213.png"
+  },
+  {
+    "name": "Waanrode",
+    "logo": "https://media.api-sports.io/football/teams/14214.png"
+  },
+  {
+    "name": "Walcourt",
+    "logo": "https://media.api-sports.io/football/teams/14215.png"
+  },
+  {
+    "name": "Wambeek",
+    "logo": "https://media.api-sports.io/football/teams/14216.png"
+  },
+  {
+    "name": "Wemmel",
+    "logo": "https://media.api-sports.io/football/teams/14217.png"
+  },
+  {
+    "name": "Willebroekse",
+    "logo": "https://media.api-sports.io/football/teams/14218.png"
+  },
+  {
+    "name": "Grembergen",
+    "logo": "https://media.api-sports.io/football/teams/14224.png"
+  },
+  {
+    "name": "Lokeren Doorslaar",
+    "logo": "https://media.api-sports.io/football/teams/14225.png"
+  },
+  {
+    "name": "Vise",
+    "logo": "https://media.api-sports.io/football/teams/14535.png"
+  },
+  {
+    "name": "Bevel",
+    "logo": "https://media.api-sports.io/football/teams/15154.png"
+  },
+  {
+    "name": "Kalmthout",
+    "logo": "https://media.api-sports.io/football/teams/15155.png"
+  },
+  {
+    "name": "Retie",
+    "logo": "https://media.api-sports.io/football/teams/15156.png"
+  },
+  {
+    "name": "Bodegem Kapelle United",
+    "logo": "https://media.api-sports.io/football/teams/15157.png"
+  },
+  {
+    "name": "Houtem-Oplinter",
+    "logo": "https://media.api-sports.io/football/teams/15158.png"
+  },
+  {
+    "name": "Morlanwelz",
+    "logo": "https://media.api-sports.io/football/teams/15159.png"
+  },
+  {
+    "name": "Beaufays",
+    "logo": "https://media.api-sports.io/football/teams/15160.png"
+  },
+  {
+    "name": "Pontisse Cité",
+    "logo": "https://media.api-sports.io/football/teams/15161.png"
+  },
+  {
+    "name": "KFC Eksel",
+    "logo": "https://media.api-sports.io/football/teams/15162.png"
+  },
+  {
+    "name": "Aubange",
+    "logo": "https://media.api-sports.io/football/teams/15163.png"
+  },
+  {
+    "name": "Longlier",
+    "logo": "https://media.api-sports.io/football/teams/15164.png"
+  },
+  {
+    "name": "RAC Saint-Mard",
+    "logo": "https://media.api-sports.io/football/teams/15165.png"
+  },
+  {
+    "name": "Flavion-Morialmé",
+    "logo": "https://media.api-sports.io/football/teams/15166.png"
+  },
+  {
+    "name": "Meux II",
+    "logo": "https://media.api-sports.io/football/teams/15167.png"
+  },
+  {
+    "name": "US Dinantaise",
+    "logo": "https://media.api-sports.io/football/teams/15168.png"
+  },
+  {
+    "name": "Meulebeke",
+    "logo": "https://media.api-sports.io/football/teams/15169.png"
+  },
+  {
+    "name": "SC Zonnebeke",
+    "logo": "https://media.api-sports.io/football/teams/15170.png"
+  },
+  {
+    "name": "Sparta Heestert",
+    "logo": "https://media.api-sports.io/football/teams/15171.png"
+  },
+  {
+    "name": "Grez-Doiceau",
+    "logo": "https://media.api-sports.io/football/teams/15172.png"
+  },
+  {
+    "name": "NSeth Berchem",
+    "logo": "https://media.api-sports.io/football/teams/15173.png"
+  },
+  {
+    "name": "Aubel II",
+    "logo": "https://media.api-sports.io/football/teams/16965.png"
+  },
+  {
+    "name": "Courcelles",
+    "logo": "https://media.api-sports.io/football/teams/16966.png"
+  },
+  {
+    "name": "Eendracht Henis",
+    "logo": "https://media.api-sports.io/football/teams/16967.png"
+  },
+  {
+    "name": "Erpe-Mere United",
+    "logo": "https://media.api-sports.io/football/teams/16968.png"
+  },
+  {
+    "name": "Erpion",
+    "logo": "https://media.api-sports.io/football/teams/16969.png"
+  },
+  {
+    "name": "Estaimbourg",
+    "logo": "https://media.api-sports.io/football/teams/16970.png"
+  },
+  {
+    "name": "Gravelo",
+    "logo": "https://media.api-sports.io/football/teams/16971.png"
+  },
+  {
+    "name": "Grimbie",
+    "logo": "https://media.api-sports.io/football/teams/16972.png"
+  },
+  {
+    "name": "Harchies-Bernissart",
+    "logo": "https://media.api-sports.io/football/teams/16973.png"
+  },
+  {
+    "name": "Havinnes",
+    "logo": "https://media.api-sports.io/football/teams/16974.png"
+  },
+  {
+    "name": "Herseaux",
+    "logo": "https://media.api-sports.io/football/teams/16975.png"
+  },
+  {
+    "name": "Lummen",
+    "logo": "https://media.api-sports.io/football/teams/16976.png"
+  },
+  {
+    "name": "Montigny",
+    "logo": "https://media.api-sports.io/football/teams/16977.png"
+  },
+  {
+    "name": "Obigies",
+    "logo": "https://media.api-sports.io/football/teams/16978.png"
+  },
+  {
+    "name": "Renaissance Mons 44 II",
+    "logo": "https://media.api-sports.io/football/teams/16979.png"
+  },
+  {
+    "name": "Roeselare Daisel",
+    "logo": "https://media.api-sports.io/football/teams/16980.png"
+  },
+  {
+    "name": "Rutten",
+    "logo": "https://media.api-sports.io/football/teams/16981.png"
+  },
+  {
+    "name": "SLW Maaseik",
+    "logo": "https://media.api-sports.io/football/teams/16982.png"
+  },
+  {
+    "name": "Hooikt",
+    "logo": "https://media.api-sports.io/football/teams/17049.png"
+  },
+  {
+    "name": "Antwerp U21",
+    "logo": "https://media.api-sports.io/football/teams/17476.png"
+  },
+  {
+    "name": "Cercle Brugge U21",
+    "logo": "https://media.api-sports.io/football/teams/17477.png"
+  },
+  {
+    "name": "Sporting Charleroi U21",
+    "logo": "https://media.api-sports.io/football/teams/17478.png"
+  },
+  {
+    "name": "Zulte-Waregem U21",
+    "logo": "https://media.api-sports.io/football/teams/17479.png"
+  },
+  {
+    "name": "Tubize II",
+    "logo": "https://media.api-sports.io/football/teams/17495.png"
+  },
+  {
+    "name": "Belgium U17",
+    "logo": "https://media.api-sports.io/football/teams/17942.png"
+  },
+  {
+    "name": "Lierse K. U21",
+    "logo": "https://media.api-sports.io/football/teams/18387.png"
+  },
+  {
+    "name": "KRC Genk II",
+    "logo": "https://media.api-sports.io/football/teams/19045.png"
+  },
+  {
+    "name": "RSC Anderlecht II",
+    "logo": "https://media.api-sports.io/football/teams/19046.png"
+  },
+  {
+    "name": "Standard Liège II",
+    "logo": "https://media.api-sports.io/football/teams/19047.png"
+  },
+  {
+    "name": "Mechelen",
+    "logo": "https://media.api-sports.io/football/teams/19160.png"
+  },
+  {
+    "name": "AC Lustin",
+    "logo": "https://media.api-sports.io/football/teams/19493.png"
+  },
+  {
+    "name": "Anvaing",
+    "logo": "https://media.api-sports.io/football/teams/19494.png"
+  },
+  {
+    "name": "Bressoux",
+    "logo": "https://media.api-sports.io/football/teams/19495.png"
+  },
+  {
+    "name": "Chastre",
+    "logo": "https://media.api-sports.io/football/teams/19496.png"
+  },
+  {
+    "name": "Club Roeselare",
+    "logo": "https://media.api-sports.io/football/teams/19497.png"
+  },
+  {
+    "name": "De Kempen II",
+    "logo": "https://media.api-sports.io/football/teams/19498.png"
+  },
+  {
+    "name": "Deerlijk Sport",
+    "logo": "https://media.api-sports.io/football/teams/19499.png"
+  },
+  {
+    "name": "Destelbergen",
+    "logo": "https://media.api-sports.io/football/teams/19500.png"
+  },
+  {
+    "name": "Ecaussinnes",
+    "logo": "https://media.api-sports.io/football/teams/19501.png"
+  },
+  {
+    "name": "Eendracht Louwel",
+    "logo": "https://media.api-sports.io/football/teams/19502.png"
+  },
+  {
+    "name": "Eendracht Winnik",
+    "logo": "https://media.api-sports.io/football/teams/19503.png"
+  },
+  {
+    "name": "Etoilés Ére-Allain",
+    "logo": "https://media.api-sports.io/football/teams/19504.png"
+  },
+  {
+    "name": "FC Eupen II",
+    "logo": "https://media.api-sports.io/football/teams/19505.png"
+  },
+  {
+    "name": "Geraardsbergen",
+    "logo": "https://media.api-sports.io/football/teams/19506.png"
+  },
+  {
+    "name": "Heide Hasselt",
+    "logo": "https://media.api-sports.io/football/teams/19507.png"
+  },
+  {
+    "name": "Hoeselt",
+    "logo": "https://media.api-sports.io/football/teams/19508.png"
+  },
+  {
+    "name": "Huy II",
+    "logo": "https://media.api-sports.io/football/teams/19509.png"
+  },
+  {
+    "name": "JSM Roselies",
+    "logo": "https://media.api-sports.io/football/teams/19510.png"
+  },
+  {
+    "name": "Jabbeke",
+    "logo": "https://media.api-sports.io/football/teams/19511.png"
+  },
+  {
+    "name": "KMR Biesen",
+    "logo": "https://media.api-sports.io/football/teams/19512.png"
+  },
+  {
+    "name": "Kalfort Puursica",
+    "logo": "https://media.api-sports.io/football/teams/19513.png"
+  },
+  {
+    "name": "Lutlommel",
+    "logo": "https://media.api-sports.io/football/teams/19514.png"
+  },
+  {
+    "name": "Montegnée",
+    "logo": "https://media.api-sports.io/football/teams/19515.png"
+  },
+  {
+    "name": "Montignies II",
+    "logo": "https://media.api-sports.io/football/teams/19516.png"
+  },
+  {
+    "name": "Neeroeteren",
+    "logo": "https://media.api-sports.io/football/teams/19517.png"
+  },
+  {
+    "name": "Nielse",
+    "logo": "https://media.api-sports.io/football/teams/19518.png"
+  },
+  {
+    "name": "Olympic Namur",
+    "logo": "https://media.api-sports.io/football/teams/19519.png"
+  },
+  {
+    "name": "Oreye Union",
+    "logo": "https://media.api-sports.io/football/teams/19520.png"
+  },
+  {
+    "name": "Perwez",
+    "logo": "https://media.api-sports.io/football/teams/19521.png"
+  },
+  {
+    "name": "Poesele",
+    "logo": "https://media.api-sports.io/football/teams/19522.png"
+  },
+  {
+    "name": "RAEC Mons II",
+    "logo": "https://media.api-sports.io/football/teams/19523.png"
+  },
+  {
+    "name": "RESC Houffaloise",
+    "logo": "https://media.api-sports.io/football/teams/19524.png"
+  },
+  {
+    "name": "RU Rixensartoise",
+    "logo": "https://media.api-sports.io/football/teams/19525.png"
+  },
+  {
+    "name": "RUS Assenois",
+    "logo": "https://media.api-sports.io/football/teams/19526.png"
+  },
+  {
+    "name": "RWL Sport",
+    "logo": "https://media.api-sports.io/football/teams/19527.png"
+  },
+  {
+    "name": "Racing Peer",
+    "logo": "https://media.api-sports.io/football/teams/19528.png"
+  },
+  {
+    "name": "Rapid Leest II",
+    "logo": "https://media.api-sports.io/football/teams/19529.png"
+  },
+  {
+    "name": "Rapid Symphorinois II",
+    "logo": "https://media.api-sports.io/football/teams/19530.png"
+  },
+  {
+    "name": "SK Oetingen",
+    "logo": "https://media.api-sports.io/football/teams/19531.png"
+  },
+  {
+    "name": "STA Genk",
+    "logo": "https://media.api-sports.io/football/teams/19532.png"
+  },
+  {
+    "name": "Saint-Vith",
+    "logo": "https://media.api-sports.io/football/teams/19533.png"
+  },
+  {
+    "name": "Sart-Lez-Spa",
+    "logo": "https://media.api-sports.io/football/teams/19534.png"
+  },
+  {
+    "name": "Sparta Lille",
+    "logo": "https://media.api-sports.io/football/teams/19535.png"
+  },
+  {
+    "name": "Toekomst Relegem",
+    "logo": "https://media.api-sports.io/football/teams/19536.png"
+  },
+  {
+    "name": "Trois-Ponts",
+    "logo": "https://media.api-sports.io/football/teams/19537.png"
+  },
+  {
+    "name": "Union Bossière Gembloux",
+    "logo": "https://media.api-sports.io/football/teams/19538.png"
+  },
+  {
+    "name": "VS Kortenaken",
+    "logo": "https://media.api-sports.io/football/teams/19539.png"
+  },
+  {
+    "name": "Vamos Zandvoorde",
+    "logo": "https://media.api-sports.io/football/teams/19540.png"
+  },
+  {
+    "name": "Vilvoorde",
+    "logo": "https://media.api-sports.io/football/teams/19541.png"
+  },
+  {
+    "name": "Vlijtingen",
+    "logo": "https://media.api-sports.io/football/teams/19542.png"
+  },
+  {
+    "name": "WS Schorvoort",
+    "logo": "https://media.api-sports.io/football/teams/19543.png"
+  },
+  {
+    "name": "Wallonia Thisnes",
+    "logo": "https://media.api-sports.io/football/teams/19544.png"
+  },
+  {
+    "name": "Wambeek-Ternat",
+    "logo": "https://media.api-sports.io/football/teams/19545.png"
+  },
+  {
+    "name": "Wijnegem",
+    "logo": "https://media.api-sports.io/football/teams/19546.png"
+  },
+  {
+    "name": "Zingem",
+    "logo": "https://media.api-sports.io/football/teams/19547.png"
+  },
+  {
+    "name": "Deinze U21",
+    "logo": "https://media.api-sports.io/football/teams/19580.png"
+  },
+  {
+    "name": "Dender U21",
+    "logo": "https://media.api-sports.io/football/teams/19581.png"
+  },
+  {
+    "name": "Excelsior Virton U21",
+    "logo": "https://media.api-sports.io/football/teams/19582.png"
+  },
+  {
+    "name": "KV Oostende U21",
+    "logo": "https://media.api-sports.io/football/teams/19583.png"
+  },
+  {
+    "name": "Kortrijk U21",
+    "logo": "https://media.api-sports.io/football/teams/19584.png"
+  },
+  {
+    "name": "Lommel U21",
+    "logo": "https://media.api-sports.io/football/teams/19585.png"
+  },
+  {
+    "name": "RWDM U21",
+    "logo": "https://media.api-sports.io/football/teams/19586.png"
+  },
+  {
+    "name": "Westerlo U21",
+    "logo": "https://media.api-sports.io/football/teams/19587.png"
+  },
+  {
+    "name": "Fenixx BeigHum",
+    "logo": "https://media.api-sports.io/football/teams/19642.png"
+  },
+  {
+    "name": "Lissewege",
+    "logo": "https://media.api-sports.io/football/teams/19643.png"
+  },
+  {
+    "name": "RAFC Cuesmes",
+    "logo": "https://media.api-sports.io/football/teams/19645.png"
+  },
+  {
+    "name": "Royal Wavre-Limal",
+    "logo": "https://media.api-sports.io/football/teams/19646.png"
+  },
+  {
+    "name": "KAA Gent II",
+    "logo": "https://media.api-sports.io/football/teams/19685.png"
+  },
+  {
+    "name": "Sporting Tisselt",
+    "logo": "https://media.api-sports.io/football/teams/19770.png"
+  },
+  {
+    "name": "Hechtel",
+    "logo": "https://media.api-sports.io/football/teams/19771.png"
+  },
+  {
+    "name": "DT Borsbeke",
+    "logo": "https://media.api-sports.io/football/teams/19772.png"
+  },
+  {
+    "name": "Heikant Zele",
+    "logo": "https://media.api-sports.io/football/teams/19773.png"
+  },
+  {
+    "name": "KSK Beveren",
+    "logo": "https://media.api-sports.io/football/teams/19774.png"
+  },
+  {
+    "name": "Sottegem",
+    "logo": "https://media.api-sports.io/football/teams/19775.png"
+  },
+  {
+    "name": "Moen",
+    "logo": "https://media.api-sports.io/football/teams/19776.png"
+  },
+  {
+    "name": "Veurne",
+    "logo": "https://media.api-sports.io/football/teams/19777.png"
+  },
+  {
+    "name": "Saint-Michel",
+    "logo": "https://media.api-sports.io/football/teams/19778.png"
+  },
+  {
+    "name": "Flénu",
+    "logo": "https://media.api-sports.io/football/teams/19779.png"
+  },
+  {
+    "name": "Evelette-Jallet",
+    "logo": "https://media.api-sports.io/football/teams/19780.png"
+  },
+  {
+    "name": "St-Hadelin-Haversin",
+    "logo": "https://media.api-sports.io/football/teams/19781.png"
+  },
+  {
+    "name": "Hannut",
+    "logo": "https://media.api-sports.io/football/teams/19782.png"
+  },
+  {
+    "name": "Eendracht Mazenzele",
+    "logo": "https://media.api-sports.io/football/teams/19783.png"
+  },
+  {
+    "name": "Elewijt",
+    "logo": "https://media.api-sports.io/football/teams/19784.png"
+  },
+  {
+    "name": "FC Vilvoorde",
+    "logo": "https://media.api-sports.io/football/teams/19786.png"
+  },
+  {
+    "name": "Tongeren",
+    "logo": "https://media.api-sports.io/football/teams/19787.png"
+  },
+  {
+    "name": "Cercle Brugge II",
+    "logo": "https://media.api-sports.io/football/teams/19897.png"
+  },
+  {
+    "name": "Zulte Waregem II",
+    "logo": "https://media.api-sports.io/football/teams/19898.png"
+  },
+  {
+    "name": "Beerschot VA II",
+    "logo": "https://media.api-sports.io/football/teams/19899.png"
+  },
+  {
+    "name": "Mechelen II",
+    "logo": "https://media.api-sports.io/football/teams/19900.png"
+  },
+  {
+    "name": "Seraing II",
+    "logo": "https://media.api-sports.io/football/teams/19901.png"
+  },
+  {
+    "name": "Union Saint-Gilloise II",
+    "logo": "https://media.api-sports.io/football/teams/19902.png"
+  },
+  {
+    "name": "KBSK Retie",
+    "logo": "https://media.api-sports.io/football/teams/19956.png"
+  },
+  {
+    "name": "Oud-Heverlee Leuven II",
+    "logo": "https://media.api-sports.io/football/teams/19957.png"
+  },
+  {
+    "name": "Royal Antwerp II",
+    "logo": "https://media.api-sports.io/football/teams/19958.png"
+  },
+  {
+    "name": "Sporting Charleroi II",
+    "logo": "https://media.api-sports.io/football/teams/19959.png"
+  },
+  {
+    "name": "RUS Binche",
+    "logo": "https://media.api-sports.io/football/teams/20403.png"
+  },
+  {
+    "name": "Belgium U19 W",
+    "logo": "https://media.api-sports.io/football/teams/21271.png"
+  },
+  {
+    "name": "Putte",
+    "logo": "https://media.api-sports.io/football/teams/21497.png"
+  },
+  {
+    "name": "Verviers",
+    "logo": "https://media.api-sports.io/football/teams/21690.png"
+  },
+  {
+    "name": "'s Herenelderen",
+    "logo": "https://media.api-sports.io/football/teams/21774.png"
+  },
+  {
+    "name": "Ans Montegnée",
+    "logo": "https://media.api-sports.io/football/teams/21775.png"
+  },
+  {
+    "name": "Ardooie",
+    "logo": "https://media.api-sports.io/football/teams/21776.png"
+  },
+  {
+    "name": "Auderghem",
+    "logo": "https://media.api-sports.io/football/teams/21777.png"
+  },
+  {
+    "name": "Bellem",
+    "logo": "https://media.api-sports.io/football/teams/21778.png"
+  },
+  {
+    "name": "Binkom",
+    "logo": "https://media.api-sports.io/football/teams/21779.png"
+  },
+  {
+    "name": "Boutersem United",
+    "logo": "https://media.api-sports.io/football/teams/21780.png"
+  },
+  {
+    "name": "Brasschaat",
+    "logo": "https://media.api-sports.io/football/teams/21781.png"
+  },
+  {
+    "name": "Bredene",
+    "logo": "https://media.api-sports.io/football/teams/21782.png"
+  },
+  {
+    "name": "Croatia Wandre",
+    "logo": "https://media.api-sports.io/football/teams/21783.png"
+  },
+  {
+    "name": "Daring Brugge",
+    "logo": "https://media.api-sports.io/football/teams/21784.png"
+  },
+  {
+    "name": "Eendracht Houthalen",
+    "logo": "https://media.api-sports.io/football/teams/21785.png"
+  },
+  {
+    "name": "Ekeren Donk",
+    "logo": "https://media.api-sports.io/football/teams/21786.png"
+  },
+  {
+    "name": "Entité Wasseiges",
+    "logo": "https://media.api-sports.io/football/teams/21787.png"
+  },
+  {
+    "name": "Fortuna Smeermaas",
+    "logo": "https://media.api-sports.io/football/teams/21788.png"
+  },
+  {
+    "name": "Geluwe",
+    "logo": "https://media.api-sports.io/football/teams/21789.png"
+  },
+  {
+    "name": "Genker",
+    "logo": "https://media.api-sports.io/football/teams/21790.png"
+  },
+  {
+    "name": "Halvenweg Zonhoven",
+    "logo": "https://media.api-sports.io/football/teams/21791.png"
+  },
+  {
+    "name": "Havré",
+    "logo": "https://media.api-sports.io/football/teams/21792.png"
+  },
+  {
+    "name": "Heusy Rouheid",
+    "logo": "https://media.api-sports.io/football/teams/21793.png"
+  },
+  {
+    "name": "Honsfeld",
+    "logo": "https://media.api-sports.io/football/teams/21794.png"
+  },
+  {
+    "name": "Isièroise",
+    "logo": "https://media.api-sports.io/football/teams/21795.png"
+  },
+  {
+    "name": "Jumet",
+    "logo": "https://media.api-sports.io/football/teams/21796.png"
+  },
+  {
+    "name": "KFC Zammel",
+    "logo": "https://media.api-sports.io/football/teams/21797.png"
+  },
+  {
+    "name": "KMR Biesen II",
+    "logo": "https://media.api-sports.io/football/teams/21798.png"
+  },
+  {
+    "name": "Kattenbos",
+    "logo": "https://media.api-sports.io/football/teams/21799.png"
+  },
+  {
+    "name": "Landen",
+    "logo": "https://media.api-sports.io/football/teams/21800.png"
+  },
+  {
+    "name": "Luingnois II",
+    "logo": "https://media.api-sports.io/football/teams/21801.png"
+  },
+  {
+    "name": "Meer",
+    "logo": "https://media.api-sports.io/football/teams/21802.png"
+  },
+  {
+    "name": "Mortsel",
+    "logo": "https://media.api-sports.io/football/teams/21803.png"
+  },
+  {
+    "name": "Nieuwerkerken",
+    "logo": "https://media.api-sports.io/football/teams/21804.png"
+  },
+  {
+    "name": "Olen United",
+    "logo": "https://media.api-sports.io/football/teams/21805.png"
+  },
+  {
+    "name": "PSV 1820",
+    "logo": "https://media.api-sports.io/football/teams/21806.png"
+  },
+  {
+    "name": "Paliseulois",
+    "logo": "https://media.api-sports.io/football/teams/21807.png"
+  },
+  {
+    "name": "Petigny-Frasnes",
+    "logo": "https://media.api-sports.io/football/teams/21808.png"
+  },
+  {
+    "name": "Richelle United II",
+    "logo": "https://media.api-sports.io/football/teams/21809.png"
+  },
+  {
+    "name": "Ritterklub Jette",
+    "logo": "https://media.api-sports.io/football/teams/21810.png"
+  },
+  {
+    "name": "Rotselaar",
+    "logo": "https://media.api-sports.io/football/teams/21811.png"
+  },
+  {
+    "name": "Roy-Lignieres",
+    "logo": "https://media.api-sports.io/football/teams/21812.png"
+  },
+  {
+    "name": "Ruddervoorde II",
+    "logo": "https://media.api-sports.io/football/teams/21813.png"
+  },
+  {
+    "name": "SC Duffel",
+    "logo": "https://media.api-sports.io/football/teams/21814.png"
+  },
+  {
+    "name": "SSD Opoeteren",
+    "logo": "https://media.api-sports.io/football/teams/21815.png"
+  },
+  {
+    "name": "Saint-André Ochamps",
+    "logo": "https://media.api-sports.io/football/teams/21816.png"
+  },
+  {
+    "name": "Saive",
+    "logo": "https://media.api-sports.io/football/teams/21817.png"
+  },
+  {
+    "name": "Seraing Athlétique",
+    "logo": "https://media.api-sports.io/football/teams/21818.png"
+  },
+  {
+    "name": "Sterrebeek",
+    "logo": "https://media.api-sports.io/football/teams/21819.png"
+  },
+  {
+    "name": "Stormvogels Drieslinter",
+    "logo": "https://media.api-sports.io/football/teams/21820.png"
+  },
+  {
+    "name": "Svelta Melsele II",
+    "logo": "https://media.api-sports.io/football/teams/21821.png"
+  },
+  {
+    "name": "Thumaide",
+    "logo": "https://media.api-sports.io/football/teams/21822.png"
+  },
+  {
+    "name": "Tielt-Winge 3000",
+    "logo": "https://media.api-sports.io/football/teams/21823.png"
+  },
+  {
+    "name": "Union La Calamine II",
+    "logo": "https://media.api-sports.io/football/teams/21824.png"
+  },
+  {
+    "name": "Volkegem",
+    "logo": "https://media.api-sports.io/football/teams/21825.png"
+  },
+  {
+    "name": "Voorwaarts Gijzel",
+    "logo": "https://media.api-sports.io/football/teams/21826.png"
+  },
+  {
+    "name": "WIK Eine",
+    "logo": "https://media.api-sports.io/football/teams/21827.png"
+  },
+  {
+    "name": "WSAC Fleurus",
+    "logo": "https://media.api-sports.io/football/teams/21828.png"
+  },
+  {
+    "name": "Wanze / Bas-Oha II",
+    "logo": "https://media.api-sports.io/football/teams/21829.png"
+  },
+  {
+    "name": "Westrozebeke",
+    "logo": "https://media.api-sports.io/football/teams/21830.png"
+  },
+  {
+    "name": "Wilrijk",
+    "logo": "https://media.api-sports.io/football/teams/21831.png"
+  },
+  {
+    "name": "Zeveren Sportief",
+    "logo": "https://media.api-sports.io/football/teams/21832.png"
+  },
+  {
+    "name": "Zwaluwen Olmen",
+    "logo": "https://media.api-sports.io/football/teams/21833.png"
+  },
+  {
+    "name": "Zwijndrecht",
+    "logo": "https://media.api-sports.io/football/teams/21834.png"
+  },
+  {
+    "name": "Nechin",
+    "logo": "https://media.api-sports.io/football/teams/21837.png"
+  },
+  {
+    "name": "Anhée",
+    "logo": "https://media.api-sports.io/football/teams/21838.png"
+  },
+  {
+    "name": "Rochefort II",
+    "logo": "https://media.api-sports.io/football/teams/21839.png"
+  },
+  {
+    "name": "RCS Stavelotain",
+    "logo": "https://media.api-sports.io/football/teams/21840.png"
+  },
+  {
+    "name": "Tilffois",
+    "logo": "https://media.api-sports.io/football/teams/21841.png"
+  },
+  {
+    "name": "Trooz",
+    "logo": "https://media.api-sports.io/football/teams/21842.png"
+  },
+  {
+    "name": "Union Flémalloise",
+    "logo": "https://media.api-sports.io/football/teams/21843.png"
+  },
+  {
+    "name": "Kraainem",
+    "logo": "https://media.api-sports.io/football/teams/21844.png"
+  },
+  {
+    "name": "Standard Denderleeuw",
+    "logo": "https://media.api-sports.io/football/teams/21845.png"
+  },
+  {
+    "name": "HIH Hoepertingen",
+    "logo": "https://media.api-sports.io/football/teams/21846.png"
+  },
+  {
+    "name": "Sporting Nevok Gruitrode",
+    "logo": "https://media.api-sports.io/football/teams/21847.png"
+  },
+  {
+    "name": "Turkse Rangers",
+    "logo": "https://media.api-sports.io/football/teams/21848.png"
+  },
+  {
+    "name": "Harre-Manhay",
+    "logo": "https://media.api-sports.io/football/teams/21849.png"
+  },
+  {
+    "name": "Nothomb-Post",
+    "logo": "https://media.api-sports.io/football/teams/21850.png"
+  },
+  {
+    "name": "Érezée",
+    "logo": "https://media.api-sports.io/football/teams/21851.png"
+  },
+  {
+    "name": "Amicii Bruxelles",
+    "logo": "https://media.api-sports.io/football/teams/21852.png"
+  },
+  {
+    "name": "Francs Borains U21",
+    "logo": "https://media.api-sports.io/football/teams/22198.png"
+  },
+  {
+    "name": "Patro Eisden U21",
+    "logo": "https://media.api-sports.io/football/teams/22199.png"
+  },
+  {
+    "name": "RFC de Liege U21",
+    "logo": "https://media.api-sports.io/football/teams/22200.png"
+  },
+  {
+    "name": "Stade Verviers",
+    "logo": "https://media.api-sports.io/football/teams/22256.png"
+  },
+  {
+    "name": "Belgium U18",
+    "logo": "https://media.api-sports.io/football/teams/22425.png"
+  },
+  {
+    "name": "Belgium U20",
+    "logo": "https://media.api-sports.io/football/teams/22426.png"
+  },
+  {
+    "name": "Belgium U16",
+    "logo": "https://media.api-sports.io/football/teams/22496.png"
+  },
+  {
+    "name": "Belgium U17 W",
+    "logo": "https://media.api-sports.io/football/teams/23623.png"
+  },
+  {
+    "name": "Westerlo W",
+    "logo": "https://media.api-sports.io/football/teams/24035.png"
+  },
+  {
+    "name": "Arquet II",
+    "logo": "https://media.api-sports.io/football/teams/24135.png"
+  },
+  {
+    "name": "Aye",
+    "logo": "https://media.api-sports.io/football/teams/24136.png"
+  },
+  {
+    "name": "Aywaille II",
+    "logo": "https://media.api-sports.io/football/teams/24137.png"
+  },
+  {
+    "name": "BO Beerzel",
+    "logo": "https://media.api-sports.io/football/teams/24138.png"
+  },
+  {
+    "name": "Beauvechain",
+    "logo": "https://media.api-sports.io/football/teams/24139.png"
+  },
+  {
+    "name": "Beveren-Leie",
+    "logo": "https://media.api-sports.io/football/teams/24140.png"
+  },
+  {
+    "name": "Casteau",
+    "logo": "https://media.api-sports.io/football/teams/24141.png"
+  },
+  {
+    "name": "Corbion",
+    "logo": "https://media.api-sports.io/football/teams/24142.png"
+  },
+  {
+    "name": "Diepenbeek",
+    "logo": "https://media.api-sports.io/football/teams/24143.png"
+  },
+  {
+    "name": "Ekeren",
+    "logo": "https://media.api-sports.io/football/teams/24144.png"
+  },
+  {
+    "name": "Elsautoise II",
+    "logo": "https://media.api-sports.io/football/teams/24145.png"
+  },
+  {
+    "name": "Excelsior Stéphanois",
+    "logo": "https://media.api-sports.io/football/teams/24146.png"
+  },
+  {
+    "name": "Fontaine-l'Évêque",
+    "logo": "https://media.api-sports.io/football/teams/24147.png"
+  },
+  {
+    "name": "Frasnoise",
+    "logo": "https://media.api-sports.io/football/teams/24148.png"
+  },
+  {
+    "name": "GD Ingooigem",
+    "logo": "https://media.api-sports.io/football/teams/24149.png"
+  },
+  {
+    "name": "Gooreind",
+    "logo": "https://media.api-sports.io/football/teams/24150.png"
+  },
+  {
+    "name": "Habay-la-Vieille",
+    "logo": "https://media.api-sports.io/football/teams/24151.png"
+  },
+  {
+    "name": "Ham United",
+    "logo": "https://media.api-sports.io/football/teams/24152.png"
+  },
+  {
+    "name": "Jalhay",
+    "logo": "https://media.api-sports.io/football/teams/24153.png"
+  },
+  {
+    "name": "Juprelle",
+    "logo": "https://media.api-sports.io/football/teams/24154.png"
+  },
+  {
+    "name": "Knesselare",
+    "logo": "https://media.api-sports.io/football/teams/24155.png"
+  },
+  {
+    "name": "Linkhout",
+    "logo": "https://media.api-sports.io/football/teams/24156.png"
+  },
+  {
+    "name": "Lint",
+    "logo": "https://media.api-sports.io/football/teams/24157.png"
+  },
+  {
+    "name": "Londerzeel United",
+    "logo": "https://media.api-sports.io/football/teams/24158.png"
+  },
+  {
+    "name": "Mol",
+    "logo": "https://media.api-sports.io/football/teams/24159.png"
+  },
+  {
+    "name": "Nieuwmoer",
+    "logo": "https://media.api-sports.io/football/teams/24160.png"
+  },
+  {
+    "name": "Racing Waregem II",
+    "logo": "https://media.api-sports.io/football/teams/24161.png"
+  },
+  {
+    "name": "Rapid Oudler",
+    "logo": "https://media.api-sports.io/football/teams/24162.png"
+  },
+  {
+    "name": "Saintoise",
+    "logo": "https://media.api-sports.io/football/teams/24163.png"
+  },
+  {
+    "name": "Sparta Waasmunster",
+    "logo": "https://media.api-sports.io/football/teams/24164.png"
+  },
+  {
+    "name": "Sparta Wortegem",
+    "logo": "https://media.api-sports.io/football/teams/24165.png"
+  },
+  {
+    "name": "Standard Bouillon",
+    "logo": "https://media.api-sports.io/football/teams/24166.png"
+  },
+  {
+    "name": "Uikhoven",
+    "logo": "https://media.api-sports.io/football/teams/24167.png"
+  },
+  {
+    "name": "Unico Tongeren",
+    "logo": "https://media.api-sports.io/football/teams/24168.png"
+  },
+  {
+    "name": "Union Limbourg",
+    "logo": "https://media.api-sports.io/football/teams/24169.png"
+  },
+  {
+    "name": "Veldwezelt",
+    "logo": "https://media.api-sports.io/football/teams/24170.png"
+  },
+  {
+    "name": "Warsage",
+    "logo": "https://media.api-sports.io/football/teams/24171.png"
+  },
+  {
+    "name": "Weerstand Koersel II",
+    "logo": "https://media.api-sports.io/football/teams/24172.png"
+  },
+  {
+    "name": "Zwaneven",
+    "logo": "https://media.api-sports.io/football/teams/24173.png"
+  },
+  {
+    "name": "Zwevegem Sport",
+    "logo": "https://media.api-sports.io/football/teams/24174.png"
+  },
+  {
+    "name": "Zwijnaarde",
+    "logo": "https://media.api-sports.io/football/teams/24175.png"
+  },
+  {
+    "name": "AS Eupen II",
+    "logo": "https://media.api-sports.io/football/teams/24386.png"
+  },
+  {
+    "name": "Westerlo II",
+    "logo": "https://media.api-sports.io/football/teams/24387.png"
+  },
+  {
+    "name": "Sint-Truiden II",
+    "logo": "https://media.api-sports.io/football/teams/24388.png"
+  },
+  {
+    "name": "Lommel II",
+    "logo": "https://media.api-sports.io/football/teams/24389.png"
+  },
+  {
+    "name": "Jong Male",
+    "logo": "https://media.api-sports.io/football/teams/24548.png"
+  },
+  {
+    "name": "Marke",
+    "logo": "https://media.api-sports.io/football/teams/24549.png"
+  },
+  {
+    "name": "Evergem 2020",
+    "logo": "https://media.api-sports.io/football/teams/24550.png"
+  },
+  {
+    "name": "Hedes",
+    "logo": "https://media.api-sports.io/football/teams/24551.png"
+  },
+  {
+    "name": "Laarne-Kalken",
+    "logo": "https://media.api-sports.io/football/teams/24552.png"
+  },
+  {
+    "name": "Gedinne",
+    "logo": "https://media.api-sports.io/football/teams/24553.png"
+  },
+  {
+    "name": "Jette II",
+    "logo": "https://media.api-sports.io/football/teams/24554.png"
+  },
+  {
+    "name": "Suryoyés Bruxellois",
+    "logo": "https://media.api-sports.io/football/teams/24555.png"
+  },
+  {
+    "name": "Stade Mouscronnois",
+    "logo": "https://media.api-sports.io/football/teams/24556.png"
+  },
+  {
+    "name": "Lindelhoeven",
+    "logo": "https://media.api-sports.io/football/teams/24557.png"
+  },
+  {
+    "name": "Turkse",
+    "logo": "https://media.api-sports.io/football/teams/24558.png"
+  },
+  {
+    "name": "Gouvy II",
+    "logo": "https://media.api-sports.io/football/teams/24559.png"
+  },
+  {
+    "name": "Averbode Okselaar",
+    "logo": "https://media.api-sports.io/football/teams/24560.png"
+  },
+  {
+    "name": "Leeuwkens Teralfene",
+    "logo": "https://media.api-sports.io/football/teams/24561.png"
+  },
+  {
+    "name": "Entente Blegnytoise",
+    "logo": "https://media.api-sports.io/football/teams/24562.png"
+  },
+  {
+    "name": "Ferrières",
+    "logo": "https://media.api-sports.io/football/teams/24563.png"
+  },
+  {
+    "name": "Union Momalloise",
+    "logo": "https://media.api-sports.io/football/teams/24564.png"
+  },
+  {
+    "name": "Xhoris",
+    "logo": "https://media.api-sports.io/football/teams/24565.png"
+  },
+  {
+    "name": "RAAL La Louviere U21",
+    "logo": "https://media.api-sports.io/football/teams/24650.png"
+  },
+  {
+    "name": "Union St-Gilloise U21",
+    "logo": "https://media.api-sports.io/football/teams/24651.png"
+  },
+  {
+    "name": "Lokeren-Temse U21",
+    "logo": "https://media.api-sports.io/football/teams/25121.png"
+  },
+  {
+    "name": "TK Meldert II",
+    "logo": "https://media.api-sports.io/football/teams/25275.png"
+  },
+  {
+    "name": "Daring",
+    "logo": "https://media.api-sports.io/football/teams/26130.png"
+  },
+  {
+    "name": "Bioul",
+    "logo": "https://media.api-sports.io/football/teams/26251.png"
+  },
+  {
+    "name": "Dessel",
+    "logo": "https://media.api-sports.io/football/teams/26252.png"
+  },
+  {
+    "name": "Ezaart Sport Mol",
+    "logo": "https://media.api-sports.io/football/teams/26253.png"
+  },
+  {
+    "name": "Grobbendonk",
+    "logo": "https://media.api-sports.io/football/teams/26254.png"
+  },
+  {
+    "name": "Noduwez",
+    "logo": "https://media.api-sports.io/football/teams/26255.png"
+  },
+  {
+    "name": "Verlaine II",
+    "logo": "https://media.api-sports.io/football/teams/26256.png"
+  },
+  {
+    "name": "Jeugd Patro Eisden Maasmechelen U21",
+    "logo": "https://media.api-sports.io/football/teams/26402.png"
+  },
+  {
+    "name": "RFC Seraing Reserve U21",
+    "logo": "https://media.api-sports.io/football/teams/26403.png"
+  },
+  {
+    "name": "K. Beerschot V.A. Reserve U21",
+    "logo": "https://media.api-sports.io/football/teams/26404.png"
+  },
+  {
+    "name": "R. Union SG U19",
+    "logo": "https://media.api-sports.io/football/teams/26625.png"
+  }
+]
