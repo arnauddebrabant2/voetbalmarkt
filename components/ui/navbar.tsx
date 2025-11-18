@@ -13,22 +13,24 @@ export default function Navbar() {
   const router = useRouter()
 
   useEffect(() => {
-  const publicPaths = ['/start', '/privacy', '/login', '/register']
-  const isPublic = publicPaths.some((path) => pathname.startsWith(path))
+    // Publieke pagina's waar je niet ingelogd hoeft te zijn
+    const publicPaths = ['/start', '/privacy', '/login', '/register']
+    const isPublic = publicPaths.some((path) => pathname === path || pathname.startsWith(path))
 
-  // wacht tot Supabase klaar is
-  if (loading) return
+    // wacht tot Supabase klaar is
+    if (loading) return
 
-  // alleen redirecten als we GEEN user hebben, NIET aan het inloggen zijn
-  // en we niet op een publieke pagina zitten
-  if (!user && !isPublic) {
-    // kleine vertraging om state-updates (zoals login) niet te onderbreken
-    const timeout = setTimeout(() => {
-      router.replace('/start')
-    }, 200)
-    return () => clearTimeout(timeout)
-  }
-}, [user, loading, pathname, router])
+    // alleen redirecten als we GEEN user hebben, NIET aan het inloggen zijn
+    // en we niet op een publieke pagina zitten
+    // MAAR: op homepage (/) is het ok om niet ingelogd te zijn
+    if (!user && !isPublic && pathname !== '/') {
+      // redirect naar login in plaats van start
+      const timeout = setTimeout(() => {
+        router.replace('/login')
+      }, 200)
+      return () => clearTimeout(timeout)
+    }
+  }, [user, loading, pathname, router])
 
   const linkStyle = (path: string) =>
     `px-4 py-2 rounded-md text-lg font-medium transition-colors ${
@@ -45,12 +47,14 @@ export default function Navbar() {
     ? 'Anoniem'
     : displayName || user?.email?.split('@')[0] || ''
 
-  // ❌ Navbar niet tonen op start, privacy, login of register
+  // ❌ Navbar ALLEEN niet tonen op deze specifieke pagina's
+  // EN op homepage als je NIET ingelogd bent
   if (
     pathname === '/start' ||
     pathname === '/privacy' ||
     pathname.startsWith('/login') ||
-    pathname.startsWith('/register')
+    pathname.startsWith('/register') ||
+    (pathname === '/' && !user) // ← alleen op homepage zonder user
   ) {
     return null
   }
@@ -77,10 +81,6 @@ export default function Navbar() {
         <Link href="/" className={linkStyle('/')}>
           Home
         </Link>
-
-        {/* <Link href="/zoekertjes" className={linkStyle('/zoekertjes')}>
-          Zoekertjes
-        </Link> */}
 
         {role === 'speler' && (
           <Link href="/clubs" className={linkStyle('/clubs')}>
@@ -127,7 +127,7 @@ export default function Navbar() {
           </>
         ) : (
           <Link
-            href="/start"
+            href="/login"
             className="bg-[#0F172A] text-white px-3 py-1.5 rounded hover:bg-[#1E293B] text-sm font-medium transition-colors"
           >
             Inloggen

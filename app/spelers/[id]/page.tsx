@@ -17,6 +17,7 @@ export default function PubliekSpelerProfiel() {
   const [career, setCareer] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
+  // Redirect naar eigen profiel als je je eigen pagina bekijkt
   useEffect(() => {
     if (user && id && user.id === id) {
       router.push('/profiel')
@@ -66,7 +67,7 @@ export default function PubliekSpelerProfiel() {
     fetchCareer()
   }, [id])
 
-  // 👁️ Profielview registreren
+  // Profielview registreren
   useEffect(() => {
     const logProfileView = async () => {
       if (!user || !id) return
@@ -87,32 +88,48 @@ export default function PubliekSpelerProfiel() {
     logProfileView()
   }, [user, id])
 
-  if (loading)
-    return (
-      <main className="p-8 text-center">
-        <p>Profiel laden...</p>
-      </main>
-    )
+  // 🔹 Smart terug functie
+  const handleGoBack = () => {
+    if (window.history.length > 1) {
+      router.back() // Ga terug naar vorige pagina
+    } else {
+      router.push('/') // Fallback naar homepage
+    }
+  }
 
-  if (!profile)
+  if (loading) {
     return (
-      <main className="p-8 text-center">
-        <Button onClick={() => router.push('/spelers')} className="mb-6">
-          ← Terug naar spelerslijst
-        </Button>
-        <p>❌ Geen speler gevonden.</p>
+      <main className="relative w-full min-h-screen bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0B1220] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F59E0B] mx-auto mb-4"></div>
+          <p className="text-white">Profiel laden...</p>
+        </div>
       </main>
     )
+  }
+
+  if (!profile) {
+    return (
+      <main className="relative w-full min-h-screen bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0B1220] flex items-center justify-center">
+        <div className="text-center">
+          <Button onClick={handleGoBack} className="mb-6 bg-[#F59E0B] hover:bg-[#D97706]">
+            ← Terug
+          </Button>
+          <p className="text-white">❌ Geen speler gevonden.</p>
+        </div>
+      </main>
+    )
+  }
 
   if (!profile.visibility) {
     return (
-      <main className="p-8 text-center">
-        <Button onClick={() => router.push('/spelers')} className="mb-6">
-          ← Terug naar spelerslijst
-        </Button>
-        <p className="text-gray-600">
-          🔒 Dit profiel is privé en niet openbaar zichtbaar.
-        </p>
+      <main className="relative w-full min-h-screen bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0B1220] flex items-center justify-center">
+        <div className="text-center">
+          <Button onClick={handleGoBack} className="mb-6 bg-[#F59E0B] hover:bg-[#D97706]">
+            ← Terug
+          </Button>
+          <p className="text-white">🔒 Dit profiel is privé en niet openbaar zichtbaar.</p>
+        </div>
       </main>
     )
   }
@@ -132,220 +149,215 @@ export default function PubliekSpelerProfiel() {
     return '👤'
   }
 
-  // 🔹 Leeftijd berekenen
+  // Leeftijd berekenen
   let age_calculated = null
   if (profile.birth_date) {
     const birth = new Date(profile.birth_date)
-    const diff = Date.now() - birth.getTime()
-    age_calculated = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25))
+    age_calculated = Math.floor((Date.now() - birth.getTime()) / (1000 * 60 * 60 * 24 * 365.25))
   }
 
   return (
-    <main className="relative p-8 w-full min-h-[calc(100vh-4rem)] bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0B1220] text-white">
-      <div className="flex justify-between items-center max-w-7xl mx-auto mb-10">
-        <Button
-          onClick={() => router.push('/spelers')}
-          className="bg-gray-700 hover:bg-gray-600 text-white"
-        >
-          ← Terug naar spelerslijst
-        </Button>
-        <h1 className="text-3xl font-bold text-[#F59E0B]">Spelersprofiel</h1>
+    <main className="relative w-full min-h-screen bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0B1220]">
+      {/* Header met cover */}
+      <div className="relative h-48 bg-gradient-to-r from-[#F59E0B] via-[#D97706] to-[#F59E0B] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0F172A]/50" />
       </div>
 
-      <div className="max-w-7xl mx-auto flex flex-col gap-10">
-        {/* ---------- BOVENSTE PROFIELKADER ---------- */}
-        <section className="relative overflow-hidden bg-gradient-to-r from-[#1E293B] via-[#0F172A] to-[#1E293B] border border-white/10 rounded-3xl shadow-2xl p-10 flex flex-col md:flex-row items-start gap-10">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#F59E0B]/5 to-transparent pointer-events-none" />
-
-          {/* Linkerzijde: Avatar + naam */}
-          <div className="relative z-10 flex flex-col items-center text-center gap-4 w-full md:w-[300px] flex-shrink-0">
-            <div className="relative w-36 h-36 flex items-center justify-center text-5xl font-bold rounded-full 
-                            bg-gradient-to-br from-[#F59E0B]/20 to-[#F59E0B]/5 border-2 border-[#F59E0B]/40 
-                            text-[#F59E0B] shadow-lg hover:scale-105 transition-transform duration-300">
-              {getProfileAvatar()}
-
-              {age_calculated && (
-                <div className="absolute bottom-1 right-2 bg-[#F59E0B] text-white text-xs font-semibold px-2 py-0.5 rounded-full shadow-md">
-                  {age_calculated}
+      {/* Main content container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 pb-12">
+        {/* Profile Header Card */}
+        <div className="bg-[#1E293B]/95 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-8 mb-8">
+          <div className="flex flex-col md:flex-row gap-8 items-start">
+            {/* Avatar Section */}
+            <div className="flex flex-col items-center md:items-start gap-4 flex-shrink-0">
+              <div className="relative">
+                <div className="w-32 h-32 flex items-center justify-center text-5xl font-bold rounded-2xl 
+                                bg-gradient-to-br from-[#F59E0B] to-[#D97706] text-white shadow-xl">
+                  {getProfileAvatar()}
                 </div>
-              )}
+                {age_calculated && (
+                  <div className="absolute -bottom-2 -right-2 bg-white text-[#F59E0B] text-sm font-bold px-3 py-1.5 rounded-full shadow-lg">
+                    {age_calculated} jaar
+                  </div>
+                )}
+              </div>
             </div>
 
-            <div className="w-full">
-              <h2 className="text-2xl font-bold text-white tracking-wide truncate max-w-[260px] mx-auto">
-                {profile.is_anonymous ? 'Anonieme speler' : profile.display_name || '-'}
-              </h2>
-            </div>
-          </div>
+            {/* Info Section */}
+            <div className="flex-1">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+                <div>
+                  <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                    {profile.is_anonymous ? 'Anonieme speler' : profile.display_name || '-'}
+                  </h1>
+                  {currentTeamData && (
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <Image src={currentTeamData.logo} alt={currentTeamData.name} width={24} height={24} className="rounded-full" />
+                      <span className="font-medium">{currentTeamData.name}</span>
+                    </div>
+                  )}
+                </div>
+                <Button onClick={handleGoBack} className="bg-gray-700 hover:bg-gray-600 text-white shadow-lg">
+                  ← Terug
+                </Button>
+              </div>
 
-          {/* Rechterzijde info */}
-          <div className="relative z-10 flex-1">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-10 gap-y-5">
-              <InfoFancy icon="📍" label="Provincie" value={profile.province} />
-              <InfoFancy icon="🏆" label="Niveau" value={profile.level} />
-              <InfoFancy icon="🎯" label="Gewenst niveau" value={profile.level_pref} />
-              <InfoFancy icon="🦶" label="Voet" value={profile.foot} />
-              <InfoFancy
-                icon="📅"
-                label="Beschikbaar vanaf"
-                value={
-                  profile.available_from
-                    ? new Date(profile.available_from).toLocaleDateString('nl-BE')
-                    : '-'
-                }
-              />
-              <InfoFancy
-                icon="🎂"
-                label="Geboortedatum"
-                value={
-                  profile.birth_date
-                    ? new Date(profile.birth_date).toLocaleDateString('nl-BE')
-                    : '-'
-                }
-              />
-              <div className="col-span-2 sm:col-span-2 lg:col-span-2">
-                <InfoFancy
-                  icon="⚽"
-                  label="Posities"
-                  value={`${profile.position_primary || '-'}${
-                    profile.position_secondary ? ` & ${profile.position_secondary}` : ''
-                  }`}
-                />
+              {/* Quick Stats Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <StatItem icon="📍" label="Provincie" value={profile.province} />
+                <StatItem icon="🏆" label="Niveau" value={profile.level} />
+                <StatItem icon="🎯" label="Gewenst" value={profile.level_pref} />
+                <StatItem icon="🦶" label="Voet" value={profile.foot} />
               </div>
             </div>
           </div>
-        </section>
+        </div>
 
-        {/* ---------- INFO + VELD ---------- */}
-        <section className="grid md:grid-cols-[2fr_1fr] gap-10 items-start w-full">
-          <div className="flex flex-col gap-8">
-            {currentTeamData && (
-              <section className="bg-[#1E293B]/60 border border-white/20 rounded-2xl p-6 flex items-center gap-4 shadow-lg">
-                <Image
-                  src={currentTeamData.logo}
-                  alt={currentTeamData.name}
-                  width={48}
-                  height={48}
-                  className="rounded-full border border-white/30"
-                />
-                <div>
-                  <h3 className="text-lg font-semibold text-[#F59E0B]">
-                    Huidige / Laatste club
-                  </h3>
-                  <p className="text-white text-base font-medium">
-                    {currentTeamData.name}
-                  </p>
+        {/* Two Column Layout */}
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Left Column - Main Info */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Over mij */}
+            <ContentCard title="Over mij" icon="👤">
+              <p className="text-gray-300 leading-relaxed">
+                {profile.bio || 'Nog geen beschrijving toegevoegd.'}
+              </p>
+            </ContentCard>
+
+            {/* Posities & Veld */}
+            <ContentCard title="Posities" icon="⚽">
+              <div className="flex flex-col md:flex-row gap-6 items-start">
+                <div className="flex-1">
+                  <div className="space-y-3">
+                    {profile.position_primary && (
+                      <div className="flex items-center gap-3">
+                        <span className="text-[#F59E0B] font-semibold">Primair:</span>
+                        <span className="text-white bg-[#F59E0B]/20 px-4 py-2 rounded-lg border border-[#F59E0B]/30">
+                          {profile.position_primary}
+                        </span>
+                      </div>
+                    )}
+                    {profile.position_secondary && (
+                      <div className="flex items-center gap-3">
+                        <span className="text-gray-400 font-semibold">Secundair:</span>
+                        <span className="text-white bg-white/5 px-4 py-2 rounded-lg border border-white/10">
+                          {profile.position_secondary}
+                        </span>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </section>
+                <div className="w-full md:w-[280px] h-[420px] flex-shrink-0">
+                  <FootballField positionsSelected={selectedPositions} />
+                </div>
+              </div>
+            </ContentCard>
+
+            {/* Sterktes */}
+            {profile.strengths && (
+              <ContentCard title="Sterktes" icon="💪">
+                <div className="flex flex-wrap gap-2">
+                  {profile.strengths.split(',').map((s: string) => (
+                    <span
+                      key={s.trim()}
+                      className="px-4 py-2 bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/30 rounded-full text-sm font-medium"
+                    >
+                      {s.trim()}
+                    </span>
+                  ))}
+                </div>
+              </ContentCard>
             )}
 
-            <Section
-              title="Over mij"
-              content={profile.bio}
-              fallback="Nog geen beschrijving toegevoegd."
-            />
-
-            <Section
-              title="Sterktes"
-              content={
-                profile.strengths
-                  ? profile.strengths.split(',').map((s: string) => (
-                      <span
-                        key={s.trim()}
-                        className="inline-block bg-[#F59E0B]/20 text-[#F59E0B] border border-[#F59E0B]/40 px-4 py-2 rounded-full text-sm font-medium shadow mr-2 mb-2"
-                      >
-                        {s.trim()}
-                      </span>
-                    ))
-                  : 'Nog geen sterktes ingevuld.'
-              }
-            />
-
-            <section className="bg-[#1E293B]/60 border border-white/20 rounded-3xl p-8 shadow-lg">
-              <h2 className="text-xl font-semibold text-[#F59E0B] mb-4">Loopbaan / Carrière</h2>
-
+            {/* Carrière */}
+            <ContentCard title="Loopbaan" icon="📜">
               {career.length > 0 ? (
-                <ul className="divide-y divide-white/10 space-y-1">
+                <div className="space-y-3">
                   {career.map((c) => {
                     const team = belgianTeams.find(
                       (t) => t.name.toLowerCase() === c.team_name?.toLowerCase()
                     )
-
                     const periode = c.is_youth
-                      ? `${c.youth_from || '?'} → ${c.youth_to || '?'} (jeugd)`
+                      ? `${c.youth_from || '?'} → ${c.youth_to || '?'}`
                       : `${c.start_date ? new Date(c.start_date).getFullYear() : '?'} - ${
                           c.end_date ? new Date(c.end_date).getFullYear() : 'heden'
                         }`
 
                     return (
-                      <li
+                      <div
                         key={c.id}
-                        className="flex items-center justify-between py-3 gap-4 hover:bg-white/5 rounded-xl transition-colors px-2"
+                        className="flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/5"
                       >
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-4">
                           {team ? (
-                            <Image
-                              src={team.logo}
-                              alt={team.name}
-                              width={36}
-                              height={36}
-                              className="object-contain"
-                            />
+                            <Image src={team.logo} alt={team.name} width={40} height={40} className="rounded-lg" />
                           ) : (
-                            <div className="w-9 h-9 bg-gray-600/30 rounded-md" />
+                            <div className="w-10 h-10 bg-gray-600/30 rounded-lg" />
                           )}
-                          <span className="text-white font-medium">{c.team_name}</span>
+                          <div>
+                            <p className="text-white font-semibold">{c.team_name}</p>
+                            {c.is_youth && <span className="text-xs text-gray-400">Jeugd</span>}
+                          </div>
                         </div>
-                        <span className="text-gray-400 text-sm font-light">{periode}</span>
-                      </li>
+                        <span className="text-gray-400 text-sm font-medium">{periode}</span>
+                      </div>
                     )
                   })}
-                </ul>
+                </div>
               ) : (
                 <p className="text-gray-400">Nog geen loopbaaninformatie toegevoegd.</p>
               )}
-            </section>
+            </ContentCard>
           </div>
 
-          {/* Veld rechts */}
-          <div className="flex justify-center md:justify-end sticky top-20">
-            <div className="w-full max-w-[400px] aspect-[2/3] min-h-[500px]">
-              <FootballField positionsSelected={selectedPositions} />
-            </div>
+          {/* Right Column - Details */}
+          <div className="space-y-6">
+            <ContentCard title="Details" icon="📋">
+              <div className="space-y-4">
+                <DetailRow label="Geboortedatum" value={profile.birth_date ? new Date(profile.birth_date).toLocaleDateString('nl-BE') : '-'} />
+                <DetailRow label="Leeftijd" value={age_calculated ? `${age_calculated} jaar` : '-'} />
+                <DetailRow label="Beschikbaar vanaf" value={profile.available_from ? new Date(profile.available_from).toLocaleDateString('nl-BE') : '-'} />
+                <DetailRow label="Provincie" value={profile.province} />
+                <DetailRow label="Huidig niveau" value={profile.level} />
+                <DetailRow label="Gewenst niveau" value={profile.level_pref} />
+                <DetailRow label="Voorkeursvoet" value={profile.foot} />
+              </div>
+            </ContentCard>
           </div>
-        </section>
+        </div>
       </div>
     </main>
   )
 }
 
-function Section({ title, content, fallback }: any) {
+// Helper components blijven hetzelfde...
+function ContentCard({ title, icon, children }: { title: string; icon: string; children: React.ReactNode }) {
   return (
-    <section className="bg-[#1E293B]/60 border border-white/20 rounded-3xl p-8 shadow-lg">
-      <h2 className="text-xl font-semibold text-[#F59E0B] mb-4">{title}</h2>
-      <div className="text-gray-100 whitespace-pre-line">{content || fallback}</div>
-    </section>
+    <div className="bg-[#1E293B]/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 shadow-lg">
+      <div className="flex items-center gap-2 mb-4">
+        <span className="text-2xl">{icon}</span>
+        <h2 className="text-xl font-bold text-white">{title}</h2>
+      </div>
+      {children}
+    </div>
   )
 }
 
-function InfoFancy({
-  icon,
-  label,
-  value,
-}: {
-  icon: string
-  label: string
-  value: string | number | null
-}) {
+function StatItem({ icon, label, value }: { icon: string; label: string; value: string | null }) {
   return (
-    <div className="flex flex-col bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-4 transition-colors duration-200">
-      <div className="flex items-center gap-2 text-[#F59E0B] font-medium mb-1">
-        <span>{icon}</span>
-        <span className="text-sm text-gray-300">{label}</span>
-      </div>
-      <p className="text-base text-gray-100 font-semibold">
-        {value && value !== '' ? value : '-'}
-      </p>
+    <div className="text-center p-3 bg-white/5 rounded-xl border border-white/5">
+      <div className="text-2xl mb-1">{icon}</div>
+      <p className="text-xs text-gray-400 mb-1">{label}</p>
+      <p className="text-sm font-semibold text-white">{value || '-'}</p>
+    </div>
+  )
+}
+
+function DetailRow({ label, value }: { label: string; value: string | null }) {
+  return (
+    <div className="flex justify-between items-center py-2 border-b border-white/5 last:border-0">
+      <span className="text-sm text-gray-400">{label}</span>
+      <span className="text-sm font-medium text-white">{value || '-'}</span>
     </div>
   )
 }

@@ -2,10 +2,8 @@
 
 export function FootballField({
   positionsSelected = [],
-  size = 'md',
 }: {
   positionsSelected?: string[]
-  size?: 'sm' | 'md' | 'lg'
 }) {
   const positions: Record<string, { x: number; y: number }> = {
     Doelman: { x: 50, y: 95 },
@@ -21,24 +19,16 @@ export function FootballField({
     Rechtsbuiten: { x: 80, y: 27 },
   }
 
-  const sizes = {
-    sm: 'w-[240px] h-[360px]',
-    md: 'w-[320px] h-[480px]',
-    lg: 'w-[400px] h-[600px]',
-  }
-
   return (
-    <div className="relative flex items-center justify-center">
-      {/* 🏟️ Buitenrand (stadionmuur) */}
-      <div
-        className={`relative ${sizes[size]} rounded-3xl bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 border-4 border-slate-700 shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden`}
-      >
+    <div className="relative w-full h-full flex items-center justify-center p-2">
+      {/* 🏟️ Buitenrand */}
+      <div className="relative w-full h-full max-w-[300px] max-h-[450px] rounded-2xl bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 border-4 border-slate-700 shadow-2xl overflow-hidden">
         {/* 💺 Tribune ring */}
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-800 via-gray-900 to-black rounded-3xl p-3">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-800 via-gray-900 to-black rounded-2xl p-2">
           {/* ⚽ Grasveld */}
-          <div className="relative w-full h-full rounded-2xl bg-gradient-to-b from-green-800 to-green-700 border-4 border-green-900 shadow-inner overflow-hidden">
+          <div className="relative w-full h-full rounded-xl bg-gradient-to-b from-green-800 to-green-700 border-2 border-green-900 shadow-inner overflow-hidden">
             {/* Lijnen */}
-            <svg viewBox="0 0 100 150" className="absolute inset-0 w-full h-full opacity-90">
+            <svg viewBox="0 0 100 150" preserveAspectRatio="xMidYMid meet" className="absolute inset-0 w-full h-full opacity-90">
               <rect x="0" y="0" width="100" height="150" fill="none" stroke="white" strokeWidth="1.2" />
               <line x1="0" y1="75" x2="100" y2="75" stroke="white" strokeWidth="0.8" />
               <circle cx="50" cy="75" r="10" stroke="white" fill="none" strokeWidth="0.8" />
@@ -62,8 +52,8 @@ export function FootballField({
                   title={pos}
                   className={`absolute rounded-full transition-all duration-300 ease-in-out ${
                     isSelected
-                      ? 'bg-yellow-400 border-2 border-white w-6 h-6 ring-4 ring-yellow-300/40 shadow-lg animate-pulse'
-                      : 'bg-white/80 w-3 h-3 shadow-sm'
+                      ? 'bg-yellow-400 border-2 border-white w-5 h-5 ring-2 ring-yellow-300/40 shadow-lg animate-pulse'
+                      : 'bg-white/80 w-2.5 h-2.5 shadow-sm'
                   }`}
                   style={{
                     left: `${x}%`,
@@ -77,8 +67,8 @@ export function FootballField({
         </div>
       </div>
 
-      {/* 💡 Lichtgloed bovenaan (stadionlichten) */}
-      <div className="absolute -top-10 w-[120%] h-20 bg-gradient-to-b from-white/10 to-transparent blur-3xl rounded-full pointer-events-none" />
+      {/* 💡 Lichtgloed */}
+      <div className="absolute -top-6 w-full h-12 bg-gradient-to-b from-white/5 to-transparent blur-xl rounded-full pointer-events-none" />
     </div>
   )
 }
