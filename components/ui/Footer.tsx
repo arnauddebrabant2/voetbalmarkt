@@ -22,7 +22,7 @@ export default function Footer() {
             : 'bg-[#1E293B] border-[#1E293B] text-gray-400'
         }`}
     >
-      © {new Date().getFullYear()} VoetbalMarkt — gemaakt met ⚽ & ❤️
+      © {new Date().getFullYear()} MyScout — gemaakt met ⚽ & ❤️
       <span className="mx-2">|</span>
       <a
         href="/privacy"

@@ -71,8 +71,8 @@ export default function Navbar() {
           className="rounded"
         />
         <span className="text-2xl font-bold">
-          <span className="text-[#0F172A]">Voetbal</span>
-          <span className="text-[#F59E0B]">Markt</span>
+          <span className="text-[#0F172A]">My</span>
+          <span className="text-[#F59E0B]">Scout</span>
         </span>
       </Link>
 
