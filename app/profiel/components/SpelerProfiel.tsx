@@ -78,6 +78,20 @@ useEffect(() => {
     fetchViewCount()
   }, [profielID])
 
+  // Block body scroll wanneer modal open is
+  useEffect(() => {
+    if (isEditing) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+
+    // Cleanup
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isEditing])
+
   useEffect(() => {
     if (!message) return
     const t = setTimeout(() => setMessage(''), 3000)
@@ -318,6 +332,7 @@ useEffect(() => {
       </div>
 
       {/* Edit Modal - blijft hetzelfde */}
+      {/* Edit Modal */}
       <AnimatePresence>
         {isEditing && (
           <motion.div
@@ -331,18 +346,38 @@ useEffect(() => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 50, opacity: 0 }}
               className="bg-[#0F172A]/95 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl 
-                         p-10 max-w-5xl w-full max-h-[90vh] overflow-y-auto text-white"
+                         max-w-5xl w-full max-h-[90vh] overflow-hidden text-white flex flex-col"
             >
-              <EditForm
-                user={user}
-                initial={profile}
-                onClose={() => setIsEditing(false)}
-                onSaved={() => {
-                  refreshProfile()
-                  setIsEditing(false)
-                  setMessage('✅ Profiel bijgewerkt!')
-                }}
-              />
+              {/* Sticky Header */}
+              <div className="sticky top-0 z-10 bg-[#0F172A]/95 backdrop-blur-xl border-b border-white/10 p-6 flex items-center justify-between">
+                <div>
+                  <h2 className="text-2xl font-bold text-[#F59E0B]">Spelersprofiel bewerken</h2>
+                  <p className="text-sm text-gray-400 mt-1">Update je profiel informatie</p>
+                </div>
+                <button
+                  onClick={() => setIsEditing(false)}
+                  type="button"
+                  className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Scrollable content */}
+              <div className="overflow-y-auto flex-1 p-10">
+                <EditForm
+                  user={user}
+                  initial={profile}
+                  onClose={() => setIsEditing(false)}
+                  onSaved={() => {
+                    refreshProfile()
+                    setIsEditing(false)
+                    setMessage('✅ Profiel bijgewerkt!')
+                  }}
+                />
+              </div>
             </motion.div>
           </motion.div>
         )}

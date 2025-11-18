@@ -47,6 +47,19 @@ export default function ClubProfielPage() {
     return () => clearTimeout(t)
   }, [message])
 
+  // Block body scroll wanneer modal open is
+  useEffect(() => {
+    if (isEditing) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isEditing])
+
   if (!user) {
     return <p className="p-8 text-center text-white">Log eerst in om je clubprofiel te bekijken.</p>
   }
@@ -204,18 +217,38 @@ export default function ClubProfielPage() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 50, opacity: 0 }}
               className="bg-[#0F172A]/95 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl 
-                         p-10 max-w-5xl w-full max-h-[90vh] overflow-y-auto text-white"
+                         max-w-5xl w-full max-h-[90vh] overflow-hidden text-white flex flex-col"
             >
-              <EditForm
-                user={user}
-                initial={profile}
-                onClose={() => setIsEditing(false)}
-                onSaved={() => {
-                  refreshProfile()
-                  setIsEditing(false)
-                  setMessage('✅ Clubprofiel bijgewerkt!')
-                }}
-              />
+              {/* Sticky Header */}
+              <div className="sticky top-0 z-10 bg-[#0F172A]/95 backdrop-blur-xl border-b border-white/10 p-6 flex items-center justify-between">
+                <div>
+                  <h2 className="text-2xl font-bold text-[#F59E0B]">Clubprofiel bewerken</h2>
+                  <p className="text-sm text-gray-400 mt-1">Update je club informatie</p>
+                </div>
+                <button
+                  onClick={() => setIsEditing(false)}
+                  type="button"
+                  className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Scrollable content */}
+              <div className="overflow-y-auto flex-1 p-10">
+                <EditForm
+                  user={user}
+                  initial={profile}
+                  onClose={() => setIsEditing(false)}
+                  onSaved={() => {
+                    refreshProfile()
+                    setIsEditing(false)
+                    setMessage('✅ Clubprofiel bijgewerkt!')
+                  }}
+                />
+              </div>
             </motion.div>
           </motion.div>
         )}
@@ -317,8 +350,6 @@ function EditForm({ user, initial, onClose, onSaved }: any) {
 
   return (
     <form onSubmit={save} className="space-y-6">
-      <h2 className="text-2xl font-bold text-center mb-4 text-[#F59E0B]">Clubprofiel bewerken</h2>
-
       <div className="md:col-span-2 grid md:grid-cols-[1fr_auto] gap-6 items-start">
         <InputField
           label="Clubnaam"
@@ -407,6 +438,7 @@ function EditForm({ user, initial, onClose, onSaved }: any) {
         />
       </div>
 
+      {/* Originele buttons zonder sticky */}
       <div className="flex justify-end gap-4 pt-6">
         <button type="button" onClick={onClose} className="px-5 py-2 border border-white/40 rounded-lg hover:bg-white/10 transition">
           Annuleren

@@ -565,187 +565,258 @@ export default function HomePage() {
       </main>
 
       {/* Create Post Modal */}
-      <AnimatePresence>
-        {showModal && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowModal(false)}
-            />
-            <motion.div
-              className="fixed inset-0 flex items-center justify-center z-50 p-4"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-            >
-              <div className="bg-[#0F172A] border border-white/20 rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-                {/* Modal Header */}
-                <div className="border-b border-white/10 p-6 flex items-center justify-between">
-                  <div>
-                    <h2 className="text-2xl font-bold text-white">Nieuwe bijdrage</h2>
-                    <p className="text-sm text-gray-400 mt-1">
-                      {profile?.role === 'club' 
-                        ? 'Vertel welke spelers je zoekt voor je team' 
-                        : 'Vertel waar je naar op zoek bent'}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setShowModal(false)}
-                    className="text-gray-400 hover:text-white transition"
+      {/* Create Post Modal */}
+<AnimatePresence>
+  {showModal && (
+    <>
+      <motion.div
+        className="fixed inset-0 bg-black/80 backdrop-blur-md z-40"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={() => setShowModal(false)}
+      />
+      <motion.div
+        className="fixed inset-0 flex items-center justify-center z-50 p-4"
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+        transition={{ type: "spring", duration: 0.5 }}
+      >
+        <div className="relative bg-gradient-to-b from-[#1E293B] to-[#0F172A] border border-white/10 rounded-3xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden">
+          {/* Decorative gradient blur */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#F59E0B]/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          {/* Modal Header */}
+          <div className="relative border-b border-white/10 p-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#F59E0B] to-[#D97706] text-white font-bold text-xl shadow-lg">
+                {profile?.is_anonymous ? '?' : profile?.display_name?.charAt(0).toUpperCase() || '?'}
+              </div>
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold text-white">Nieuwe bijdrage</h2>
+                <p className="text-sm text-gray-400 mt-1">
+                  {profile?.role === 'club' 
+                    ? 'Vertel welke spelers je zoekt voor je team' 
+                    : 'Deel wat je zoekt met de community'}
+                </p>
+              </div>
+              <button
+                onClick={() => setShowModal(false)}
+                className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Modal Body - Scrollable */}
+          <form onSubmit={handleSubmit} className="relative overflow-y-auto max-h-[calc(90vh-180px)]">
+            <div className="p-6 space-y-6">
+              {/* Titel */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300 flex items-center gap-2">
+                  <span className="text-[#F59E0B]">✏️</span>
+                  Titel
+                </label>
+                <input
+                  name="title"
+                  placeholder="Geef je bijdrage een pakkende titel..."
+                  value={form.title}
+                  onChange={handleChange}
+                  required
+                  className="bg-white/5 border border-white/10 rounded-xl p-4 w-full text-white placeholder-gray-500 focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent outline-none transition"
+                />
+              </div>
+
+              {/* Beschrijving */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300 flex items-center gap-2">
+                  <span className="text-[#F59E0B]">📝</span>
+                  Beschrijving
+                </label>
+                <textarea
+                  name="description"
+                  placeholder={profile?.role === 'club' 
+                    ? 'Beschrijf welk type spelers je zoekt, wat je te bieden hebt, trainingstijden...' 
+                    : 'Vertel over jezelf, je ervaring, wat je zoekt in een club...'}
+                  value={form.description}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className="bg-white/5 border border-white/10 rounded-xl p-4 w-full text-white placeholder-gray-500 focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent outline-none resize-none transition"
+                />
+              </div>
+
+              {/* Provincie & Niveau Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-300 flex items-center gap-2">
+                    <span className="text-blue-400">📍</span>
+                    Provincie
+                  </label>
+                  <select
+                    name="province"
+                    value={form.province}
+                    onChange={handleChange}
+                    required
+                    className="bg-white/5 border border-white/10 rounded-xl p-4 w-full text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition appearance-none cursor-pointer"
                   >
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
+                    <option value="" className="bg-[#1E293B]">Selecteer provincie...</option>
+                    <option className="bg-[#1E293B]">Antwerpen</option>
+                    <option className="bg-[#1E293B]">Limburg</option>
+                    <option className="bg-[#1E293B]">Oost-Vlaanderen</option>
+                    <option className="bg-[#1E293B]">West-Vlaanderen</option>
+                    <option className="bg-[#1E293B]">Vlaams-Brabant</option>
+                    <option className="bg-[#1E293B]">Brussel</option>
+                  </select>
                 </div>
 
-                {/* Modal Body */}
-                <form onSubmit={handleSubmit} className="p-6 space-y-4">
-                  <input
-                    name="title"
-                    placeholder="Titel van je bijdrage..."
-                    value={form.title}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-300 flex items-center gap-2">
+                    <span className="text-purple-400">🏆</span>
+                    Niveau
+                  </label>
+                  <select
+                    name="level"
+                    value={form.level}
                     onChange={handleChange}
                     required
-                    className="bg-[#1E293B] border border-white/20 rounded-xl p-4 w-full text-white placeholder-gray-400 focus:ring-2 focus:ring-[#F59E0B] outline-none"
-                  />
-
-                  <textarea
-                    name="description"
-                    placeholder={profile?.role === 'club' 
-                      ? 'Beschrijf welk type spelers je zoekt, wat je te bieden hebt...' 
-                      : 'Vertel meer over jezelf en wat je zoekt...'}
-                    value={form.description}
-                    onChange={handleChange}
-                    required
-                    rows={4}
-className="bg-[#1E293B] border border-white/20 rounded-xl p-4 w-full text-white placeholder-gray-400 focus:ring-2 focus:ring-[#F59E0B] outline-none resize-none"
-                  />
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <select
-                      name="province"
-                      value={form.province}
-                      onChange={handleChange}
-                      required
-                      className="bg-[#1E293B] border border-white/20 rounded-xl p-4 w-full text-white focus:ring-2 focus:ring-[#F59E0B] outline-none"
-                    >
-                      <option value="">Provincie</option>
-                      <option>Antwerpen</option>
-                      <option>Limburg</option>
-                      <option>Oost-Vlaanderen</option>
-                      <option>West-Vlaanderen</option>
-                      <option>Vlaams-Brabant</option>
-                      <option>Brussel</option>
-                    </select>
-
-                    <select
-                      name="level"
-                      value={form.level}
-                      onChange={handleChange}
-                      required
-                      className="bg-[#1E293B] border border-white/20 rounded-xl p-4 w-full text-white focus:ring-2 focus:ring-[#F59E0B] outline-none"
-                    >
-                      <option value="">Niveau</option>
-                      <option>Recreatief / Vriendenploeg</option>
-                      <option>4e Provinciale</option>
-                      <option>3e Provinciale</option>
-                      <option>2e Provinciale</option>
-                      <option>1e Provinciale</option>
-                      <option>3e Afdeling</option>
-                      <option>2e Afdeling</option>
-                      <option>1e Afdeling</option>
-                    </select>
-                  </div>
-
-                  {/* Posities selectie */}
-                  <div>
-                    <label className="block text-sm font-medium text-white mb-3">
-                      {profile?.role === 'club' 
-                        ? 'Welke posities zoek je? (selecteer er minimaal 1)' 
-                        : 'Op welke posities kan je spelen? (selecteer er minimaal 1)'}
-                    </label>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                      {allPositions.map((pos) => {
-                        const selected = form.positions.includes(pos)
-                        return (
-                          <button
-                            key={pos}
-                            type="button"
-                            onClick={() => togglePosition(pos)}
-                            className={`rounded-lg border px-3 py-2 text-sm transition ${
-                              selected
-                                ? 'bg-[#F59E0B] text-white border-[#F59E0B]'
-                                : 'bg-[#1E293B] text-gray-300 border-white/20 hover:bg-white/5'
-                            }`}
-                          >
-                            {pos}
-                          </button>
-                        )
-                      })}
-                    </div>
-                    {form.positions.length > 0 && (
-                      <p className="text-xs text-gray-400 mt-2">
-                        {form.positions.length} {form.positions.length === 1 ? 'positie' : 'posities'} geselecteerd
-                      </p>
-                    )}
-                  </div>
-
-                  {profile?.role === 'speler' && (
-                    <div>
-                      <label className="block text-sm text-gray-400 mb-2">Beschikbaar vanaf (optioneel)</label>
-                      <input
-                        type="date"
-                        name="available_from"
-                        value={form.available_from}
-                        onChange={handleChange}
-                        className="bg-[#1E293B] border border-white/20 rounded-xl p-4 w-full text-white focus:ring-2 focus:ring-[#F59E0B] outline-none"
-                      />
-                    </div>
-                  )}
-
-                  {message && (
-                    <div className={`p-4 rounded-xl ${message.includes('✅') ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
-                      {message}
-                    </div>
-                  )}
-
-                  {/* Modal Footer */}
-                  <div className="flex justify-end gap-3 pt-4">
-                    <button
-                      type="button"
-                      onClick={() => setShowModal(false)}
-                      className="px-6 py-3 border border-white/20 rounded-xl hover:bg-white/5 transition text-white font-medium"
-                    >
-                      Annuleren
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={saving}
-                      className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#F59E0B] to-[#D97706] text-white font-semibold hover:shadow-lg hover:shadow-[#F59E0B]/50 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {saving ? (
-                        <span className="flex items-center gap-2">
-                          <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                          </svg>
-                          Plaatsen...
-                        </span>
-                      ) : (
-                        'Plaatsen'
-                      )}
-                    </button>
-                  </div>
-                </form>
+                    className="bg-white/5 border border-white/10 rounded-xl p-4 w-full text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition appearance-none cursor-pointer"
+                  >
+                    <option value="" className="bg-[#1E293B]">Selecteer niveau...</option>
+                    <option className="bg-[#1E293B]">Recreatief / Vriendenploeg</option>
+                    <option className="bg-[#1E293B]">4e Provinciale</option>
+                    <option className="bg-[#1E293B]">3e Provinciale</option>
+                    <option className="bg-[#1E293B]">2e Provinciale</option>
+                    <option className="bg-[#1E293B]">1e Provinciale</option>
+                    <option className="bg-[#1E293B]">3e Afdeling</option>
+                    <option className="bg-[#1E293B]">2e Afdeling</option>
+                    <option className="bg-[#1E293B]">1e Afdeling</option>
+                  </select>
+                </div>
               </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+
+              {/* Posities selectie */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <label className="block text-sm font-medium text-gray-300 flex items-center gap-2">
+                    <span className="text-[#F59E0B]">⚽</span>
+                    {profile?.role === 'club' 
+                      ? 'Welke posities zoek je?' 
+                      : 'Op welke posities kan je spelen?'}
+                  </label>
+                  {form.positions.length > 0 && (
+                    <span className="text-xs bg-[#F59E0B]/20 text-[#F59E0B] px-3 py-1 rounded-full">
+                      {form.positions.length} geselecteerd
+                    </span>
+                  )}
+                </div>
+                
+                <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {allPositions.map((pos) => {
+                      const selected = form.positions.includes(pos)
+                      return (
+                        <button
+                          key={pos}
+                          type="button"
+                          onClick={() => togglePosition(pos)}
+                          className={`relative rounded-lg px-3 py-2.5 text-sm font-medium transition-all ${
+                            selected
+                              ? 'bg-gradient-to-r from-[#F59E0B] to-[#D97706] text-white'
+                              : 'bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10'
+                          }`}
+                        >
+                          {selected && (
+                            <span className="absolute top-1 right-1 w-2 h-2 bg-white rounded-full" />
+                          )}
+                          {pos}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Beschikbaar vanaf - alleen voor spelers */}
+              {profile?.role === 'speler' && (
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-300 flex items-center gap-2">
+                    <span className="text-green-400">📅</span>
+                    Beschikbaar vanaf (optioneel)
+                  </label>
+                  <input
+                    type="date"
+                    name="available_from"
+                    value={form.available_from}
+                    onChange={handleChange}
+                    className="bg-white/5 border border-white/10 rounded-xl p-4 w-full text-white focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                  />
+                </div>
+              )}
+
+              {/* Message */}
+              {message && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`p-4 rounded-xl flex items-center gap-3 ${
+                    message.includes('✅') 
+                      ? 'bg-green-500/10 text-green-400 border border-green-500/20' 
+                      : 'bg-red-500/10 text-red-400 border border-red-500/20'
+                  }`}
+                >
+                  <span className="text-xl">{message.includes('✅') ? '✅' : '❌'}</span>
+                  <span className="flex-1">{message.replace(/✅|❌/g, '').trim()}</span>
+                </motion.div>
+              )}
+            </div>
+
+            {/* Modal Footer - Sticky */}
+            <div className="sticky bottom-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A] to-transparent border-t border-white/10 p-6">
+              <div className="flex items-center justify-between gap-4">
+                <button
+                  type="button"
+                  onClick={() => setShowModal(false)}
+                  className="px-6 py-3 rounded-xl border border-white/20 hover:bg-white/5 transition text-white font-medium"
+                >
+                  Annuleren
+                </button>
+                
+                <button
+                  type="submit"
+                  disabled={saving || form.positions.length === 0}
+                  className="flex-1 max-w-xs px-6 py-3 rounded-xl bg-gradient-to-r from-[#F59E0B] to-[#D97706] text-white font-bold hover:shadow-xl hover:shadow-[#F59E0B]/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
+                >
+                  {saving ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      Plaatsen...
+                    </span>
+                  ) : (
+                    <span className="flex items-center justify-center gap-2">
+                      <span>Plaatsen</span>
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
+                  )}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </motion.div>
+    </>
+  )}
+</AnimatePresence>
     </>
   )
 }
