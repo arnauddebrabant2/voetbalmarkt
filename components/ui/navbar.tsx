@@ -60,8 +60,8 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="flex items-center justify-between bg-[#F8FAFC] text-[#0F172A] px-6 h-16 shadow-md sticky top-0 z-50">
-      {/* Logo + naam */}
+    <nav className="relative flex items-center bg-[#F8FAFC] text-[#0F172A] px-6 h-16 shadow-md sticky top-0 z-50">
+      {/* Logo + naam - Links */}
       <Link href="/" className="flex items-center gap-2">
         <Image
           src="/logo4.png"
@@ -76,22 +76,20 @@ export default function Navbar() {
         </span>
       </Link>
 
-      {/* Navigatie */}
-      <div className="flex items-center gap-4">
+      {/* Navigatie - Gecentreerd */}
+      <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-4">
         <Link href="/" className={linkStyle('/')}>
           Home
         </Link>
 
-        {role === 'speler' && (
-          <Link href="/clubs" className={linkStyle('/clubs')}>
-            Clubs
-          </Link>
-        )}
-        {role === 'club' && (
-          <Link href="/spelers" className={linkStyle('/spelers')}>
-            Spelers
-          </Link>
-        )}
+        <Link href="/spelers" className={linkStyle('/spelers')}>
+          Spelers
+        </Link>
+
+        <Link href="/clubs" className={linkStyle('/clubs')}>
+          Clubs
+        </Link>
+
         {role === 'trainer' && (
           <Link href="/teams" className={linkStyle('/teams')}>
             Teams
@@ -100,7 +98,7 @@ export default function Navbar() {
       </div>
 
       {/* Rechts: profiel / login */}
-      <div className="flex items-center gap-3">
+      <div className="ml-auto flex items-center gap-3">
         {user ? (
           <>
             <Link

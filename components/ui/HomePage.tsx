@@ -6,6 +6,8 @@ import { useAuth } from '@/components/ui/AuthProvider'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { FootballFieldHorizontal } from '@/components/ui/FootballFieldHorizontal'
+import LikersModal from '@/components/ui/LikersModal'
+
 
 /* 🔹 Mini-profiel Sidebar */
 function ProfileSidebar() {
@@ -203,6 +205,10 @@ export default function HomePage() {
   const [showModal, setShowModal] = useState(false)
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState('')
+  const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set())
+  const [likeCounts, setLikeCounts] = useState<{ [key: string]: number }>({})
+  const [showLikersModal, setShowLikersModal] = useState(false)
+  const [selectedListingId, setSelectedListingId] = useState<string | null>(null)
 
   const [form, setForm] = useState({
     title: '',
@@ -212,6 +218,7 @@ export default function HomePage() {
     positions: [] as string[], // Array voor meerdere posities
     available_from: '',
   })
+  
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -228,6 +235,49 @@ export default function HomePage() {
     fetchListings()
   }, [])
 
+  // Laad likes van de huidige gebruiker
+  useEffect(() => {
+    const fetchUserLikes = async () => {
+      if (!user) return
+      
+      const { data } = await supabase
+        .from('likes')
+        .select('listing_id')
+        .eq('user_id', user.id)
+      
+      if (data) {
+        const likedIds = new Set(data.map(like => like.listing_id))
+        setLikedPosts(likedIds)
+      }
+    }
+    
+    fetchUserLikes()
+  }, [user])
+
+  // Laad like counts voor alle posts
+  useEffect(() => {
+    const fetchLikeCounts = async () => {
+      const listingIds = listings.map(l => l.id)
+      if (listingIds.length === 0) return
+
+      const { data } = await supabase
+        .from('likes')
+        .select('listing_id')
+        
+      if (data) {
+        const counts: { [key: string]: number } = {}
+        data.forEach(like => {
+          counts[like.listing_id] = (counts[like.listing_id] || 0) + 1
+        })
+        setLikeCounts(counts)
+      }
+    }
+    
+    if (listings.length > 0) {
+      fetchLikeCounts()
+    }
+  }, [listings])
+
   const handleChange = (e: any) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
 
@@ -241,6 +291,63 @@ export default function HomePage() {
           : [...prev.positions, pos],
       }
     })
+  }
+
+  // Toggle like/unlike functie
+  const toggleLike = async (listingId: string) => {
+    if (!user) {
+      alert('Je moet ingelogd zijn om te liken')
+      return
+    }
+
+    const isLiked = likedPosts.has(listingId)
+
+    // Optimistic update (instant visuele feedback)
+    const newLikedPosts = new Set(likedPosts)
+    const newLikeCounts = { ...likeCounts }
+
+    if (isLiked) {
+      // Unlike
+      newLikedPosts.delete(listingId)
+      newLikeCounts[listingId] = Math.max((newLikeCounts[listingId] || 1) - 1, 0)
+      
+      const { error } = await supabase
+        .from('likes')
+        .delete()
+        .eq('listing_id', listingId)
+        .eq('user_id', user.id)
+        
+      if (error) {
+        console.error('Unlike error:', error)
+        return
+      }
+    } else {
+      // Like
+      newLikedPosts.add(listingId)
+      newLikeCounts[listingId] = (newLikeCounts[listingId] || 0) + 1
+      
+      const { error } = await supabase
+        .from('likes')
+        .insert({ listing_id: listingId, user_id: user.id })
+        
+      if (error) {
+        console.error('Like error:', error)
+        return
+      }
+    }
+
+    setLikedPosts(newLikedPosts)
+    setLikeCounts(newLikeCounts)
+  }
+
+  const openLikersModal = (listingId: string) => {
+    setSelectedListingId(listingId)
+    setShowLikersModal(true)
+  }
+
+  const closeLikersModal = () => {
+    setShowLikersModal(false)
+    setSelectedListingId(null)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -530,18 +637,54 @@ export default function HomePage() {
 
                     {/* Post Actions */}
                     <div className="border-t border-white/5 px-6 py-3 flex items-center gap-4 text-sm text-gray-400">
-                      <button className="flex items-center gap-2 hover:text-[#F59E0B] transition">
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      <button 
+                        onClick={() => toggleLike(l.id)}
+                        className={`flex items-center gap-2 transition ${
+                          likedPosts.has(l.id) 
+                            ? 'text-[#F59E0B]' 
+                            : 'text-gray-400 hover:text-[#F59E0B]'
+                        }`}
+                      >
+                        <svg 
+                          className="w-5 h-5" 
+                          fill={likedPosts.has(l.id) ? 'currentColor' : 'none'}
+                          viewBox="0 0 24 24" 
+                          stroke="currentColor"
+                        >
+                          <path 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round" 
+                            strokeWidth={2} 
+                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" 
+                          />
                         </svg>
-                        <span>Interessant</span>
+                        <span className="flex items-center gap-1">
+                          {likeCounts[l.id] > 0 ? (
+                            <>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  openLikersModal(l.id)
+                                }}
+                                className="hover:underline font-semibold"
+                              >
+                                {likeCounts[l.id]}
+                              </button>
+                              <span>Interessant</span>
+                            </>
+                          ) : (
+                            'Interessant'
+                          )}
+                        </span>
                       </button>
+                      
                       <button className="flex items-center gap-2 hover:text-[#F59E0B] transition">
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                         </svg>
                         <span>Reageer</span>
                       </button>
+                      
                       <button className="flex items-center gap-2 hover:text-[#F59E0B] transition ml-auto">
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
@@ -817,6 +960,15 @@ export default function HomePage() {
     </>
   )}
 </AnimatePresence>
+{/* Likers Modal */}
+      {selectedListingId && (
+        <LikersModal
+          listingId={selectedListingId}
+          isOpen={showLikersModal}
+          onClose={closeLikersModal}
+        />
+      )}
     </>
+    
   )
 }

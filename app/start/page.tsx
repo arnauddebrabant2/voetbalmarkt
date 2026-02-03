@@ -54,7 +54,7 @@ export default function StartPage() {
               className="rounded-md"
             />
             <span className="text-xl sm:text-2xl font-extrabold text-[#F59E0B] tracking-tight">
-              VoetbalMarkt
+              MyScout
             </span>
           </div>
 
