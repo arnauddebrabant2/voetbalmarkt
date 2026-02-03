@@ -209,6 +209,8 @@ export default function HomePage() {
   const [likeCounts, setLikeCounts] = useState<{ [key: string]: number }>({})
   const [showLikersModal, setShowLikersModal] = useState(false)
   const [selectedListingId, setSelectedListingId] = useState<string | null>(null)
+  const [sortOrder, setSortOrder] = useState<'newest' | 'popular'>('newest')
+
 
   const [form, setForm] = useState({
     title: '',
@@ -350,6 +352,19 @@ export default function HomePage() {
     setSelectedListingId(null)
   }
 
+  const getSortedListings = () => {
+    if (sortOrder === 'popular') {
+      // Sorteer op like_count (meeste likes eerst)
+      return [...listings].sort((a, b) => {
+        const likesA = likeCounts[a.id] || 0
+        const likesB = likeCounts[b.id] || 0
+        return likesB - likesA
+      })
+    }
+    // Default: nieuwste eerst (al gesorteerd vanuit database)
+    return listings
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!user) return setMessage('Je moet eerst inloggen.')
@@ -478,9 +493,13 @@ export default function HomePage() {
                 <span>📰</span>
                 Tijdslijn
               </h1>
-              <select className="bg-[#1E293B]/60 border border-white/10 rounded-lg px-4 py-2 text-sm text-white">
-                <option>Nieuwste eerst</option>
-                <option>Populair</option>
+              <select 
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value as 'newest' | 'popular')}
+                className="bg-[#1E293B]/60 border border-white/10 rounded-lg px-4 py-2 text-sm text-white cursor-pointer hover:border-white/20 transition focus:outline-none focus:ring-2 focus:ring-[#F59E0B]"
+              >
+                <option value="newest">Nieuwste eerst</option>
+                <option value="popular">Populair</option>
               </select>
             </div>
 
@@ -502,7 +521,7 @@ export default function HomePage() {
 
             {/* Feed Items */}
             <div className="space-y-6">
-              {listings.map((l, i) => {
+              {getSortedListings().map((l, i) => {
                 // In de render van listings:
                 const pos = l.type === 'club_zoekt_speler' && l.positions_needed
                 ? l.positions_needed.split(',').map(p => p.trim()).filter(Boolean)
