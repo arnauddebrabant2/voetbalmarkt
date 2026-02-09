@@ -7,6 +7,7 @@ import { FootballField } from '@/components/ui/FootballField'
 import { useAuth } from '@/components/ui/AuthProvider'
 import belgianTeams from '@/public/data/belgian_teams_simple.json'
 import Image from 'next/image'
+import ChatButton from '@/components/ui/ChatButton'
 
 export default function PubliekSpelerProfiel() {
   const params = useParams()
@@ -91,9 +92,9 @@ export default function PubliekSpelerProfiel() {
   // 🔹 Smart terug functie
   const handleGoBack = () => {
     if (window.history.length > 1) {
-      router.back() // Ga terug naar vorige pagina
+      router.back()
     } else {
-      router.push('/') // Fallback naar homepage
+      router.push('/')
     }
   }
 
@@ -197,9 +198,20 @@ export default function PubliekSpelerProfiel() {
                     </div>
                   )}
                 </div>
-                <Button onClick={handleGoBack} className="bg-gray-700 hover:bg-gray-600 text-white shadow-lg">
-                  ← Terug
-                </Button>
+                
+                {/* HIER KOMT DE CHATBUTTON - FIXED VERSION */}
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button onClick={handleGoBack} className="bg-gray-700 hover:bg-gray-600 text-white shadow-lg">
+                    ← Terug
+                  </Button>
+                  
+                  {user && user.id !== id && (
+                    <ChatButton 
+                      recipientId={id} 
+                      recipientName={profile.is_anonymous ? 'deze speler' : profile.display_name || 'deze speler'} 
+                    />
+                  )}
+                </div>
               </div>
 
               {/* Quick Stats Grid */}
@@ -213,18 +225,15 @@ export default function PubliekSpelerProfiel() {
           </div>
         </div>
 
-        {/* Two Column Layout */}
+        {/* Rest blijft hetzelfde... */}
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Left Column - Main Info */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Over mij */}
             <ContentCard title="Over mij" icon="👤">
               <p className="text-gray-300 leading-relaxed">
                 {profile.bio || 'Nog geen beschrijving toegevoegd.'}
               </p>
             </ContentCard>
 
-            {/* Posities & Veld */}
             <ContentCard title="Posities" icon="⚽">
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="flex-1">
@@ -253,7 +262,6 @@ export default function PubliekSpelerProfiel() {
               </div>
             </ContentCard>
 
-            {/* Sterktes */}
             {profile.strengths && (
               <ContentCard title="Sterktes" icon="💪">
                 <div className="flex flex-wrap gap-2">
@@ -269,7 +277,6 @@ export default function PubliekSpelerProfiel() {
               </ContentCard>
             )}
 
-            {/* Carrière */}
             <ContentCard title="Loopbaan" icon="📜">
               {career.length > 0 ? (
                 <div className="space-y-3">
@@ -310,7 +317,6 @@ export default function PubliekSpelerProfiel() {
             </ContentCard>
           </div>
 
-          {/* Right Column - Details */}
           <div className="space-y-6">
             <ContentCard title="Details" icon="📋">
               <div className="space-y-4">
@@ -330,7 +336,6 @@ export default function PubliekSpelerProfiel() {
   )
 }
 
-// Helper components blijven hetzelfde...
 function ContentCard({ title, icon, children }: { title: string; icon: string; children: React.ReactNode }) {
   return (
     <div className="bg-[#1E293B]/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 shadow-lg">

@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabaseClient'
 import { Button } from '@/components/ui/button'
 import { FootballField } from '@/components/ui/FootballField'
 import { useAuth } from '@/components/ui/AuthProvider'
+import ChatButton from '@/components/ui/ChatButton'
 
 export default function PubliekClubProfiel() {
   const params = useParams()
@@ -140,9 +141,19 @@ export default function PubliekClubProfiel() {
                     {profile.is_anonymous ? 'Anonieme club' : profile.display_name || '-'}
                   </h1>
                 </div>
-                <Button onClick={handleGoBack} className="bg-gray-700 hover:bg-gray-600 text-white shadow-lg">
-                  ← Terug
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button onClick={handleGoBack} className="bg-gray-700 hover:bg-gray-600 text-white shadow-lg">
+                    ← Terug
+                  </Button>
+                  
+                  {user && user.id !== id && (
+                    <ChatButton 
+                      recipientId={id} 
+                      recipientName={profile.is_anonymous ? 'deze club' : profile.display_name || 'deze club'} 
+                    />
+                  )}
+                </div>
+
               </div>
 
               {/* Quick Stats Grid */}

@@ -680,15 +680,15 @@ export default function HomePage() {
                         <span className="flex items-center gap-1">
                           {likeCounts[l.id] > 0 ? (
                             <>
-                              <button
+                              <span
                                 onClick={(e) => {
                                   e.stopPropagation()
                                   openLikersModal(l.id)
                                 }}
-                                className="hover:underline font-semibold"
+                                className="hover:underline font-semibold cursor-pointer"
                               >
                                 {likeCounts[l.id]}
-                              </button>
+                              </span>
                               <span>Interessant</span>
                             </>
                           ) : (
@@ -979,7 +979,8 @@ export default function HomePage() {
     </>
   )}
 </AnimatePresence>
-{/* Likers Modal */}
+
+      {/* Likers Modal */}
       {selectedListingId && (
         <LikersModal
           listingId={selectedListingId}
@@ -988,6 +989,5 @@ export default function HomePage() {
         />
       )}
     </>
-    
   )
 }
