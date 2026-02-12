@@ -222,7 +222,7 @@ export default function BerichtenPage() {
 
   return (
     <div className="h-[calc(100vh-112px)] bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A]">
-      <div className="max-w-7xl mx-auto h-full">
+      <div className="h-full">
         <div className="grid grid-cols-1 md:grid-cols-3 h-full">
           {/* Conversations List - Left Sidebar */}
           <div className={`${selectedConversationId ? 'hidden md:block' : 'block'} border-r border-white/10 bg-[#1E293B]/40 flex flex-col h-full`}>
