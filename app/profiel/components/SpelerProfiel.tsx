@@ -740,10 +740,11 @@ function EditForm({
       <div className="flex-1 min-w-[220px]">
         <TeamSelect
           value={item.team_name || ''}
-          onChange={(val: string, logo: string) => {
+          onChange={(val: string) => {
             const updated = [...careerList]
             updated[idx].team_name = val
-            updated[idx].team_logo = logo
+            const selectedTeam = belgianTeams.find(t => t.name === val)
+            updated[idx].team_logo = selectedTeam?.logo_url || null
             setCareerList(updated)
           }}
           hideLabel
