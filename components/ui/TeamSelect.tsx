@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import Image from 'next/image'
-import belgianTeams from '@/public/data/belgian_teams_simple.json'
+import belgianTeams from '@/public/data/belgium_football_teams_flat.json'
 
 export default function TeamSelect({
   value,
@@ -80,7 +80,7 @@ export default function TeamSelect({
               className="flex items-center gap-3 w-full px-3 py-2 text-left hover:bg-[#F59E0B]/20 transition-colors"
             >
               <Image
-                src={team.logo}
+                src={team.logo_url}
                 alt={team.name}
                 width={24}
                 height={24}

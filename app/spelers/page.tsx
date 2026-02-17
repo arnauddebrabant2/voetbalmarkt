@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabaseClient'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import belgianTeams from '@/public/data/belgian_teams_simple.json'
+import belgianTeams from '@/public/data/belgium_football_teams_flat.json'
 
 type Speler = {
   user_id: string
@@ -282,7 +282,7 @@ export default function SpelersPage() {
                               {currentTeamData ? (
                                 <>
                                   <Image
-                                    src={currentTeamData.logo}
+                                    src={currentTeamData.logo_url}
                                     alt={currentTeamData.name}
                                     width={16}
                                     height={16}

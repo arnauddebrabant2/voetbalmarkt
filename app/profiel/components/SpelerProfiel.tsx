@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useParams } from 'next/navigation'
 import { FootballField } from '@/components/ui/FootballField'
-import belgianTeams from '@/public/data/belgian_teams_simple.json'
+import belgianTeams from '@/public/data/belgium_football_teams_flat.json'
 import Image from 'next/image'
 import CareerEditor from '@/components/ui/CareerEditor'
 
@@ -184,7 +184,7 @@ useEffect(() => {
                   </h1>
                   {currentTeamData && (
                     <div className="flex items-center gap-2 text-gray-300">
-                      <Image src={currentTeamData.logo} alt={currentTeamData.name} width={24} height={24} className="rounded-full" />
+                      <Image src={currentTeamData.logo_url} alt={currentTeamData.name} width={24} height={24} className="rounded-full" />
                       <span className="font-medium">{currentTeamData.name}</span>
                     </div>
                   )}
@@ -285,7 +285,7 @@ useEffect(() => {
                       >
                         <div className="flex items-center gap-4">
                           {team ? (
-                            <Image src={team.logo} alt={team.name} width={40} height={40} className="rounded-lg" />
+                            <Image src={team.logo_url} alt={team.name} width={40} height={40} className="rounded-lg" />
                           ) : (
                             <div className="w-10 h-10 bg-gray-600/30 rounded-lg" />
                           )}
@@ -1060,7 +1060,7 @@ function TeamSelect({
               className="flex items-center gap-3 w-full px-3 py-2 text-left hover:bg-[#F59E0B]/20 transition-colors"
             >
               <Image
-                src={team.logo}
+                src={team.logo_url}
                 alt={team.name}
                 width={24}
                 height={24}
