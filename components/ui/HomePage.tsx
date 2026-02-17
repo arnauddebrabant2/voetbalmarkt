@@ -7,9 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { FootballFieldHorizontal } from '@/components/ui/FootballFieldHorizontal'
 import LikersModal from '@/components/ui/LikersModal'
-import CommentsSection from '@/components/ui/CommentsSection'  // ✅ FIX 1: default import, geen { }
-
-
+import { CommentsSection } from './CommentsSection'
 /* 🔹 Mini-profiel Sidebar */
 function ProfileSidebar() {
   const { user } = useAuth()
@@ -601,7 +599,6 @@ export default function HomePage() {
                           <div className="border-t border-white/10 p-6 bg-[#0F172A]/30">
                             <CommentsSection
                               listingId={l.id}
-                              initialCount={commentCount}
                             />
                           </div>
                         </motion.div>
