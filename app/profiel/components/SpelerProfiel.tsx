@@ -8,7 +8,6 @@ import { useParams } from 'next/navigation'
 import { FootballField } from '@/components/ui/FootballField'
 import belgianTeams from '@/public/data/belgium_football_teams_flat.json'
 import Image from 'next/image'
-import CareerEditor from '@/components/ui/CareerEditor'
 
 
 export default function SpelerProfielPage() {
@@ -19,6 +18,7 @@ export default function SpelerProfielPage() {
   const [profile, setProfile] = useState<any>(null)
   const [isEditing, setIsEditing] = useState(false)
   const [message, setMessage] = useState('')
+  const [career, setCareer] = useState<any[]>([])
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -34,36 +34,28 @@ export default function SpelerProfielPage() {
     fetchProfile()
   }, [user, isEditing])
 
-  const [career, setCareer] = useState<any[]>([])
+  useEffect(() => {
+    const fetchCareer = async () => {
+      if (!profielID) return
+      const { data, error } = await supabase
+        .from('player_career')
+        .select('*')
+        .eq('player_id', profielID)
 
-useEffect(() => {
-  const fetchCareer = async () => {
-    if (!profielID) return
-    const { data, error } = await supabase
-      .from('player_career')
-      .select('*')
-      .eq('player_id', profielID)
-
-    if (error) console.error('Fout bij ophalen carrière:', error)
-    else {
-      // 🔹 Sorteer jeugd eerst, daarna eerste ploeg, chronologisch per categorie
-      const sorted = data.sort((a, b) => {
-        if (a.is_youth && !b.is_youth) return -1
-        if (!a.is_youth && b.is_youth) return 1
-
-        const aYear = a.is_youth ? parseInt(a.youth_from || 0) : new Date(a.start_date).getFullYear()
-        const bYear = b.is_youth ? parseInt(b.youth_from || 0) : new Date(b.start_date).getFullYear()
-
-        return aYear - bYear
-      })
-      setCareer(sorted)
+      if (error) console.error('Fout bij ophalen carrière:', error)
+      else {
+        const sorted = [...data].sort((a, b) => {
+          if (a.is_youth && !b.is_youth) return -1
+          if (!a.is_youth && b.is_youth) return 1
+          const aYear = a.is_youth ? parseInt(a.youth_from || '0') : new Date(a.start_date).getFullYear()
+          const bYear = b.is_youth ? parseInt(b.youth_from || '0') : new Date(b.start_date).getFullYear()
+          return aYear - bYear
+        })
+        setCareer(sorted)
+      }
     }
-  }
-
-  fetchCareer()
-}, [profielID, isEditing])
-
-
+    fetchCareer()
+  }, [profielID, isEditing])
 
   useEffect(() => {
     const fetchViewCount = async () => {
@@ -78,18 +70,9 @@ useEffect(() => {
     fetchViewCount()
   }, [profielID])
 
-  // Block body scroll wanneer modal open is
   useEffect(() => {
-    if (isEditing) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
-
-    // Cleanup
-    return () => {
-      document.body.style.overflow = 'unset'
-    }
+    document.body.style.overflow = isEditing ? 'hidden' : 'unset'
+    return () => { document.body.style.overflow = 'unset' }
   }, [isEditing])
 
   useEffect(() => {
@@ -98,19 +81,18 @@ useEffect(() => {
     return () => clearTimeout(t)
   }, [message])
 
-    if (!user) return <p className="p-8 text-center">Log eerst in om je profiel te bekijken.</p>
+  if (!user) return <p className="p-8 text-center">Log eerst in om je profiel te bekijken.</p>
 
-      // 🔹 Loading state toevoegen
-    if (!profile) {
-      return (
-        <main className="relative w-full min-h-screen bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0B1220] flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F59E0B] mx-auto mb-4"></div>
-            <p className="text-white">Profiel laden...</p>
-          </div>
-        </main>
-      )
-    }
+  if (!profile) {
+    return (
+      <main className="relative w-full min-h-screen bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0B1220] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F59E0B] mx-auto mb-4"></div>
+          <p className="text-white">Profiel laden...</p>
+        </div>
+      </main>
+    )
+  }
 
   const selectedPositions = [
     ...(profile?.position_primary ? [profile.position_primary] : []),
@@ -127,8 +109,7 @@ useEffect(() => {
     return '👤'
   }
 
-  // Leeftijd berekenen
-  let age_calculated = null
+  let age_calculated: number | null = null
   if (profile?.birth_date) {
     const birth = new Date(profile.birth_date)
     age_calculated = Math.floor((Date.now() - birth.getTime()) / (1000 * 60 * 60 * 24 * 365.25))
@@ -149,22 +130,17 @@ useEffect(() => {
         )}
       </AnimatePresence>
 
-      {/* Header met cover */}
       <div className="relative h-48 bg-gradient-to-r from-[#F59E0B] via-[#D97706] to-[#F59E0B] overflow-hidden">
         <div className="absolute inset-0 bg-[url('/patterns/topography.svg')] opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0F172A]/50" />
       </div>
 
-      {/* Main content container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 pb-12">
-        {/* Profile Header Card */}
         <div className="bg-[#1E293B]/95 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-8 mb-8">
           <div className="flex flex-col md:flex-row gap-8 items-start">
-            {/* Avatar Section */}
             <div className="flex flex-col items-center md:items-start gap-4 flex-shrink-0">
               <div className="relative">
-                <div className="w-32 h-32 flex items-center justify-center text-5xl font-bold rounded-2xl 
-                                bg-gradient-to-br from-[#F59E0B] to-[#D97706] text-white shadow-xl">
+                <div className="w-32 h-32 flex items-center justify-center text-5xl font-bold rounded-2xl bg-gradient-to-br from-[#F59E0B] to-[#D97706] text-white shadow-xl">
                   {getProfileAvatar()}
                 </div>
                 {age_calculated && (
@@ -175,7 +151,6 @@ useEffect(() => {
               </div>
             </div>
 
-            {/* Info Section */}
             <div className="flex-1">
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
                 <div>
@@ -189,14 +164,11 @@ useEffect(() => {
                     </div>
                   )}
                 </div>
-                {profile && (
-                  <Button onClick={() => setIsEditing(true)} className="bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-lg">
-                    Profiel bewerken
-                  </Button>
-                )}
+                <Button onClick={() => setIsEditing(true)} className="bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-lg">
+                  Profiel bewerken
+                </Button>
               </div>
 
-              {/* Quick Stats Grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <StatItem icon="📍" label="Provincie" value={profile.province} />
                 <StatItem icon="🏆" label="Niveau" value={profile.level} />
@@ -207,18 +179,14 @@ useEffect(() => {
           </div>
         </div>
 
-        {/* Two Column Layout */}
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Left Column - Main Info */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Over mij */}
             <ContentCard title="Over mij" icon="👤">
               <p className="text-gray-300 leading-relaxed">
                 {profile.bio || 'Nog geen beschrijving toegevoegd.'}
               </p>
             </ContentCard>
 
-            {/* Posities & Veld */}
             <ContentCard title="Posities" icon="⚽">
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="flex-1">
@@ -241,14 +209,12 @@ useEffect(() => {
                     )}
                   </div>
                 </div>
-                {/* 🔹 Fixed container voor het veld */}
                 <div className="w-full md:w-[280px] h-[420px] flex-shrink-0">
                   <FootballField positionsSelected={selectedPositions} />
                 </div>
               </div>
             </ContentCard>
 
-            {/* Sterktes */}
             {profile.strengths && (
               <ContentCard title="Sterktes" icon="💪">
                 <div className="flex flex-wrap gap-2">
@@ -264,7 +230,6 @@ useEffect(() => {
               </ContentCard>
             )}
 
-            {/* Carrière */}
             <ContentCard title="Loopbaan" icon="📜">
               {career.length > 0 ? (
                 <div className="space-y-3">
@@ -305,7 +270,6 @@ useEffect(() => {
             </ContentCard>
           </div>
 
-          {/* Right Column - Details */}
           <div className="space-y-6">
             <ContentCard title="Details" icon="📋">
               <div className="space-y-4">
@@ -331,8 +295,6 @@ useEffect(() => {
         </div>
       </div>
 
-      {/* Edit Modal - blijft hetzelfde */}
-      {/* Edit Modal */}
       <AnimatePresence>
         {isEditing && (
           <motion.div
@@ -345,10 +307,8 @@ useEffect(() => {
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 50, opacity: 0 }}
-              className="bg-[#0F172A]/95 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl 
-                         max-w-5xl w-full max-h-[90vh] overflow-hidden text-white flex flex-col"
+              className="bg-[#0F172A]/95 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden text-white flex flex-col"
             >
-              {/* Sticky Header */}
               <div className="sticky top-0 z-10 bg-[#0F172A]/95 backdrop-blur-xl border-b border-white/10 p-6 flex items-center justify-between">
                 <div>
                   <h2 className="text-2xl font-bold text-[#F59E0B]">Spelersprofiel bewerken</h2>
@@ -365,7 +325,6 @@ useEffect(() => {
                 </button>
               </div>
 
-              {/* Scrollable content */}
               <div className="overflow-y-auto flex-1 p-10">
                 <EditForm
                   user={user}
@@ -386,7 +345,8 @@ useEffect(() => {
   )
 }
 
-// Helper components
+// ─── Helper components ───────────────────────────────────────────────────────
+
 function ContentCard({ title, icon, children }: { title: string; icon: string; children: React.ReactNode }) {
   return (
     <div className="bg-[#1E293B]/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 shadow-lg">
@@ -418,8 +378,8 @@ function DetailRow({ label, value }: { label: string; value: string | null }) {
   )
 }
 
+// ─── Edit Form ────────────────────────────────────────────────────────────────
 
-/* ---------- Bewerken formulier ---------- */
 function EditForm({
   user,
   initial,
@@ -443,7 +403,7 @@ function EditForm({
     position_secondary: initial?.position_secondary || '',
     level_pref: initial?.level_pref || '',
     foot: initial?.foot || '',
-    birth_date: initial?.birth_date || '', // 🔹 Nieuw: geboortedatum
+    birth_date: initial?.birth_date || '',
     available_from: initial?.available_from || '',
     current_team: initial?.current_team || '',
   })
@@ -451,19 +411,17 @@ function EditForm({
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
-  const fetchCareer = async () => {
-    const { data, error } = await supabase
-      .from('player_career')
-      .select('*')
-      .eq('player_id', user.id)
-      .order('start_date', { ascending: true })
-
-    if (error) console.error('❌ Fout bij ophalen carrière:', error)
-    else setCareerList(data || [])
-  }
-
-  fetchCareer()
-}, [user])
+    const fetchCareer = async () => {
+      const { data, error } = await supabase
+        .from('player_career')
+        .select('*')
+        .eq('player_id', user.id)
+        .order('start_date', { ascending: true })
+      if (error) console.error('❌ Fout bij ophalen carrière:', error)
+      else setCareerList(data || [])
+    }
+    fetchCareer()
+  }, [user])
 
   const update = (key: string, val: any) => setForm((p) => ({ ...p, [key]: val }))
 
@@ -471,21 +429,15 @@ function EditForm({
     e.preventDefault()
     setSaving(true)
 
-    // 🔹 Alle lege strings vervangen door null
     const cleanedForm = Object.fromEntries(
       Object.entries(form).map(([k, v]) => [k, v === '' ? null : v])
     )
 
     const { error } = await supabase
-    .from('profiles_player')
-    .update({
-      role: 'speler',
-      ...cleanedForm,
-      updated_at: new Date().toISOString(),
-    })
-    .eq('user_id', user.id)
+      .from('profiles_player')
+      .update({ role: 'speler', ...cleanedForm, updated_at: new Date().toISOString() })
+      .eq('user_id', user.id)
 
-    // 🔹 Carrière opslaan
     const cleanedCareer = careerList
       .filter((c) => c.team_name)
       .map((c) => ({
@@ -499,15 +451,10 @@ function EditForm({
         youth_to: c.youth_to || null,
       }))
 
-    // 🔸 Oude carrière wissen
     await supabase.from('player_career').delete().eq('player_id', user.id)
 
-    // 🔸 Nieuwe carrière invoegen
     if (cleanedCareer.length > 0) {
-      const { error: insertError } = await supabase
-        .from('player_career')
-        .insert(cleanedCareer)
-
+      const { error: insertError } = await supabase.from('player_career').insert(cleanedCareer)
       if (insertError) {
         console.error('❌ Fout bij opslaan carrière:', insertError)
         alert('❌ Fout bij opslaan carrière')
@@ -522,7 +469,6 @@ function EditForm({
     } else {
       onSaved()
     }
-
   }
 
   return (
@@ -531,7 +477,6 @@ function EditForm({
         Spelersprofiel bewerken
       </h2>
 
-      {/* Naam + checkboxen rechts */}
       <div className="md:col-span-2 grid md:grid-cols-[1fr_auto] gap-6 items-start">
         <InputField
           label="Weergavenaam"
@@ -541,360 +486,152 @@ function EditForm({
         />
         <div className="flex flex-col justify-start mt-[1.9rem] gap-1">
           <label className="flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              className="w-4 h-4 accent-[#F59E0B]"
-              checked={form.is_anonymous}
-              onChange={(e) => update('is_anonymous', e.target.checked)}
-            />
+            <input type="checkbox" className="w-4 h-4 accent-[#F59E0B]" checked={form.is_anonymous}
+              onChange={(e) => update('is_anonymous', e.target.checked)} />
             <span>Anoniem blijven</span>
           </label>
           <label className="flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              className="w-4 h-4 accent-[#F59E0B]"
-              checked={form.visibility}
-              onChange={(e) => update('visibility', e.target.checked)}
-            />
+            <input type="checkbox" className="w-4 h-4 accent-[#F59E0B]" checked={form.visibility}
+              onChange={(e) => update('visibility', e.target.checked)} />
             <span>Maak mijn profiel zichtbaar voor clubs</span>
           </label>
         </div>
       </div>
 
-      {/* Overige velden */}
       <div className="grid md:grid-cols-2 gap-6 mt-2">
-        <Select
-          label="Provincie"
-          value={form.province}
-          onChange={(v) => update('province', v)}
-          options={[
-            'Antwerpen',
-            'Limburg',
-            'Oost-Vlaanderen',
-            'West-Vlaanderen',
-            'Vlaams-Brabant',
-            'Brussel',
-          ]}
-        />
-        <Select
-          label="Niveau"
-          value={form.level}
-          onChange={(v) => update('level', v)}
-          options={[
-            'Recreatief / Vriendenploeg',
-            '4e Provinciale',
-            '3e Provinciale',
-            '2e Provinciale',
-            '1e Provinciale',
-            '3e Afdeling',
-            '2e Afdeling',
-            '1e Afdeling',
-          ]}
-        />
-        <Select
-          label="Favoriete positie"
-          value={form.position_primary}
-          onChange={(v) => update('position_primary', v)}
-          options={[
-            'Doelman',
-            'Rechtsachter',
-            'Centrale verdediger links',
-            'Centrale verdediger rechts',
-            'Linksachter',
-            'Centrale middenvelder links',
-            'Centrale middenvelder rechts',
-            'Aanvallende middenvelder',
-            'Linksbuiten',
-            'Rechtsbuiten',
-            'Spits',
-          ]}
-        />
-        <Select
-          label="Tweede positie"
-          value={form.position_secondary}
-          onChange={(v) => update('position_secondary', v)}
-          options={[
-            'Doelman',
-            'Rechtsachter',
-            'Centrale verdediger links',
-            'Centrale verdediger rechts',
-            'Linksachter',
-            'Centrale middenvelder links',
-            'Centrale middenvelder rechts',
-            'Aanvallende middenvelder',
-            'Linksbuiten',
-            'Rechtsbuiten',
-            'Spits',
-          ]}
-        />
-        <Select
-          label="Gewenst niveau"
-          value={form.level_pref}
-          onChange={(v) => update('level_pref', v)}
-          options={[
-            'Recreatief / Vriendenploeg',
-            '4e Provinciale',
-            '3e Provinciale',
-            '2e Provinciale',
-            '1e Provinciale',
-            '3e Afdeling',
-            '2e Afdeling',
-            '1e Afdeling',
-          ]}
-        />
-        <Select
-          label="Voorkeursvoet"
-          value={form.foot}
-          onChange={(v) => update('foot', v)}
-          options={['Rechts', 'Links', 'Beide']}
-        />
+        <Select label="Provincie" value={form.province} onChange={(v) => update('province', v)}
+          options={['Antwerpen','Limburg','Oost-Vlaanderen','West-Vlaanderen','Vlaams-Brabant','Brussel']} />
+        <Select label="Niveau" value={form.level} onChange={(v) => update('level', v)}
+          options={['Recreatief / Vriendenploeg','4e Provinciale','3e Provinciale','2e Provinciale','1e Provinciale','3e Afdeling','2e Afdeling','1e Afdeling']} />
+        <Select label="Favoriete positie" value={form.position_primary} onChange={(v) => update('position_primary', v)}
+          options={['Doelman','Rechtsachter','Centrale verdediger links','Centrale verdediger rechts','Linksachter','Centrale middenvelder links','Centrale middenvelder rechts','Aanvallende middenvelder','Linksbuiten','Rechtsbuiten','Spits']} />
+        <Select label="Tweede positie" value={form.position_secondary} onChange={(v) => update('position_secondary', v)}
+          options={['Doelman','Rechtsachter','Centrale verdediger links','Centrale verdediger rechts','Linksachter','Centrale middenvelder links','Centrale middenvelder rechts','Aanvallende middenvelder','Linksbuiten','Rechtsbuiten','Spits']} />
+        <Select label="Gewenst niveau" value={form.level_pref} onChange={(v) => update('level_pref', v)}
+          options={['Recreatief / Vriendenploeg','4e Provinciale','3e Provinciale','2e Provinciale','1e Provinciale','3e Afdeling','2e Afdeling','1e Afdeling']} />
+        <Select label="Voorkeursvoet" value={form.foot} onChange={(v) => update('foot', v)}
+          options={['Rechts', 'Links', 'Beide']} />
         <TeamSelect value={form.current_team} onChange={(v) => update('current_team', v)} />
-
-        {/* 🔹 Nieuw veld: geboortedatum */}
-        <InputField
-          label="Geboortedatum"
-          type="date"
-          value={form.birth_date}
-          onChange={(v) => update('birth_date', v)}
-        />
-
-        <InputField
-          label="Beschikbaar vanaf"
-          type="date"
-          value={form.available_from}
-          onChange={(v) => update('available_from', v)}
-        />
+        <InputField label="Geboortedatum" type="date" value={form.birth_date} onChange={(v) => update('birth_date', v)} />
+        <InputField label="Beschikbaar vanaf" type="date" value={form.available_from} onChange={(v) => update('available_from', v)} />
       </div>
 
-      {/* Tekstvelden */}
       <div>
-  <label className="block text-sm font-medium mb-1 text-[#F59E0B]">
-    Sterktes
-  </label>
-  <p className="text-xs text-gray-400 mb-2">
-    Selecteer de kwaliteiten die jou het best omschrijven.
-  </p>
-  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-    {[
-      'Snelheid',
-      'Techniek',
-      'Inzicht',
-      'Fysiek sterk',
-      'Uithouding',
-      'Kopbalsterk',
-      'Passnauwkeurigheid',
-      'Dribbelvaardig',
-      'Verdedigend inzicht',
-      'Positiespel',
-      'Afwerking',
-      'Teamspeler',
-      'Leiderschap',
-      'Communicatie',
-      'Creativiteit',
-    ].map((sterkte) => {
-      const selected = form.strengths
-        ?.split(',')
-        .map((s: string) => s.trim())
-        .includes(sterkte)
-      return (
-        <button
-          key={sterkte}
-          type="button"
-          onClick={() => {
-            const current = form.strengths
-              ? form.strengths.split(',').map((s: string) => s.trim())
-              : []
-            const newList = selected
-              ? current.filter((s: string) => s !== sterkte)
-              : [...current, sterkte]
-            update('strengths', newList.join(', '))
-          }}
-          className={`rounded-lg border px-3 py-2 text-sm text-center transition ${
-            selected
-              ? 'bg-[#F59E0B] text-white border-[#F59E0B]'
-              : 'bg-[#1E293B] text-gray-200 border-white/30 hover:bg-white/10'
-          }`}
-        >
-          {sterkte}
+        <label className="block text-sm font-medium mb-1 text-[#F59E0B]">Sterktes</label>
+        <p className="text-xs text-gray-400 mb-2">Selecteer de kwaliteiten die jou het best omschrijven.</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+          {['Snelheid','Techniek','Inzicht','Fysiek sterk','Uithouding','Kopbalsterk','Passnauwkeurigheid','Dribbelvaardig','Verdedigend inzicht','Positiespel','Afwerking','Teamspeler','Leiderschap','Communicatie','Creativiteit'].map((sterkte) => {
+            const selected = form.strengths?.split(',').map((s: string) => s.trim()).includes(sterkte)
+            return (
+              <button key={sterkte} type="button"
+                onClick={() => {
+                  const current = form.strengths ? form.strengths.split(',').map((s: string) => s.trim()) : []
+                  const newList = selected ? current.filter((s: string) => s !== sterkte) : [...current, sterkte]
+                  update('strengths', newList.join(', '))
+                }}
+                className={`rounded-lg border px-3 py-2 text-sm text-center transition ${
+                  selected ? 'bg-[#F59E0B] text-white border-[#F59E0B]' : 'bg-[#1E293B] text-gray-200 border-white/30 hover:bg-white/10'
+                }`}
+              >
+                {sterkte}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1 text-[#F59E0B]">Loopbaan / Carrière</label>
+        <p className="text-xs text-gray-400 mb-2">Voeg clubs toe en geef aan of het om jeugd of senior voetbal gaat.</p>
+
+        {careerList.map((item, idx) => (
+          <div key={idx} className="flex flex-wrap md:flex-nowrap items-center gap-3 mb-2 bg-[#1E293B] border border-white/20 rounded-lg p-3">
+            <div className="flex-1 min-w-[220px]">
+              <TeamSelect
+                value={item.team_name || ''}
+                onChange={(val: string) => {
+                  const updated = [...careerList]
+                  updated[idx].team_name = val
+                  const selectedTeam = belgianTeams.find(t => t.name === val)
+                  updated[idx].team_logo = selectedTeam?.logo_url || null
+                  setCareerList(updated)
+                }}
+                hideLabel
+              />
+            </div>
+
+            <div className="flex items-center gap-2 h-[46px]">
+              <input id={`is_youth_${idx}`} type="checkbox" checked={item.is_youth || false}
+                onChange={(e) => {
+                  const updated = [...careerList]
+                  updated[idx].is_youth = e.target.checked
+                  setCareerList(updated)
+                }}
+                className="accent-[#F59E0B] w-4 h-4"
+              />
+              <label htmlFor={`is_youth_${idx}`} className="text-sm text-gray-300 select-none">Jeugd</label>
+            </div>
+
+            <div className="flex items-center gap-2 flex-wrap md:flex-nowrap">
+              {item.is_youth ? (
+                <>
+                  <select value={item.youth_from || ''}
+                    onChange={(e) => { const updated = [...careerList]; updated[idx].youth_from = e.target.value; setCareerList(updated) }}
+                    className="w-[110px] bg-[#0F172A] border border-white/30 rounded-lg p-2 text-white">
+                    <option value="">Van</option>
+                    {['U6','U7','U8','U9','U10','U11','U12','U13','U14','U15','U16','U17','U18','U19'].map((u) => <option key={u}>{u}</option>)}
+                  </select>
+                  <span className="text-gray-400 text-sm">→</span>
+                  <select value={item.youth_to || ''}
+                    onChange={(e) => { const updated = [...careerList]; updated[idx].youth_to = e.target.value; setCareerList(updated) }}
+                    className="w-[110px] bg-[#0F172A] border border-white/30 rounded-lg p-2 text-white">
+                    <option value="">Tot</option>
+                    {['U6','U7','U8','U9','U10','U11','U12','U13','U14','U15','U16','U17','U18','U19'].map((u) => <option key={u}>{u}</option>)}
+                  </select>
+                </>
+              ) : (
+                <>
+                  <input type="text" inputMode="numeric" maxLength={4} placeholder="Startjaar"
+                    value={item.start_date ? new Date(item.start_date).getFullYear() : ''}
+                    onChange={(e) => {
+                      const year = e.target.value.replace(/\D/g, '')
+                      const updated = [...careerList]
+                      updated[idx].start_date = year === '' ? null : `${year.padStart(4, '0')}-01-01`
+                      setCareerList(updated)
+                    }}
+                    className="w-[110px] bg-[#0F172A] border border-white/30 rounded-lg p-2 text-white text-center"
+                  />
+                  <span className="text-gray-400 text-sm">→</span>
+                  <input type="text" inputMode="numeric" maxLength={4} placeholder="Eindjaar"
+                    value={item.end_date ? new Date(item.end_date).getFullYear() : ''}
+                    onChange={(e) => {
+                      const year = e.target.value.replace(/\D/g, '')
+                      const updated = [...careerList]
+                      updated[idx].end_date = year === '' ? null : `${year.padStart(4, '0')}-01-01`
+                      setCareerList(updated)
+                    }}
+                    className="w-[110px] bg-[#0F172A] border border-white/30 rounded-lg p-2 text-white text-center"
+                  />
+                </>
+              )}
+            </div>
+
+            <button type="button" onClick={() => setCareerList(careerList.filter((_, i) => i !== idx))
+            } className="text-red-400 hover:text-red-600 text-sm ml-auto">✕</button>
+          </div>
+        ))}
+
+        <button type="button"
+          onClick={() => setCareerList([...careerList, { team_name: '', team_logo: '', is_youth: false, youth_from: '', youth_to: '', start_date: '', end_date: '' }])}
+          className="mt-2 text-[#F59E0B] text-sm hover:underline">
+          + Voeg club toe
         </button>
-      )
-    })}
-  </div>
-</div>
-
-
-        <div>
-  <label className="block text-sm font-medium mb-1 text-[#F59E0B]">
-    Loopbaan / Carrière
-  </label>
-  <p className="text-xs text-gray-400 mb-2">
-    Voeg clubs toe en geef aan of het om jeugd of senior voetbal gaat.
-  </p>
-
-  {careerList.map((item, idx) => (
-    <div
-      key={idx}
-      className="flex flex-wrap md:flex-nowrap items-center gap-3 mb-2 bg-[#1E293B] border border-white/20 rounded-lg p-3"
-    >
-      {/* Team-select met logo — label verbergen */}
-      <div className="flex-1 min-w-[220px]">
-        <TeamSelect
-          value={item.team_name || ''}
-          onChange={(val: string) => {
-            const updated = [...careerList]
-            updated[idx].team_name = val
-            const selectedTeam = belgianTeams.find(t => t.name === val)
-            updated[idx].team_logo = selectedTeam?.logo_url || null
-            setCareerList(updated)
-          }}
-          hideLabel
-        />
       </div>
-
-      {/* Jeugd / senior toggle */}
-      <div className="flex items-center gap-2 h-[46px]">
-        <input
-          id={`is_youth_${idx}`}
-          type="checkbox"
-          checked={item.is_youth || false}
-          onChange={(e) => {
-            const updated = [...careerList]
-            updated[idx].is_youth = e.target.checked
-            setCareerList(updated)
-          }}
-          className="accent-[#F59E0B] w-4 h-4"
-        />
-        <label
-          htmlFor={`is_youth_${idx}`}
-          className="text-sm text-gray-300 select-none"
-        >
-          Jeugd
-        </label>
-      </div>
-
-      {/* Datum- of U-selectie */}
-      <div className="flex items-center gap-2 flex-wrap md:flex-nowrap">
-        {item.is_youth ? (
-          <>
-            <select
-              value={item.youth_from || ''}
-              onChange={(e) => {
-                const updated = [...careerList]
-                updated[idx].youth_from = e.target.value
-                setCareerList(updated)
-              }}
-              className="w-[110px] bg-[#0F172A] border border-white/30 rounded-lg p-2 text-white"
-            >
-              <option value="">Van</option>
-              {['U6','U7','U8','U9','U10','U11','U12','U13','U14','U15','U16','U17','U18','U19'].map((u) => (
-                <option key={u}>{u}</option>
-              ))}
-            </select>
-            <span className="text-gray-400 text-sm">→</span>
-            <select
-              value={item.youth_to || ''}
-              onChange={(e) => {
-                const updated = [...careerList]
-                updated[idx].youth_to = e.target.value
-                setCareerList(updated)
-              }}
-              className="w-[110px] bg-[#0F172A] border border-white/30 rounded-lg p-2 text-white"
-            >
-              <option value="">Tot</option>
-              {['U6','U7','U8','U9','U10','U11','U12','U13','U14','U15','U16','U17','U18','U19'].map((u) => (
-                <option key={u}>{u}</option>
-              ))}
-            </select>
-          </>
-        ) : (
-          <>
-            <input
-              type="text"
-              inputMode="numeric"
-              maxLength={4}
-              placeholder="Startjaar"
-              value={item.start_date ? new Date(item.start_date).getFullYear() : ''}
-              onChange={(e) => {
-                const year = e.target.value.replace(/\D/g, '')  // Alleen cijfers
-                const updated = [...careerList]
-                
-                if (year === '') {
-                  updated[idx].start_date = null
-                } else {
-                  updated[idx].start_date = `${year.padStart(4, '0')}-01-01`
-                }
-                
-                setCareerList(updated)
-              }}
-              className="w-[110px] bg-[#0F172A] border border-white/30 rounded-lg p-2 text-white text-center"
-            />
-            <span className="text-gray-400 text-sm">→</span>
-            <input
-              type="text"
-              inputMode="numeric"
-              maxLength={4}
-              placeholder="Eindjaar"
-              value={item.end_date ? new Date(item.end_date).getFullYear() : ''}
-              onChange={(e) => {
-                const year = e.target.value.replace(/\D/g, '')  // Alleen cijfers
-                const updated = [...careerList]
-                
-                if (year === '') {
-                  updated[idx].end_date = null
-                } else {
-                  updated[idx].end_date = `${year.padStart(4, '0')}-01-01`
-                }
-                
-                setCareerList(updated)
-              }}
-              className="w-[110px] bg-[#0F172A] border border-white/30 rounded-lg p-2 text-white text-center"
-            />
-
-          </>
-        )}
-      </div>
-
-      {/* Verwijderknop rechts */}
-      <button
-        type="button"
-        onClick={() =>
-          setCareerList(careerList.filter((_, i) => i !== idx))
-        }
-        className="text-red-400 hover:text-red-600 text-sm ml-auto"
-      >
-        ✕
-      </button>
-    </div>
-  ))}
-
-  {/* Knop om nieuwe rij toe te voegen */}
-  <button
-    type="button"
-    onClick={() =>
-      setCareerList([
-        ...careerList,
-        {
-          team_name: '',
-          team_logo: '',
-          is_youth: false,
-          youth_from: '',
-          youth_to: '',
-          start_date: '',
-          end_date: '',
-        },
-      ])
-    }
-    className="mt-2 text-[#F59E0B] text-sm hover:underline"
-  >
-    + Voeg club toe
-  </button>
-</div>
 
       <div>
         <label className="block text-sm font-medium mb-1">Over mij</label>
         <textarea
-          className="bg-[#1E293B] border border-white/30 rounded-lg p-4 w-full text-white placeholder-gray-400
-                     focus:ring-2 focus:ring-[#F59E0B] outline-none resize-none"
+          className="bg-[#1E293B] border border-white/30 rounded-lg p-4 w-full text-white placeholder-gray-400 focus:ring-2 focus:ring-[#F59E0B] outline-none resize-none"
           placeholder="Vertel iets over jezelf..."
           value={form.bio || ''}
           onChange={(e) => update('bio', e.target.value)}
@@ -902,18 +639,12 @@ function EditForm({
       </div>
 
       <div className="flex justify-end gap-4 pt-6">
-        <button
-          type="button"
-          onClick={onClose}
-          className="px-5 py-2 border border-white/40 rounded-lg hover:bg-white/10 transition"
-        >
+        <button type="button" onClick={onClose}
+          className="px-5 py-2 border border-white/40 rounded-lg hover:bg-white/10 transition">
           Annuleren
         </button>
-        <button
-          type="submit"
-          disabled={saving}
-          className="px-6 py-2 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition"
-        >
+        <button type="submit" disabled={saving}
+          className="px-6 py-2 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-white font-semibold transition">
           {saving ? 'Opslaan...' : 'Opslaan'}
         </button>
       </div>
@@ -921,64 +652,41 @@ function EditForm({
   )
 }
 
+// ─── UI Helpers ───────────────────────────────────────────────────────────────
 
-/* ---------- Kleine UI helpers ---------- */
 function InputField({
-  label,
-  type = 'text',
-  value,
-  onChange,
-  disabled = false,
+  label, type = 'text', value, onChange, disabled = false,
 }: {
-  label: string
-  type?: string
-  value: string | number | null
-  onChange: (v: any) => void
-  disabled?: boolean
+  label: string; type?: string; value: string | number | null; onChange: (v: any) => void; disabled?: boolean
 }) {
   return (
     <div>
       <label className="block text-sm font-medium mb-1">{label}</label>
-      <input
-        type={type}
-        value={value ?? ''}
-        disabled={disabled}
-        onChange={(e) => onChange(e.target.value)}
-        className={`bg-[#1E293B] border border-white/30 rounded-lg p-4 w-full text-white placeholder-gray-400
-                    focus:ring-2 focus:ring-[#F59E0B] outline-none ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+      <input type={type} value={value ?? ''} disabled={disabled} onChange={(e) => onChange(e.target.value)}
+        className={`bg-[#1E293B] border border-white/30 rounded-lg p-4 w-full text-white placeholder-gray-400 focus:ring-2 focus:ring-[#F59E0B] outline-none ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
       />
     </div>
   )
 }
 
 function Select({
-  label,
-  value,
-  onChange,
-  options,
+  label, value, onChange, options,
 }: {
-  label: string
-  value: string | null
-  onChange: (v: string) => void
-  options: string[]
+  label: string; value: string | null; onChange: (v: string) => void; options: string[]
 }) {
   return (
     <div>
       <label className="block text-sm font-medium mb-1">{label}</label>
-      <select
-        className="bg-[#1E293B] border border-white/30 rounded-lg p-4 w-full text-white focus:ring-2 focus:ring-[#F59E0B] outline-none"
-        value={value ?? ''}
-        onChange={(e) => onChange(e.target.value)}
-      >
+      <select className="bg-[#1E293B] border border-white/30 rounded-lg p-4 w-full text-white focus:ring-2 focus:ring-[#F59E0B] outline-none"
+        value={value ?? ''} onChange={(e) => onChange(e.target.value)}>
         <option value="">Selecteer...</option>
-        {options.map((opt) => (
-          <option key={opt}>{opt}</option>
-        ))}
+        {options.map((opt) => <option key={opt}>{opt}</option>)}
       </select>
     </div>
   )
 }
 
+// ✅ FIX: hideLabel toegevoegd aan de interface
 function TeamSelect({
   value,
   onChange,
@@ -986,120 +694,62 @@ function TeamSelect({
 }: {
   value: string
   onChange: (v: string) => void
+  hideLabel?: boolean  // ← WAS MISSING! Dit veroorzaakte de TypeScript error
 }) {
   const [query, setQuery] = useState('')
   const [focused, setFocused] = useState(false)
 
-  // 🔠 Sorteer alfabetisch
   const teams = useMemo(
     () => [...belgianTeams].sort((a, b) => a.name.localeCompare(b.name)),
     []
   )
 
-  // 🔍 Filteren
   const filteredTeams = useMemo(() => {
     if (!query) return teams
-    return teams.filter((team) =>
-      team.name.toLowerCase().includes(query.toLowerCase())
-    )
+    return teams.filter((team) => team.name.toLowerCase().includes(query.toLowerCase()))
   }, [query, teams])
 
-  // 💡 Toon tijdelijk query bij focus
   const displayValue = focused ? query : value
 
   return (
     <div className="relative w-full">
       {!hideLabel && (
-  <label className="block text-sm font-medium mb-1">
-    Huidige / Laatste club
-  </label>
-)}
-
+        <label className="block text-sm font-medium mb-1">Huidige / Laatste club</label>
+      )}
 
       <input
         type="text"
         placeholder="Zoek of selecteer een club..."
         value={displayValue || ''}
         onChange={(e) => setQuery(e.target.value)}
-        onFocus={() => {
-          setFocused(true)
-          setQuery('') // leeg bij focus om te zoeken
-        }}
+        onFocus={() => { setFocused(true); setQuery('') }}
         onBlur={() => setTimeout(() => setFocused(false), 150)}
         className="w-full bg-[#1E293B] border border-white/30 rounded-lg p-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-[#F59E0B] outline-none"
       />
 
-      {/* Dropdownlijst */}
       {focused && (
         <div className="absolute z-20 mt-1 w-full max-h-60 overflow-y-auto bg-[#0F172A] border border-white/20 rounded-lg shadow-lg">
-          {/* ➕ Optie: geen club */}
-          <button
-            type="button"
-            onClick={() => {
-              onChange('')
-              setQuery('')
-              setFocused(false)
-            }}
-            className="flex items-center gap-3 w-full px-3 py-2 text-left hover:bg-[#F59E0B]/20 transition-colors border-b border-white/10"
-          >
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-600/50 text-white text-xs">
-              –
-            </div>
+          <button type="button"
+            onClick={() => { onChange(''); setQuery(''); setFocused(false) }}
+            className="flex items-center gap-3 w-full px-3 py-2 text-left hover:bg-[#F59E0B]/20 transition-colors border-b border-white/10">
+            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-600/50 text-white text-xs">–</div>
             <span className="text-sm text-gray-300 italic">Geen club (vrije speler)</span>
           </button>
 
-          {/* Clubs */}
           {filteredTeams.map((team) => (
-            <button
-              key={team.name}
-              type="button"
-              onClick={() => {
-                onChange(team.name)
-                setQuery('')
-                setFocused(false)
-              }}
-              className="flex items-center gap-3 w-full px-3 py-2 text-left hover:bg-[#F59E0B]/20 transition-colors"
-            >
-              <Image
-                src={team.logo_url}
-                alt={team.name}
-                width={24}
-                height={24}
-                className="rounded-full"
-              />
+            <button key={team.name} type="button"
+              onClick={() => { onChange(team.name); setQuery(''); setFocused(false) }}
+              className="flex items-center gap-3 w-full px-3 py-2 text-left hover:bg-[#F59E0B]/20 transition-colors">
+              <Image src={team.logo_url} alt={team.name} width={24} height={24} className="rounded-full" />
               <span className="text-sm text-white">{team.name}</span>
             </button>
           ))}
 
           {filteredTeams.length === 0 && (
-            <p className="px-3 py-2 text-sm text-gray-400">
-              Geen clubs gevonden
-            </p>
+            <p className="px-3 py-2 text-sm text-gray-400">Geen clubs gevonden</p>
           )}
         </div>
       )}
-    </div>
-  )
-}
-
-function InfoFancy({
-  icon,
-  label,
-  value,
-}: {
-  icon: string
-  label: string
-  value: string | number | null
-}) {
-  return (
-    <div className="flex flex-col bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-4 transition-colors duration-200">
-      <div className="flex items-center gap-2 text-[#F59E0B] font-medium mb-1">
-        <span>{icon}</span>
-        <span className="text-sm text-gray-300">{label}</span>
-      </div>
-      <p className="text-base text-gray-100 font-semibold">
-        {value && value !== '' ? value : '-'}
-      </p>
     </div>
   )
 }
