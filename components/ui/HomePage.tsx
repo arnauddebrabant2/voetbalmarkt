@@ -8,6 +8,8 @@ import Link from 'next/link'
 import { FootballFieldHorizontal } from '@/components/ui/FootballFieldHorizontal'
 import LikersModal from '@/components/ui/LikersModal'
 import { CommentsSection } from './CommentsSection'
+import ShareModal from '@/components/ui/ShareModal'
+
 /* 🔹 Mini-profiel Sidebar */
 function ProfileSidebar() {
   const { user } = useAuth()
@@ -190,6 +192,8 @@ export default function HomePage() {
   const [selectedListingId, setSelectedListingId] = useState<string | null>(null)
   const [sortOrder, setSortOrder] = useState<'newest' | 'popular'>('newest')
   const [expandedComments, setExpandedComments] = useState<Set<string>>(new Set())
+  const [showShareModal, setShowShareModal] = useState(false)
+  const [selectedShareListing, setSelectedShareListing] = useState<any>(null)
 
   const [form, setForm] = useState({
     title: '',
@@ -309,6 +313,15 @@ export default function HomePage() {
     }
     return listings
   }
+
+  const openShareModal = (listing: any) => {
+     setSelectedShareListing(listing)
+     setShowShareModal(true)
+   }
+   const closeShareModal = () => {
+     setShowShareModal(false)
+     setSelectedShareListing(null)
+   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -444,18 +457,19 @@ export default function HomePage() {
                 const commentCount = commentCounts[l.id] || 0
 
                 return (
-                  <motion.article
-                    key={l.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    className="bg-[#1E293B]/60 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-white/20 transition-all"
-                  >
+  <Link href={`/listing/${l.id}`} key={l.id} className="block">
+    <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: i * 0.05 }}
+      className="bg-[#1E293B]/60 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-white/20 transition-all cursor-pointer"
+    >
                     {/* Post Header */}
                     <div className="p-6">
                       <div className="flex items-start gap-4 mb-4">
                         <Link
                           href={l.profiles_player?.role === 'club' ? `/clubs/${l.owner_user_id}` : `/spelers/${l.owner_user_id}`}
+                          onClick={(e) => e.stopPropagation()}
                           className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-[#F59E0B] to-[#D97706] text-white font-bold hover:scale-110 transition-transform"
                         >
                           {l.profiles_player?.is_anonymous ? '?' : l.profiles_player?.display_name?.[0]?.toUpperCase() || '?'}
@@ -465,6 +479,7 @@ export default function HomePage() {
                           <div className="flex items-center gap-2 mb-1">
                             <Link
                               href={l.profiles_player?.role === 'club' ? `/clubs/${l.owner_user_id}` : `/spelers/${l.owner_user_id}`}
+                              onClick={(e) => e.stopPropagation()}
                               className="font-bold text-white hover:text-[#F59E0B] transition truncate"
                             >
                               {displayName}
@@ -545,11 +560,11 @@ export default function HomePage() {
                     <div className="border-t border-white/5 px-6 py-3 flex items-center gap-4 text-sm text-gray-400">
                       {/* Like Button */}
                       <button
-                        onClick={() => toggleLike(l.id)}
-                        className={`flex items-center gap-2 transition ${
-                          likedPosts.has(l.id) ? 'text-[#F59E0B]' : 'text-gray-400 hover:text-[#F59E0B]'
-                        }`}
-                      >
+                          onClick={(e) => { e.stopPropagation(); toggleLike(l.id) }}
+                          className={`flex items-center gap-2 transition ${
+                            likedPosts.has(l.id) ? 'text-[#F59E0B]' : 'text-gray-400 hover:text-[#F59E0B]'
+                          }`}
+                        >
                         <svg className="w-5 h-5" fill={likedPosts.has(l.id) ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                         </svg>
@@ -567,9 +582,9 @@ export default function HomePage() {
 
                       {/* Comment Button */}
                       <button
-                        onClick={() => toggleComments(l.id)}
-                        className="flex items-center gap-2 hover:text-[#F59E0B] transition"
-                      >
+                          onClick={(e) => { e.stopPropagation(); toggleComments(l.id) }}
+                          className="flex items-center gap-2 hover:text-[#F59E0B] transition"
+                        >
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                         </svg>
@@ -578,7 +593,10 @@ export default function HomePage() {
                       </button>
 
                       {/* Deel Button */}
-                      <button className="flex items-center gap-2 hover:text-[#F59E0B] transition ml-auto">
+                      <button 
+                          onClick={(e) => { e.stopPropagation(); openShareModal(l) }}
+                          className="flex items-center gap-2 hover:text-[#F59E0B] transition ml-auto"
+                        >
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                         </svg>
@@ -605,6 +623,7 @@ export default function HomePage() {
                       )}
                     </AnimatePresence>
                   </motion.article>
+                  </Link>
                 )
               })}
             </div>
@@ -761,6 +780,10 @@ export default function HomePage() {
 
       {selectedListingId && (
         <LikersModal listingId={selectedListingId} isOpen={showLikersModal} onClose={closeLikersModal} />
+      )}
+
+      {selectedShareListing && (
+     <ShareModal isOpen={showShareModal} onClose={closeShareModal} listing={selectedShareListing} />
       )}
     </>
   )
