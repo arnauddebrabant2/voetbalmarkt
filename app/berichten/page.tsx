@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabaseClient'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Send, ArrowLeft, MessageCircle } from 'lucide-react'
 import { motion } from 'framer-motion'
-
+export const dynamic = 'force-dynamic'
 interface Conversation {
   id: string
   user1_id: string
